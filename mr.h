@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:23:14 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/16 20:33:18 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:47:01 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,14 @@
 # include "./libft/libft.h"
 # include "./gnl/get_next_line.h"
 
-typedef struct s_point
-{
-	int	x;
-	int	y;
-	int	z;
-}	t_point;
-	
 typedef struct s_vector
 {
 	int	x;
 	int	y;
 	int	z;
 }	t_vector;
+
+typedef t_vector t_point;
 
 typedef struct s_camera
 {
@@ -49,9 +44,10 @@ typedef struct s_ambient_lightning
 
 typedef struct s_light
 {
-	t_point	loc;
-	float	ratio;
-	int		color;
+	t_point			loc;
+	float			ratio;
+	int				color;
+	struct s_light	*next;
 }	t_light;
 
 typedef struct s_obj_sphere
