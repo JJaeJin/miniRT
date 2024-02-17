@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 19:26:12 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/17 13:18:10 by jaejilee         ###   ########.fr       */
+/*   Created: 2024/02/17 17:03:55 by jaejilee          #+#    #+#             */
+/*   Updated: 2024/02/17 17:06:26 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mr.h"
+#ifndef ERROR_H
+# define ERROR_H
 
-int main(int argc, char *argv[])
-{
-	
-	
-	if (argc != 2)
-	{
-		write(2, "Error\nminiRT: wrong argument count\n", 35);
-		return (1);
-	}
-	return (0);
-}
+int	return_error(char *s);
+
+#endif

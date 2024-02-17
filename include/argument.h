@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mr.h                                               :+:      :+:    :+:   */
+/*   argument.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 19:23:14 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/17 12:47:01 by jaejilee         ###   ########.fr       */
+/*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
+/*   Updated: 2024/02/17 17:56:53 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MR_H
-# define MR_H
+#ifndef ARGUMENT_H
+# define ARGUMENT_H
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <math.h>
-# include "mlx.h"
-# include "./libft/libft.h"
-# include "./gnl/get_next_line.h"
+# include "vector.h"
+# include "color.h"
 
-typedef struct s_vector
-{
-	int	x;
-	int	y;
-	int	z;
-}	t_vector;
-
-typedef t_vector t_point;
+# define SUCCESS 0
+# define FAILURE 1
 
 typedef struct s_camera
 {
@@ -39,14 +29,14 @@ typedef struct s_camera
 typedef struct s_ambient_lightning
 {
 	float	ratio;
-	int		color;
+	t_color	color;
 }	t_ambient_lightning;
 
 typedef struct s_light
 {
 	t_point			loc;
 	float			ratio;
-	int				color;
+	t_color			color;
 	struct s_light	*next;
 }	t_light;
 
@@ -54,7 +44,7 @@ typedef struct s_obj_sphere
 {
 	t_point				center;
 	int					diameter;
-	int					color;
+	t_color				color;
 	struct s_obj_sphere	*next;
 }	t_obj_sphere;
 
@@ -62,7 +52,7 @@ typedef struct s_obj_plane
 {
 	t_point				loc;
 	t_vector			normal;
-	int					color;
+	t_color				color;
 	struct s_obj_plane	*next;
 }	t_obj_plane;
 
@@ -72,7 +62,7 @@ typedef struct s_obj_cylinder
 	t_vector				normal;
 	int						height;
 	int						diameter;
-	int						color;
+	t_color					color;
 	struct s_obj_cylinder	*next;
 }	t_obj_cylinder;
 
@@ -82,5 +72,16 @@ typedef struct s_obj
 	t_obj_plane		*pl;
 	t_obj_sphere	*sp;
 }	t_obj;
+
+typedef struct s_info
+{
+	t_camera			*camera;
+	t_ambient_lightning	*amb;
+	t_light				*lights;
+	t_obj				*objs;
+}	t_info;
+
+void	init_obj(t_info *info);
+int		parse_all(t_info *info, char *file);
 
 #endif

@@ -40,3 +40,10 @@ To execute miniRT, you need formatted file with `.rt` expansion.
 추가 : "[add] details"  
 삭제 : "[del] details"  
 긴급 : "[fix] details"  
+## allowed functions
+```c
+#include <unistd.h>
+#include <stdlib.h>
+#include <math.h>
+#include "mlx.h"
+```
