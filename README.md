@@ -30,4 +30,13 @@ To execute miniRT, you need formatted file with `.rt` expansion.
 - ray tracing 기법 공부
 - 깃 & 깃허브 협업 심화 공부
 ## 진행 상황
-**2024.02.16** 과제 등록, git repository 만들기, README 작성
+**2024.02.16** 과제 등록, git repository 만들기, README 작성  
+**2024.02.17** 규칙 정하기 (커밋 메세지, 풀 리퀘스트)   
+
+# [Rules]
+## commit message
+
+변경 : "[mod] details"  
+추가 : "[add] details"  
+삭제 : "[del] details"  
+긴급 : "[fix] details"  
