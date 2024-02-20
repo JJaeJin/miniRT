@@ -18,14 +18,15 @@ OBJS=		ft_isascii.o ft_memcpy.o ft_putstr_fd.o ft_strlcat.o ft_strrchr.o\
 			ft_isalpha.o ft_memcmp.o ft_putnbr_fd.o ft_strjoin.o ft_strnstr.o\
 			ft_atod.o get_next_line_utils.o get_next_line.o
 HEADER=		libft.h
+HEADER_DIR=	../include
 
 all:			$(NAME)
 
-$(NAME):		$(OBJS)
+$(NAME):		$(OBJS) $(HEADER)
 	ar rc $(NAME) $(OBJS)
 
-$(OBJS):		$(SRCS) $(HEADER)
-	$(CC) $(CFLAGS) -c $(SRCS)
+$(OBJS):		$(SRCS)
+	$(CC) $(CFLAGS) -I $(HEADER_DIR) -c $(SRCS)
 	
 clean:
 	$(RM) $(OBJS)

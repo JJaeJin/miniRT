@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:45:37 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 13:43:01 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:55:18 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	parse_all(t_info *info, char *file)
 		buffer = get_next_line(fd);
 		if (buffer == 0)
 			break ;
+		if (buffer[ft_strlen(buffer) - 1] == '\n')
+			buffer[ft_strlen(buffer) - 1] = 0;
 		if (read_info(info, buffer) == FAILURE)
 		{
 			free(buffer);
@@ -41,6 +43,7 @@ int	parse_all(t_info *info, char *file)
 		}
 		free(buffer);
 	}
+	close(fd);
 	if (parse_finished(info) == FALSE)
 		return (FAILURE);
 	return (SUCCESS);
@@ -66,17 +69,17 @@ static int	read_info(t_info *info, char *buffer)
 	if (all_info[0] == NULL)
 		return (SUCCESS);
 	else if (ft_strncmp(all_info[0], "sp", 3) == 0)
-		return (read_sp());
+		return (read_sp(info->objs, all_info));
 	else if (ft_strncmp(all_info[0], "pl", 3) == 0)
-		return (read_pl());
+		return (read_pl(info->objs, all_info));
 	else if (ft_strncmp(all_info[0], "cy", 3) == 0)
-		return (read_cy());
+		return (read_cy(info->objs, all_info));
 	else if (ft_strncmp(all_info[0], "A", 2) == 0)
-		return (read_amb());
+		return (read_amb(info, all_info));
 	else if (ft_strncmp(all_info[0], "C", 2) == 0)
-		return (read_cam());
+		return (read_cam(info, all_info));
 	else if (ft_strncmp(all_info[0], "L", 2) == 0)
-		return (read_light());
+		return (read_light(info, all_info));
 	else
 		return (FAILURE);
 }

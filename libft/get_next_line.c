@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:34:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 13:50:01 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:28:13 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*get_next_line(int fd)
 
 	now = go_to_node(fd, &first);
 	if (now == 0)
-		return (ERROR);
+		return (FALSE);
 	res = get_res(now);
 	if (res == 0)
 	{
@@ -55,7 +55,7 @@ t_glst	*go_to_node(int fd, t_glst **first)
 	{
 		n_n = (t_glst *)malloc(sizeof(t_glst));
 		if (n_n == 0)
-			return (ERROR);
+			return (FALSE);
 		n_n->content = (char *)malloc(BUFFER_SIZE);
 		rd_size = read(fd, n_n->content, BUFFER_SIZE);
 		if (n_n->content == 0 || rd_size <= 0)
@@ -75,7 +75,7 @@ char	*get_res(t_glst *n)
 	size_t	add;
 
 	if (read(n->fd, 0, 0) == -1)
-		return (ERROR);
+		return (FALSE);
 	add = n->len;
 	i = 0;
 	d = 1;
@@ -86,10 +86,10 @@ char	*get_res(t_glst *n)
 			if (i != 0)
 				d *= 2;
 			if (add_buffer(n, d * BUFFER_SIZE) == 0)
-				return (ERROR);
+				return (FALSE);
 		}
 		if (read_buff(n) == 0)
-			return (ERROR);
+			return (FALSE);
 		i++;
 	}
 	return (make_res(n));
@@ -117,7 +117,7 @@ int	add_buffer(t_glst *n, size_t add)
 	i = 0;
 	tmp_con = (char *)malloc(n->len + add);
 	if (tmp_con == 0)
-		return (ERROR);
+		return (FALSE);
 	while (i < n->len)
 	{
 		tmp_con[i] = n->content[i];
@@ -125,5 +125,5 @@ int	add_buffer(t_glst *n, size_t add)
 	}
 	free(n->content);
 	n->content = tmp_con;
-	return (SUCCESS);
+	return (TRUE);
 }

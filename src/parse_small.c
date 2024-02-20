@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_small.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:00:52 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 13:34:28 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:34:56 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,5 @@ int	read_cy(t_obj *obj, char **all_info)
 		return (fail_free(res));
 	res->next = obj->cy;
 	obj->cy = res;
-	retrun (SUCCESS);
+	return (SUCCESS);
 }

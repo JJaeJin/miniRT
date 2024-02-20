@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 10:33:22 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:36:23 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ typedef struct s_camera
 {
 	t_point		loc;
 	t_vector	way;
-	int			fov;
+	double		fov;
 }	t_camera;
 
 typedef struct s_ambient_lightning
 {
-	float	ratio;
+	double	ratio;
 	t_color	color;
 }	t_ambient_lightning;
 
 typedef struct s_light
 {
 	t_point			loc;
-	float			ratio;
+	double			ratio;
 	t_color			color;
 	struct s_light	*next;
 }	t_light;
@@ -43,7 +43,7 @@ typedef struct s_light
 typedef struct s_obj_sphere
 {
 	t_point				center;
-	int					diameter;
+	double				diameter;
 	t_color				color;
 	struct s_obj_sphere	*next;
 }	t_obj_sphere;
@@ -60,8 +60,8 @@ typedef struct s_obj_cylinder
 {
 	t_point					loc;
 	t_vector				normal;
-	int						height;
-	int						diameter;
+	double					height;
+	double					diameter;
 	t_color					color;
 	struct s_obj_cylinder	*next;
 }	t_obj_cylinder;
@@ -86,7 +86,14 @@ int		parse_all(t_info *info, char *file);
 int		is_vector(char *s, t_vector *v);
 int		is_double(char *s, double *f);
 int		is_unsigned_double(char *s, double *f);
-int		is_rgb(char *s, t_vector *v);
+int		is_rgb(char *s, t_color *clr);
 int		fail_free(void *p);
+
+int		read_sp(t_obj *obj, char **all_info);
+int		read_pl(t_obj *obj, char **all_info);
+int		read_cy(t_obj *obj, char **all_info);
+int		read_cam(t_info *info, char **all_info);
+int		read_light(t_info *info, char **all_info);
+int		read_amb(t_info *info, char **all_info);
 
 #endif
