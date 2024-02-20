@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 21:52:04 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/01/25 14:32:51 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:39:06 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int	ft_atoi(const char *nptr, int *ans)
 			return (FALSE);
 		nptr++;
 	}
-	if (*nptr != 0)
-		return (FALSE);
 	*ans = sign * acc;
 	return (TRUE);
 }
