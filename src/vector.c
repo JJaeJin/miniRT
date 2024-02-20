@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:51:51 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 15:19:17 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:25:20 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,19 @@ static int	is_num(char *s, int *i, double *vi)
 	if (ft_atod(s + *i, vi) == FALSE)
 		return (FALSE);
 	if (s[*i] == '-')
+	{
 		(*i)++;
+		if (ft_isdigit(s[*i]) == FALSE)
+	 		return (FALSE);
+	}
 	while (ft_isdigit(s[*i]) == TRUE)
 		(*i)++;
 	if (s[*i] == '.')
+	{
 		(*i)++;
+		if (ft_isdigit(s[*i]) == FALSE)
+	 		return (FALSE);
+	}
 	while (ft_isdigit(s[*i]) == TRUE)
 		(*i)++;
 	return (TRUE);
