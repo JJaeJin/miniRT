@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:21:50 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/02/20 13:49:44 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:27:35 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@
 # elif BUFFER_SIZE <= 0
 #  error "error"
 # endif
-
-# define SUCCESS 1
-# define ERROR 0
 
 /* libft */
 int		ft_atod(const char *nptr, double *ans);

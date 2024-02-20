@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 17:46:07 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 13:50:05 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:28:48 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	read_buff(t_glst *n)
 
 	rd_size = read(n->fd, n->content + n->len, BUFFER_SIZE);
 	if (rd_size == -1 || (rd_size == 0 && n->len == 0))
-		return (ERROR);
+		return (FALSE);
 	n->len += rd_size;
-	return (SUCCESS);
+	return (TRUE);
 }
 
 char	*make_res(t_glst *n)
@@ -39,14 +39,14 @@ char	*make_res(t_glst *n)
 	size_t	res_len;
 
 	if (n->len == 0)
-		return (ERROR);
+		return (FALSE);
 	if (find_nl(n) != -1)
 		res_len = find_nl(n) + 1;
 	else
 		res_len = n->len;
 	res = (char *)malloc(res_len + 1);
 	if (res == 0)
-		return (ERROR);
+		return (FALSE);
 	i = -1;
 	while (++i < (int)res_len)
 		res[i] = n->content[i];
@@ -66,7 +66,7 @@ int	trim_con(t_glst *n, int i, size_t res_len)
 
 	tmp_con = (char *)malloc(n->len - res_len);
 	if (tmp_con == 0)
-		return (ERROR);
+		return (FALSE);
 	while ((size_t)i < n->len)
 	{
 		tmp_con[i - res_len] = n->content[i];
@@ -74,11 +74,11 @@ int	trim_con(t_glst *n, int i, size_t res_len)
 	}
 	free(n->content);
 	n->content = tmp_con;
-	return (SUCCESS);
+	return (TRUE);
 }
 
 void	*free_error(void *v)
 {
 	free(v);
-	return (ERROR);
+	return (FALSE);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:19:09 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 13:03:19 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:19:01 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_double(char *s, double *f)
 		if (s[i] != 0)
 			return (FALSE);
 	}
-	if (ft_atod(s, f) == FALSE)
+	if (ft_atod(s + i, f) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
@@ -56,7 +56,7 @@ int	is_unsigned_double(char *s, double *f)
 		if (s[i] != 0)
 			return (FALSE);
 	}
-	if (ft_atod(s, f) == FALSE \
+	if (ft_atod(s + i, f) == FALSE \
 		|| f <= 0)
 		return (FALSE);
 	return (TRUE);

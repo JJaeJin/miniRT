@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 17:35:45 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/19 16:59:11 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:33:20 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 typedef struct s_color
 {
-	int		red;
-	int		green;
-	int		blue;
+	double	red;
+	double	green;
+	double	blue;
 	double	brightness;
 }	t_color;
 

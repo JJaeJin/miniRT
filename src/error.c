@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:56:52 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 13:45:30 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:29:07 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	return_error(char *s)
 void	free_all_info(t_info *info)
 {
 	t_light	*temp_light;
-	t_obj	*temp_obj;
 
 	free(info->camera);
 	free(info->amb);
