@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:19:09 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 11:24:01 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:03:19 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_double(char *s, double *f)
 		if (s[i] != 0)
 			return (FALSE);
 	}
-	if (ft_atod() == FALSE)
+	if (ft_atod(s, f) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
@@ -56,7 +56,7 @@ int	is_unsigned_double(char *s, double *f)
 		if (s[i] != 0)
 			return (FALSE);
 	}
-	if (ft_atod() == FALSE \
+	if (ft_atod(s, f) == FALSE \
 		|| f <= 0)
 		return (FALSE);
 	return (TRUE);
