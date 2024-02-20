@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:21:50 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/01/28 18:20:01 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:11:55 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #  define FALSE 0
 # endif
 
+int		ft_atod(const char *nptr, double *ans);
 int		ft_atoi(const char *nptr, int *ans);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
