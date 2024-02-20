@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 14:36:23 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:43:05 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct s_info
 void	init_obj(t_info *info);
 int		parse_all(t_info *info, char *file);
 int		is_vector(char *s, t_vector *v);
-int		is_double(char *s, double *f);
 int		is_unsigned_double(char *s, double *f);
 int		is_rgb(char *s, t_color *clr);
 int		fail_free(void *p);
