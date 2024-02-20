@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:32:02 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 11:24:41 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:37:23 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	read_cam(t_info *info, char **all_info)
 {
 	t_camera	*res;
 
+	if (info->camera != NULL)
+		return (FAILURE);
 	res = (t_camera *)ft_calloc(1, sizeof(t_camera));
-	if (res == NULL)
-		exit(return_error("malloc fail"));
 	if (all_info[1] == NULL \
 		|| is_vector(all_info[1], &(res->loc)) == FALSE)
 		return (fail_free(res));
@@ -40,8 +40,6 @@ int	read_light(t_info *info, char **all_info)
 	t_light	*res;
 
 	res = (t_light *)ft_calloc(1, sizeof(t_light));
-	if (res == NULL)
-		exit(return_error("malloc fail"));
 	if (all_info[1] == NULL \
 		|| is_vector(all_info[1], &(res->loc)) == FALSE)
 		return (fail_free(res));
@@ -62,9 +60,9 @@ int	read_amb(t_info *info, char **all_info)
 {
 	t_ambient_lightning	*res;
 
+	if (info->amb != NULL)
+		return (FAILURE);
 	res = (t_ambient_lightning *)ft_calloc(1, sizeof(t_ambient_lightning));
-	if (res == NULL)
-		exit(return_error("malloc fail"));
 	if (all_info[1] == NULL \
 		|| is_unsigned_double(all_info[1], &(res->ratio)) == FALSE)
 		return (fail_free(res));

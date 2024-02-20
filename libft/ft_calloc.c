@@ -6,11 +6,12 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 08:15:22 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/01/28 18:20:24 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:33:09 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "error.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {
@@ -27,7 +28,7 @@ void	*ft_calloc(size_t count, size_t size)
 		exit(1);
 	ptr_mal_add = malloc(count * size);
 	if (ptr_mal_add == 0)
-		exit(1);
+		exit(return_error("malloc fail"));
 	ft_bzero(ptr_mal_add, count * size);
 	return (ptr_mal_add);
 }

@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:45:37 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 13:54:50 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:43:01 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	read_info(t_info *info, char *buffer)
 	if (all_info == 0)
 		return (FAILURE);
 	if (all_info[0] == NULL)
-		return (0);
+		return (SUCCESS);
 	else if (ft_strncmp(all_info[0], "sp", 3) == 0)
 		return (read_sp());
 	else if (ft_strncmp(all_info[0], "pl", 3) == 0)
