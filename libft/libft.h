@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:21:50 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/01/28 18:20:01 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:04:12 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # endif
 
 int		ft_atoi(const char *nptr, int *ans);
+int		ft_atod();
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_isalnum(int c);

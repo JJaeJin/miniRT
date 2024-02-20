@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:45:37 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/17 18:17:19 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:24:26 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	is_rt_file(char *file)
 
 static int	read_info(t_info *info, char *buffer)
 {
-	char **all_info;
+	char	**all_info;
 
 	all_info = ft_split(buffer, ' ');
 	if (all_info == 0)
@@ -89,4 +89,10 @@ static int	parse_finished(t_info *info)
 		|| info->lights == 0)
 		return (FALSE);
 	return (TRUE);
+}
+
+int	fail_free(void *p)
+{
+	free(p);
+	return (FAILURE);
 }
