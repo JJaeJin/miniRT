@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:45:37 by jaejilee          #+#    #+#             */
 /*   Updated: 2024/02/20 13:43:01 by jaejilee         ###   ########.fr       */
@@ -12,7 +12,6 @@
 
 #include "libft.h"
 #include "argument.h"
-#include "get_next_line.h"
 #include "fcntl.h"
 
 static int	is_rt_file(char *file);

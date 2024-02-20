@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:21:50 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/02/19 20:04:12 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:49:44 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 #  define FALSE 0
 # endif
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 20
+# elif BUFFER_SIZE <= 0
+#  error "error"
+# endif
+
+# define SUCCESS 1
+# define ERROR 0
+
+/* libft */
 int		ft_atod(const char *nptr, double *ans);
 int		ft_atoi(const char *nptr, int *ans);
 void	ft_bzero(void *s, size_t n);
@@ -58,5 +68,27 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 void	_error(char *msg);
+
+/* gnl */
+char	*get_next_line(int fd);
+
+typedef struct s_glst
+{
+	int				fd;
+	char			*content;
+	size_t			len;
+	struct s_glst	*next;
+}	t_glst;
+
+t_glst	*go_to_node(int fd, t_glst **first);
+char	*get_res(t_glst *n);
+int		add_buffer(t_glst *n, size_t add);
+int		find_nl(t_glst *n);
+
+int		read_buff(t_glst *n);
+char	*make_res(t_glst *n);
+t_glst	*set_nn(t_glst **lst, t_glst *new, int fd, ssize_t rd_size);
+int		trim_con(t_glst *n, int i, size_t res_len);
+void	*free_error(void *v);
 
 #endif
