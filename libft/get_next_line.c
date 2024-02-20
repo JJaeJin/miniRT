@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:34:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2023/11/20 16:18:57 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:50:01 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 char	*get_next_line(int fd)
 {

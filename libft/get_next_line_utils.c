@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 17:46:07 by jaejilee          #+#    #+#             */
-/*   Updated: 2023/11/11 11:14:51 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:50:05 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 t_glst	*set_nn(t_glst **lst, t_glst *new, int fd, ssize_t rd_size)
 {
