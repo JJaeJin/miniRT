@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:19:09 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 15:19:01 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:19:49 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	is_double(char *s, double *f)
 	if (s[i] == '.')
 	{
 		i++;
+		if (ft_isdigit(s[i]) == FALSE)
+			return (FALSE);
 		while (ft_isdigit(s[i]) == TRUE)
 			i++;
 		if (s[i] != 0)
@@ -51,6 +53,8 @@ int	is_unsigned_double(char *s, double *f)
 	if (s[i] == '.')
 	{
 		i++;
+		if (ft_isdigit(s[i]) == FALSE)
+			return (FALSE);
 		while (ft_isdigit(s[i]) == TRUE)
 			i++;
 		if (s[i] != 0)

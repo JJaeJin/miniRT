@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 20:33:10 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 15:18:38 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:20:56 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ static int	is_num(char *s, int *i, double *vi)
 	if (ft_atod(s + *i, vi) == FALSE)
 		return (FALSE);
 	if (s[*i] == '-')
+	{
 		(*i)++;
+		if (ft_isdigit(s[*i]) == FALSE)
+			return (FALSE);
+	}
 	while (ft_isdigit(s[*i]) == TRUE)
 		(*i)++;
 	if (is_in_color(*vi) == FALSE)
