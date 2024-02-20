@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:48:35 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 11:10:48 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:33:41 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,4 @@ void	init_obj(t_info *info)
 	info->amb = NULL;
 	info->lights = NULL;
 	info->objs = (t_obj *)ft_calloc(1, sizeof(t_obj));
-	if (info->objs == NULL)
-		exit(return_error("malloc fail"));
 }

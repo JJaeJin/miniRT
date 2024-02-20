@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:26:12 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 11:21:13 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:42:13 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ int	main(int argc, char *argv[])
 	}
 	// 실행부~~
 	free_all_info(&info);
-	return (0);
+	return (SUCCESS);
 }
