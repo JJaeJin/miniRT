@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:56:52 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 11:19:38 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:45:30 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	return_error(char *s)
 	ft_putstr_fd("Error\nminiRT: ", 2);
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd("\n", 2);
-	return (1);
+	return (FAILURE);
 }
 
 void	free_all_info(t_info *info)

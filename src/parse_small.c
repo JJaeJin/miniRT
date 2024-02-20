@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:00:52 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 11:25:11 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:34:28 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	read_sp(t_obj *obj, char **all_info)
 	t_obj_sphere	*res;
 
 	res = (t_obj_sphere *)ft_calloc(1, sizeof(t_obj_sphere));
-	if (res == NULL)
-		exit(return_error("malloc fail"));
 	if (all_info[1] == NULL \
 		|| is_vector(all_info[1], &(res->center)) == FALSE)
 		return (fail_free(res));
@@ -42,8 +40,6 @@ int	read_pl(t_obj *obj, char **all_info)
 	t_obj_plane	*res;
 
 	res = (t_obj_plane *)ft_calloc(1, sizeof(t_obj_plane));
-	if (res == NULL)
-		exit(return_error("malloc fail"));
 	if (all_info[1] == NULL \
 		|| is_vector(all_info[1], &(res->loc)) == FALSE)
 		return (fail_free(res));
@@ -65,8 +61,6 @@ int	read_cy(t_obj *obj, char **all_info)
 	t_obj_cylinder	*res;
 
 	res = ft_calloc(1, sizeof(t_obj_cylinder));
-	if (res == NULL)
-		exit(return_error("malloc fail"));
 	if (all_info[1] == NULL \
 		|| is_vector(all_info[1], &(res->loc)) == FALSE)
 		return (fail_free(res));
