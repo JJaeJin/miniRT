@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 19:26:12 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/25 11:42:36 by jaejilee         ###   ########.fr       */
+/*   Created: 2024/02/25 11:21:20 by jaejilee          #+#    #+#             */
+/*   Updated: 2024/02/25 11:23:10 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "argument.h"
-#include "libft.h"
-#include "error.h"
 #include "draw.h"
 
-int	main(int argc, char *argv[])
+void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 {
-	t_info	info;
+	char	*dst;
 
-	if (argc != 2)
-		return (return_error("wrong argument count"));
-	init_obj(&info);
-	if (parse_all(&info, argv[1]) == FAILURE)
-	{
-		free_all_info(&info);
-		return (return_error("wrong file"));
-	}
-	draw_all(info);
-	free_all_info(&info);
-	return (SUCCESS);
+	dst = data->addr + (y * data->line_length + x * (data->bpp / 8));
+	*(unsigned int *)dst = color;
 }

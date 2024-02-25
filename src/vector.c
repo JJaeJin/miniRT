@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:51:51 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 16:25:20 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/25 11:43:10 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	is_num(char *s, int *i, double *vi)
 	{
 		(*i)++;
 		if (ft_isdigit(s[*i]) == FALSE)
-	 		return (FALSE);
+			return (FALSE);
 	}
 	while (ft_isdigit(s[*i]) == TRUE)
 		(*i)++;
@@ -55,7 +55,7 @@ static int	is_num(char *s, int *i, double *vi)
 	{
 		(*i)++;
 		if (ft_isdigit(s[*i]) == FALSE)
-	 		return (FALSE);
+			return (FALSE);
 	}
 	while (ft_isdigit(s[*i]) == TRUE)
 		(*i)++;

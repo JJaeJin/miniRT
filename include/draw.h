@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 19:26:12 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/25 11:42:36 by jaejilee         ###   ########.fr       */
+/*   Created: 2024/02/25 10:57:20 by jaejilee          #+#    #+#             */
+/*   Updated: 2024/02/25 11:37:45 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "argument.h"
-#include "libft.h"
-#include "error.h"
-#include "draw.h"
+#ifndef DRAW_H
+# define DRAW_H
 
-int	main(int argc, char *argv[])
+# include "argument.h"
+
+# define ON_DESTROY		17
+# define ON_KEYBOARD	2
+# define KB_ESC			53
+
+typedef struct s_mlx
 {
-	t_info	info;
+	void	*mlx;
+	void	*win;
+	void	*img;
+	void	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}	t_mlx;
 
-	if (argc != 2)
-		return (return_error("wrong argument count"));
-	init_obj(&info);
-	if (parse_all(&info, argv[1]) == FAILURE)
-	{
-		free_all_info(&info);
-		return (return_error("wrong file"));
-	}
-	draw_all(info);
-	free_all_info(&info);
-	return (SUCCESS);
-}
+void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
+void	draw_all(t_info info);
+
+#endif

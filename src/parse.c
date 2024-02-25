@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:45:37 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 14:55:18 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/02/25 11:48:16 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ int	parse_all(t_info *info, char *file)
 		free(buffer);
 	}
 	close(fd);
-	if (parse_finished(info) == FALSE)
-		return (FAILURE);
-	return (SUCCESS);
+	return (parse_finished(info));
 }
 
 static int	is_rt_file(char *file)
@@ -89,8 +87,8 @@ static int	parse_finished(t_info *info)
 	if (info->amb == 0
 		|| info->camera == 0
 		|| info->lights == 0)
-		return (FALSE);
-	return (TRUE);
+		return (FAILURE);
+	return (SUCCESS);
 }
 
 int	fail_free(void *p)
