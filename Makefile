@@ -2,7 +2,7 @@ CC=				cc
 CFLAGS=			-Wall -Wextra -Werror -g
 NAME=			miniRT
 
-FILES=			color double error init_data main parse_capital parse_small parse parse_vector draw_all draw_img vector_cal1 vector_cal2
+FILES=			color double error init_data main parse_capital parse_small parse parse_vector draw_all draw_img vector_cal1 vector_cal2 draw_obj
 SRCS=			$(addsuffix .c, $(addprefix ./src/, $(FILES)))
 OBJS=			$(SRCS:.c=.o)
 SRCS_BONUS=		$(EMPTY)
