@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:54:45 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/25 15:54:01 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:45:53 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,14 @@ double	*solve_quadratic(double a, double b, double c)
 		res[1] = (-1 * b + sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
 	}
 	return (res);
+}
+
+void	v_normalize(t_vector *v)
+{
+	double	size;
+
+	size = v_size(*v);
+	v->x /= size;
+	v->y /= size;
+	v->z /= size;
 }

@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:32:02 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/25 12:51:45 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:24:18 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	read_cam(t_info *info, char **all_info)
 		|| is_vector(all_info[1], &(res->loc)) == FALSE)
 		return (fail_free(res));
 	if (all_info[2] == NULL \
-		|| is_vector(all_info[2], &(res->way)) == FALSE)
+		|| is_vector(all_info[2], &(res->way)) == FALSE \
+		|| (res->way.x == 0 && res->way.y == 0 && res->way.z == 0))
 		return (fail_free(res));
 	if (all_info[3] == NULL \
 		|| is_unsigned_double(all_info[3], &(res->fov)) == FALSE \

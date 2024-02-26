@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 10:31:44 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/25 11:42:16 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:33:58 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	draw_all(t_info info)
 	t_mlx	data;
 
 	init_mlx(&data);
-	// make_img();
-	(void)info;
+	make_img(&data, info);
 	mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
 	mlx_hook(data.win, ON_DESTROY, 0, close_exit, &data);
 	mlx_hook(data.win, ON_KEYBOARD, 0, key_hook, &data);
@@ -35,8 +34,8 @@ void	draw_all(t_info info)
 static void	init_mlx(t_mlx *data)
 {
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 800, 800, "miniRT");
-	data->img = mlx_new_image(data->mlx, 800, 800);
+	data->win = mlx_new_window(data->mlx, SCREEN_W, SCREEN_H, "miniRT");
+	data->img = mlx_new_image(data->mlx, SCREEN_W, SCREEN_H);
 	data->addr = mlx_get_data_addr(data->img, &data->bpp, \
 					&data->line_length, &data->endian);
 }

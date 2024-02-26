@@ -39,6 +39,7 @@ To execute miniRT, you need formatted file with `.rt` expansion.
 **2024.02.17** 규칙 정하기 (커밋 메세지, 풀 리퀘스트)  
 **2024.02.20** parsing 구현 완료, 이론 공부 시작  
 **2024.02.25** mlx 기본 세팅 완료  
+**2024.02.26** 각 픽셀에 대한 벡터 구하기 완료, 도형 따로 구현 시작  
 
 # [Rules]
 ## commit message
