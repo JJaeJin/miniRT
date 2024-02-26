@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:54:45 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/26 14:45:53 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:25:33 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,23 @@
 #include "libft.h"
 #include <math.h>
 
-t_point	*get_near_p(t_point cam, t_vector v, double *t)
+t_point	get_near_p(t_vector v, double *t)
 {
-	t_point	*res;
+	t_point	res;
 	int		small_idx;
 
-	res = (t_point *)ft_calloc(1, sizeof(t_point));
 	if (sizeof(t) == sizeof(double))
 		small_idx = 0;
 	else
 	{
-		if (t[1] < 0)
-		{
-			free(res);
-			return (NULL);
-		}
-		else if (t[0] < 0)
+		if (t[0] < 0)
 			small_idx = 1;
 		else
 			small_idx = 0;
 	}
-	res->x = cam.x + t[small_idx] * v.x;
-	res->y = cam.y + t[small_idx] * v.y;
-	res->z = cam.z + t[small_idx] * v.z;
+	res.x = t[small_idx] * v.x;
+	res.y = t[small_idx] * v.y;
+	res.z = t[small_idx] * v.z;
 	return (res);
 }
 
@@ -67,4 +61,16 @@ void	v_normalize(t_vector *v)
 	v->x /= size;
 	v->y /= size;
 	v->z /= size;
+}
+
+double	p_get_distance(t_point p1, t_point p2)
+{
+	double	res;
+
+	res = 0;
+	res += pow(p1.x - p2.x, 2);
+	res += pow(p1.y - p2.y, 2);
+	res += pow(p1.z - p2.z, 2);
+	res = sqrt(res);
+	return (res);
 }
