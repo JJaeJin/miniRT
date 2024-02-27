@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:54:45 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/26 19:25:33 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:12:28 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	v_normalize(t_vector *v)
 	double	size;
 
 	size = v_size(*v);
+	if (size == 0)
+		return ;
 	v->x /= size;
 	v->y /= size;
 	v->z /= size;
