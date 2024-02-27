@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 10:31:44 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/26 13:33:58 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:19:22 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,21 @@ static int	key_hook(int keycode, t_mlx *data)
 	(void)data;
 	if (keycode == KB_ESC)
 		exit(0);
+	else if (keycode == KB_UP && data->info->amb->ratio != 1)
+	{
+		data->info->amb->ratio += 0.1;
+		if (data->info->amb->ratio > 1.0)
+			data->info->amb->ratio = 1;
+		make_img(data, *data->info);
+		mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	}
+	else if (keycode == KB_DOWN && data->info->amb->ratio != 0)
+	{
+		data->info->amb->ratio -= 0.1;
+		if (data->info->amb->ratio < 0)
+			data->info->amb->ratio = 0;
+		make_img(data, *data->info);
+		mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	}
 	return (0);
 }

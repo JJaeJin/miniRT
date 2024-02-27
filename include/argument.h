@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/26 18:40:36 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:31:33 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,10 @@
 
 # include "vector.h"
 # include "color.h"
+# include <stdlib.h>
 
 # define SUCCESS (0)
 # define FAILURE (1)
-
-# ifndef NULL
-#  define NULL (0)
-# endif
 
 typedef struct s_camera
 {
@@ -100,5 +97,10 @@ int		read_light(t_info *info, char **all_info);
 int		read_amb(t_info *info, char **all_info);
 
 void	convert_system(t_info *info);
+
+void	check_sphere(t_color *rgb, double *distance, t_vector v, t_info info);
+void	check_plane(t_color *rgb, double *distance, t_vector v, t_info info);
+void	check_cylinder(t_color *rgb, double *distance, t_vector v, t_info info);
+void	apply_ambient(t_color *c, t_ambient_lightning *amb);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:29 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/26 20:27:28 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:20:15 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,20 @@ void	check_plane(t_color *rgb, double *distance, t_vector v, t_info info)
 	pl = info.objs->pl;
 	while (pl != NULL)
 	{
-		t = (pl->normal.x * pl->loc.x + pl->normal.y * pl->loc.y + \
-			pl->normal.z * pl->loc.z) / (pl->normal.x * v.x + pl->normal.y \
-			* v.y + pl->normal.z * v.z);
-		p_res.x = v.x * t;
-		p_res.y = v.y * t;
-		p_res.z = v.z * t;
-		d_res = v_size((t_vector)p_res);
-		if (*distance == 0 || d_res < *distance)
+		if (v_inner_product(info.camera->way, pl->normal) != 0)
 		{
-			*distance = d_res;
-			*rgb = pl->color;
+			t = (pl->normal.x * pl->loc.x + pl->normal.y * pl->loc.y + \
+				pl->normal.z * pl->loc.z) / (pl->normal.x * v.x + pl->normal.y \
+				* v.y + pl->normal.z * v.z);
+			p_res.x = v.x * t;
+			p_res.y = v.y * t;
+			p_res.z = v.z * t;
+			d_res = v_size((t_vector)p_res);
+			if (*distance == 0 || d_res < *distance)
+			{
+				*distance = d_res;
+				*rgb = pl->color;
+			}
 		}
 		pl = pl->next;
 	}

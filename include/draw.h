@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 10:57:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/26 13:35:23 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:05:47 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # define ON_DESTROY		17
 # define ON_KEYBOARD	2
+# define KB_DOWN		125
+# define KB_UP			126
 # define KB_ESC			53
 
 # define SCREEN_W		800
@@ -31,13 +33,11 @@ typedef struct s_mlx
 	int		bpp;
 	int		line_length;
 	int		endian;
+	t_info	*info;
 }	t_mlx;
 
 void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 void	draw_all(t_info info);
 void	make_img(t_mlx *data, t_info info);
-void	check_sphere(t_color *rgb, double *distance, t_vector v, t_info info);
-void	check_plane(t_color *rgb, double *distance, t_vector v, t_info info);
-void	check_cylinder(t_color *rgb, double *distance, t_vector v, t_info info);
 
 #endif
