@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:21:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/26 19:52:47 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:35:14 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 #include "argument.h"
 #include "libft.h"
 #include <math.h>
+#include <stdio.h>
 
 static t_vector	get_3d_vector(int x, int y, t_info info);
 static void		law_rodrigues(t_vector *res, t_vector cw, \
 							t_vector normal, t_vector ndc_t);
+static void		init_img_data(t_color *rgb, double *distance);
 
 void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 {
@@ -33,28 +35,27 @@ void	make_img(t_mlx *data, t_info info)
 	int			x;
 	int			y;
 	t_color		rgb;
-	double		disance;
+	double		distance;
 	t_vector	v;
 
-	x = 0;
-	while (x < SCREEN_W)
+	x = -1;
+	while (++x < SCREEN_W)
 	{
-		y = 0;
-		while (y < SCREEN_H)
+		y = -1;
+		while (++y < SCREEN_H)
 		{
-			disance = 0;
-			rgb.red = 0;
-			rgb.blue = 0;
-			rgb.green = 0;
+			init_img_data(&rgb, &distance);
 			v = get_3d_vector(x, y, info);
-			check_sphere(&rgb, &disance, v, info);
-			check_plane(&rgb, &disance, v, info);
-			check_cylinder(&rgb, &disance, v, info);
+			check_sphere(&rgb, &distance, v, info);
+			check_plane(&rgb, &distance, v, info);
+			check_cylinder(&rgb, &distance, v, info);
+			if (distance != 0)
+				apply_ambient(&rgb, info.amb);
 			my_mlx_pixel_put(data, x, y, \
 				((int)rgb.red << 16) | ((int)rgb.green << 8) | (int)rgb.blue);
-			y++;
+			if (x == 400 && y == 400)
+				printf("(400,400) distance = %f\n", distance);
 		}
-		x++;
 	}
 }
 
@@ -87,4 +88,12 @@ static void	law_rodrigues(t_vector *res, t_vector cw, \
 	res->x = cos_th * cw.x + sin_th * temp.x;
 	res->y = cos_th * cw.y + sin_th * temp.y;
 	res->z = cos_th * cw.z + sin_th * temp.z;
+}
+
+static void	init_img_data(t_color *rgb, double *distance)
+{
+	*distance = 0;
+	rgb->red = 0;
+	rgb->blue = 0;
+	rgb->green = 0;
 }
