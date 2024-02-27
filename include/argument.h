@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 16:43:05 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:40:36 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@
 # include "vector.h"
 # include "color.h"
 
-# define SUCCESS 0
-# define FAILURE 1
+# define SUCCESS (0)
+# define FAILURE (1)
+
+# ifndef NULL
+#  define NULL (0)
+# endif
 
 typedef struct s_camera
 {
@@ -94,5 +98,7 @@ int		read_cy(t_obj *obj, char **all_info);
 int		read_cam(t_info *info, char **all_info);
 int		read_light(t_info *info, char **all_info);
 int		read_amb(t_info *info, char **all_info);
+
+void	convert_system(t_info *info);
 
 #endif

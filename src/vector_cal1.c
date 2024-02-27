@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:25:35 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/25 13:54:24 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:47:00 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,33 @@ double	v_inner_product(t_vector v1, t_vector v2)
 	return (res);
 }
 
-t_vector	*v_outer_product(t_vector v1, t_vector v2)
+t_vector	v_outer_product(t_vector v1, t_vector v2)
 {
-	t_vector	*res;
+	t_vector	res;
 
-	res = (t_vector *)ft_calloc(1, sizeof(t_vector));
-	res->x = v1.y * v2.z - v1.z * v2.y;
-	res->y = v1.z * v2.x - v1.x * v2.z;
-	res->z = v1.x * v2.y - v1.y * v2.x;
+	res.x = v1.y * v2.z - v1.z * v2.y;
+	res.y = v1.z * v2.x - v1.x * v2.z;
+	res.z = v1.x * v2.y - v1.y * v2.x;
 	return (res);
 }
 
-t_vector	*v_add(t_vector v1, t_vector v2)
+t_vector	v_add(t_vector v1, t_vector v2)
 {
-	t_vector	*res;
+	t_vector	res;
 
-	res = (t_vector *)ft_calloc(1, sizeof(t_vector));
-	res->x = v1.x + v2.x;
-	res->y = v1.y + v2.y;
-	res->z = v1.z + v2.z;
+	res.x = v1.x + v2.x;
+	res.y = v1.y + v2.y;
+	res.z = v1.z + v2.z;
 	return (res);
 }
 
-t_vector	*v_sub(t_vector v1, t_vector v2)
+t_vector	v_sub(t_vector v1, t_vector v2)
 {
-	t_vector	*res;
+	t_vector	res;
 
-	res = (t_vector *)ft_calloc(1, sizeof(t_vector));
-	res->x = v1.x - v2.x;
-	res->y = v1.y - v2.y;
-	res->z = v1.z - v2.z;
+	res.x = v1.x - v2.x;
+	res.y = v1.y - v2.y;
+	res.z = v1.z - v2.z;
 	return (res);
 }
 

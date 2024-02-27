@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:26:12 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/25 11:42:36 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:11:14 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char *argv[])
 		free_all_info(&info);
 		return (return_error("wrong file"));
 	}
+	convert_system(&info);
 	draw_all(info);
 	free_all_info(&info);
 	return (SUCCESS);
