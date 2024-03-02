@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:21:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/27 13:13:07 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:45:09 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ void	make_img(t_mlx *data, t_info info)
 			check_plane(&rgb, &distance, v, info);
 			check_cylinder(&rgb, &distance, v, info);
 			if (distance != 0)
+			{
 				apply_ambient(&rgb, info.amb);
-			my_mlx_pixel_put(data, x, y, \
-				((int)rgb.red << 16) | ((int)rgb.green << 8) | (int)rgb.blue);
+				my_mlx_pixel_put(data, x, y, \
+					((int)rgb.red << 16) | ((int)rgb.green << 8) | (int)rgb.blue);
+			}
 		}
 	}
 }

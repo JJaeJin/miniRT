@@ -6,12 +6,13 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:32:02 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/26 15:24:18 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 20:46:52 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "argument.h"
+#include "vector.h"
 
 int	read_cam(t_info *info, char **all_info)
 {
@@ -34,6 +35,7 @@ int	read_cam(t_info *info, char **all_info)
 	if (all_info[4] != NULL)
 		return (fail_free(res));
 	info->camera = res;
+	v_normalize(&info->camera->way);
 	return (SUCCESS);
 }
 

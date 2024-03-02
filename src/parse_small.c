@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_small.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:00:52 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 14:34:56 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/01 20:48:37 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "argument.h"
 #include "error.h"
+#include "vector.h"
 
 int	read_sp(t_obj *obj, char **all_info)
 {
@@ -53,6 +54,7 @@ int	read_pl(t_obj *obj, char **all_info)
 		return (fail_free(res));
 	res->next = obj->pl;
 	obj->pl = res;
+	v_normalize(&obj->pl->normal);
 	return (SUCCESS);
 }
 
@@ -80,5 +82,6 @@ int	read_cy(t_obj *obj, char **all_info)
 		return (fail_free(res));
 	res->next = obj->cy;
 	obj->cy = res;
+	v_normalize(&obj->cy->normal);
 	return (SUCCESS);
 }

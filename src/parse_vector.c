@@ -6,12 +6,13 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:51:51 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/25 15:53:50 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:45:11 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "argument.h"
+#include <math.h>
 
 static int	is_num(char *s, int *i, double *vi);
 static int	is_comma(char *s, int *i);
@@ -19,7 +20,7 @@ static int	is_end(char *s, int i);
 
 int	is_vector(char *s, t_vector *v)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	if (is_num(s, &i, &(v->x)) == FALSE)
