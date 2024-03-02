@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:31:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/27 13:13:15 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:54:18 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	check_sphere(t_color *rgb, double *distance, t_vector v, t_info info)
 		d = v_size((t_vector)sp->center);
 		cos_th = v_inner_product((t_vector)sp->center, v) \
 				/ (v_size((t_vector)sp->center) * v_size(v));
-		if (d * sqrt(1 - pow(cos_th, 2)) <= sp->diameter)
+		if (d * sqrt(1 - pow(cos_th, 2)) <= sp->diameter / 2)
 		{
 			d_res = get_res_distance(v, sp);
 			if (*distance == 0 || d_res < *distance)
@@ -49,5 +49,5 @@ static double	get_res_distance(t_vector v, t_obj_sphere *sp)
 				pow(v.z, 2), -2 * v.x * sp->center.x -2 * v.y * \
 				sp->center.y -2 * v.z * sp->center.z, pow(sp->center.x, 2) \
 				+ pow(sp->center.y, 2) + pow(sp->center.z, 2) - \
-				pow(sp->diameter, 2))))));
+				pow(sp->diameter / 2, 2))))));
 }
