@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 10:31:44 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/27 11:19:22 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:23:04 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "mlx.h"
 #include "draw.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 static void	init_mlx(t_mlx *data);
 static int	close_exit(int keycode, t_mlx *data);
@@ -50,24 +51,20 @@ static int	close_exit(int keycode, t_mlx *data)
 
 static int	key_hook(int keycode, t_mlx *data)
 {
-	(void)data;
 	if (keycode == KB_ESC)
 		exit(0);
-	else if (keycode == KB_UP && data->info->amb->ratio != 1)
-	{
-		data->info->amb->ratio += 0.1;
-		if (data->info->amb->ratio > 1.0)
-			data->info->amb->ratio = 1;
-		make_img(data, *data->info);
-		mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-	}
-	else if (keycode == KB_DOWN && data->info->amb->ratio != 0)
-	{
-		data->info->amb->ratio -= 0.1;
-		if (data->info->amb->ratio < 0)
-			data->info->amb->ratio = 0;
-		make_img(data, *data->info);
-		mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-	}
+	else if ((keycode == KB_PLUS && data->info->amb->ratio != 1)
+		|| (keycode == KB_MINUS && data->info->amb->ratio != 0))
+		apply_kb_plus_minus(keycode, data);
+	else if (keycode == KB_W || keycode == KB_S || keycode == KB_Q
+		|| keycode == KB_E)
+		apply_kb_w_s_q_e(keycode, data);
+	else if (keycode == KB_A || keycode == KB_D)
+		apply_kb_a_d(keycode, data);
+	else
+		return (1);
+	make_img(data, *data->info);
+	printf("run\n");
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);
 }
