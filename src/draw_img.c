@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:21:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/12 14:25:42 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:13:25 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,15 @@ static t_vector	get_3d_vector(int x, int y, t_info info)
 	t_vector	ndc_t;
 	t_vector	res;
 	t_vector	normal;
+	t_vector	z;
 
 	ndc_t.x = x - SCREEN_W / 2;
 	ndc_t.y = y - SCREEN_H / 2;
 	ndc_t.z = (SCREEN_W / 2) / tan(M_PI / 180 * (info.camera->fov / 2));
-	normal = v_outer_product(ndc_t, info.camera->way);
+	z.x = 0;
+	z.y = 0;
+	z.z = 1;
+	normal = v_outer_product(z, info.camera->way);
 	v_normalize(&normal);
 	law_rodrigues(&res, info.camera->way, normal, ndc_t);
 	v_normalize(&res);
@@ -81,14 +85,20 @@ static void	law_rodrigues(t_vector *res, t_vector cw, \
 	t_vector	temp;
 	double		cos_th;
 	double		sin_th;
+	t_vector	z;
 
-	cos_th = v_inner_product(ndc_t, cw) \
-				/ (v_size(ndc_t) * v_size(cw));
+	z.x = 0;
+	z.y = 0;
+	z.z = 1;
+	cos_th = v_inner_product(z, cw) / (v_size(z) * v_size(cw));
 	sin_th = sqrt(1 - pow(cos_th, 2));
-	temp = v_outer_product(normal, cw);
-	res->x = cos_th * cw.x + sin_th * temp.x;
-	res->y = cos_th * cw.y + sin_th * temp.y;
-	res->z = cos_th * cw.z + sin_th * temp.z;
+	temp = v_outer_product(normal, ndc_t);
+	res->x = cos_th * ndc_t.x + (1 - cos_th) * v_inner_product(normal, ndc_t) \
+			* normal.x + sin_th * temp.x;
+	res->y = cos_th * ndc_t.y + (1 - cos_th) * v_inner_product(normal, ndc_t) \
+			* normal.y + sin_th * temp.y;
+	res->z = cos_th * ndc_t.z + (1 - cos_th) * v_inner_product(normal, ndc_t) \
+			* normal.z + sin_th * temp.z;
 }
 
 static void	init_img_data(t_color *rgb, double *distance)

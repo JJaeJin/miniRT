@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:31:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/01 18:54:18 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:12:57 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include "vector.h"
 #include <math.h>
 
-static double	get_res_distance(t_vector v, t_obj_sphere *sp);
+static double	get_res_distance(t_vector v, t_obj_sphere *sp, t_vector cam);
+static void		get_res_p(t_point *res, t_vector v, double *diff);
 
 void	check_sphere(t_color *rgb, double *distance, t_vector v, t_info info)
 {
@@ -32,7 +33,7 @@ void	check_sphere(t_color *rgb, double *distance, t_vector v, t_info info)
 				/ (v_size((t_vector)sp->center) * v_size(v));
 		if (d * sqrt(1 - pow(cos_th, 2)) <= sp->diameter / 2)
 		{
-			d_res = get_res_distance(v, sp);
+			d_res = get_res_distance(v, sp, info.camera->way);
 			if (*distance == 0 || d_res < *distance)
 			{
 				*distance = d_res;
@@ -43,11 +44,40 @@ void	check_sphere(t_color *rgb, double *distance, t_vector v, t_info info)
 	}
 }
 
-static double	get_res_distance(t_vector v, t_obj_sphere *sp)
+static double	get_res_distance(t_vector v, t_obj_sphere *sp, t_vector cam)
 {
-	return (v_size((get_near_p(v, solve_quadratic(pow(v.x, 2) + pow(v.y, 2) + \
+	t_point	res[2];
+	double	*diff;
+	double	res_d;
+	double	temp;
+
+	res_d = 0;
+	diff = solve_quadratic(pow(v.x, 2) + pow(v.y, 2) + \
 				pow(v.z, 2), -2 * v.x * sp->center.x -2 * v.y * \
 				sp->center.y -2 * v.z * sp->center.z, pow(sp->center.x, 2) \
 				+ pow(sp->center.y, 2) + pow(sp->center.z, 2) - \
-				pow(sp->diameter / 2, 2))))));
+				pow(sp->diameter / 2, 2));
+	get_res_p(res, v, diff);
+	if (v_inner_product(res[0], cam) > 0)
+		res_d = v_size(res[0]);
+	if (v_inner_product(res[1], cam) > 0)
+	{
+		temp = v_size(res[1]);
+		if (res_d == 0 || res_d > temp)
+			res_d = temp;
+	}
+	free(diff);
+	return (res_d);
+}
+
+static void	get_res_p(t_point *res, t_vector v, double *diff)
+{
+	res[0].x = v.x * diff[0];
+	res[0].y = v.y * diff[0];
+	res[0].z = v.z * diff[0];
+	if (sizeof(diff) == sizeof(double))
+		return ;
+	res[1].x = v.x * diff[1];
+	res[1].y = v.y * diff[1];
+	res[1].z = v.z * diff[1];
 }

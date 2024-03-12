@@ -6,33 +6,13 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:54:45 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/01 20:49:24 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:59:55 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 #include "libft.h"
 #include <math.h>
-
-t_point	get_near_p(t_vector v, double *t)
-{
-	t_point	res;
-	int		small_idx;
-
-	if (sizeof(t) == sizeof(double))
-		small_idx = 0;
-	else
-	{
-		if (t[0] < 0)
-			small_idx = 1;
-		else
-			small_idx = 0;
-	}
-	res.x = t[small_idx] * v.x;
-	res.y = t[small_idx] * v.y;
-	res.z = t[small_idx] * v.z;
-	return (res);
-}
 
 // y = ax^2 + bx + c
 double	*solve_quadratic(double a, double b, double c)
