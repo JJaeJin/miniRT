@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:21:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/12 19:58:17 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:13:25 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,12 @@ static void	law_rodrigues(t_vector *res, t_vector cw, \
 	cos_th = v_inner_product(z, cw) / (v_size(z) * v_size(cw));
 	sin_th = sqrt(1 - pow(cos_th, 2));
 	temp = v_outer_product(normal, ndc_t);
-	res->x = cos_th * ndc_t.x + (1 - cos_th) * v_inner_product(normal, ndc_t) * normal.x + sin_th * temp.x;
-	res->y = cos_th * ndc_t.y + (1 - cos_th) * v_inner_product(normal, ndc_t) * normal.y + sin_th * temp.y;
-	res->z = cos_th * ndc_t.z + (1 - cos_th) * v_inner_product(normal, ndc_t) * normal.z + sin_th * temp.z;
+	res->x = cos_th * ndc_t.x + (1 - cos_th) * v_inner_product(normal, ndc_t) \
+			* normal.x + sin_th * temp.x;
+	res->y = cos_th * ndc_t.y + (1 - cos_th) * v_inner_product(normal, ndc_t) \
+			* normal.y + sin_th * temp.y;
+	res->z = cos_th * ndc_t.z + (1 - cos_th) * v_inner_product(normal, ndc_t) \
+			* normal.z + sin_th * temp.z;
 }
 
 static void	init_img_data(t_color *rgb, double *distance)

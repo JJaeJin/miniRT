@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:31:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/12 19:53:06 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:12:57 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <math.h>
 
 static double	get_res_distance(t_vector v, t_obj_sphere *sp, t_vector cam);
+static void		get_res_p(t_point *res, t_vector v, double *diff);
 
 void	check_sphere(t_color *rgb, double *distance, t_vector v, t_info info)
 {
@@ -56,12 +57,7 @@ static double	get_res_distance(t_vector v, t_obj_sphere *sp, t_vector cam)
 				sp->center.y -2 * v.z * sp->center.z, pow(sp->center.x, 2) \
 				+ pow(sp->center.y, 2) + pow(sp->center.z, 2) - \
 				pow(sp->diameter / 2, 2));
-	res[0].x = v.x * diff[0];
-	res[0].y = v.y * diff[0];
-	res[0].z = v.z * diff[0];
-	res[1].x = v.x * diff[1];
-	res[1].y = v.y * diff[1];
-	res[1].z = v.z * diff[1];
+	get_res_p(res, v, diff);
 	if (v_inner_product(res[0], cam) > 0)
 		res_d = v_size(res[0]);
 	if (v_inner_product(res[1], cam) > 0)
@@ -72,4 +68,16 @@ static double	get_res_distance(t_vector v, t_obj_sphere *sp, t_vector cam)
 	}
 	free(diff);
 	return (res_d);
+}
+
+static void	get_res_p(t_point *res, t_vector v, double *diff)
+{
+	res[0].x = v.x * diff[0];
+	res[0].y = v.y * diff[0];
+	res[0].z = v.z * diff[0];
+	if (sizeof(diff) == sizeof(double))
+		return ;
+	res[1].x = v.x * diff[1];
+	res[1].y = v.y * diff[1];
+	res[1].z = v.z * diff[1];
 }
