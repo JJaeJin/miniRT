@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 10:57:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/27 11:05:47 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:23:21 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,15 @@
 
 # define ON_DESTROY		17
 # define ON_KEYBOARD	2
-# define KB_DOWN		125
-# define KB_UP			126
+# define KB_MINUS		27
+# define KB_PLUS		24
 # define KB_ESC			53
+# define KB_W			13
+# define KB_A			0
+# define KB_S			1
+# define KB_D			2
+# define KB_Q			12
+# define KB_E			14
 
 # define SCREEN_W		800
 # define SCREEN_H		800
@@ -39,5 +45,10 @@ typedef struct s_mlx
 void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 void	draw_all(t_info info);
 void	make_img(t_mlx *data, t_info info);
+
+void	clear_img(t_mlx *data);
+void	apply_kb_plus_minus(int keycode, t_mlx *data);
+void	apply_kb_w_s_q_e(int keycode, t_mlx *data);
+void	apply_kb_a_d(int keycode, t_mlx *data);
 
 #endif
