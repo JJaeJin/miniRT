@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:28:29 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/12 10:40:27 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:06:46 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	get_p_bottom(t_vector v, t_point *p, t_obj_cylinder *cy)
 void	get_p_side(t_vector v, t_point *p, t_obj_cylinder *cy, t_info info)
 {
 	if (get_d_between_lines(v, cy) == 0)
-		return (get_p_side_parallel(v, cy, p, info.camera->way));
-	else if (v_inner_product(v, cy->normal) == 0)
 		return (get_p_side_vertical(v, cy, p, info.camera->way));
+	else if (v_inner_product(v, cy->normal) == 0)
+		return (get_p_side_parallel(v, cy, p, info.camera->way));
 	else
 		return (get_p_side_others(v, p, cy));
 }
@@ -69,7 +69,7 @@ t_point	get_p_center(t_obj_cylinder *cy, t_vector v)
 	return (center);
 }
 
-static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, \
+static void	get_p_side_vertical(t_vector v, t_obj_cylinder *cy, \
 								t_point *p, t_vector cam)
 {
 	t_point	center;
@@ -96,16 +96,21 @@ static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, \
 	p[1].z = center.z + v.z * diff;
 }
 
-static void	get_p_side_vertical(t_vector v, t_obj_cylinder *cy, \
+static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, \
 									t_point *p, t_vector cam)
 {
 	double	def;
 	double	diff;
+	double	cos_th;
+	double	v_to_cy;
 
-	def = v_size(cy->loc) * (v_inner_product(v, cam) \
-			/ (v_size(v) * v_size(cam)));
-	diff = sqrt(pow(cy->diameter / 2, 2) \
-			- pow(get_d_between_lines(v, cy), 2));
+	(void)cam;
+	v_to_cy = get_d_between_lines(v, cy);
+	cos_th = fabs(v_inner_product(cy->loc, cy->normal)) \
+				/ (v_size(cy->loc) * v_size(cy->normal));
+	def = sqrt(fabs(pow(v_size(cy->loc) * sqrt(1 - pow(cos_th, 2)), 2) \
+				- pow(v_to_cy, 2)));
+	diff = sqrt(fabs(pow(cy->diameter / 2, 2) - pow(v_to_cy, 2)));
 	p[0].x = v.x * (def + diff);
 	p[0].y = v.y * (def + diff);
 	p[0].z = v.z * (def + diff);
