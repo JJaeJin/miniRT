@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/27 12:31:33 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/12 10:26:24 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,13 @@ void	check_sphere(t_color *rgb, double *distance, t_vector v, t_info info);
 void	check_plane(t_color *rgb, double *distance, t_vector v, t_info info);
 void	check_cylinder(t_color *rgb, double *distance, t_vector v, t_info info);
 void	apply_ambient(t_color *c, t_ambient_lightning *amb);
+
+/* funcs for cylinder */
+void	get_p_bottom(t_vector v, t_point *p, t_obj_cylinder *cy);
+void	get_p_side(t_vector v, t_point *p, t_obj_cylinder *cy, t_info info);
+void	get_p_side_others(t_vector v, t_point *p, t_obj_cylinder *cy);
+double	get_height_diff(t_vector v_ray, t_obj_cylinder *cy);
+double	get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy);
+t_point	get_p_center(t_obj_cylinder *cy, t_vector v);
 
 #endif
