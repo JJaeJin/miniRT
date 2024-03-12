@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 10:31:44 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/11 16:23:04 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:40:48 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "mlx.h"
 #include "draw.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 static void	init_mlx(t_mlx *data);
 static int	close_exit(int keycode, t_mlx *data);
@@ -64,7 +63,6 @@ static int	key_hook(int keycode, t_mlx *data)
 	else
 		return (1);
 	make_img(data, *data->info);
-	printf("run\n");
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);
 }

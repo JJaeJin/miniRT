@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:05:28 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/11 16:22:04 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:42:24 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "mlx.h"
 #include "draw.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 static t_vector	get_outer_result_of_way(t_mlx *data);
 
@@ -45,7 +44,6 @@ void	apply_kb_plus_minus(int keycode, t_mlx *data)
 		data->info->amb->ratio += 0.1;
 		if (data->info->amb->ratio > 1.0)
 			data->info->amb->ratio = 1;
-		
 	}
 	else if (keycode == KB_MINUS && data->info->amb->ratio != 0)
 	{
@@ -103,17 +101,16 @@ static t_vector	get_outer_result_of_way(t_mlx *data)
 	t_vector	tmp;
 
 	tmp.x = 0;
-	if (data->info->camera->way.y == 0)
-	{
-		tmp.y = 1;
-		tmp.z = 0;
-	}
-	else
+	if (data->info->camera->way.y == 1)
 	{
 		tmp.y = 0;
 		tmp.z = 1;
 	}
+	else
+	{
+		tmp.y = 1;
+		tmp.z = 0;
+	}
 	tmp = v_outer_product(tmp, data->info->camera->way);
-	printf("tmp(%f,%f,%f)\n", tmp.x, tmp.y, tmp.z);
 	return (tmp);
 }
