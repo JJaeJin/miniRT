@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:45:37 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/25 11:48:16 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:52:54 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	read_info(t_info *info, char *buffer)
 	all_info = ft_split(buffer, ' ');
 	if (all_info == 0)
 		return (FAILURE);
-	if (all_info[0] == NULL)
+	if (all_info[0] == NULL || all_info[0][0] == '#')
 		return (SUCCESS);
 	else if (ft_strncmp(all_info[0], "sp", 3) == 0)
 		return (read_sp(info->objs, all_info));

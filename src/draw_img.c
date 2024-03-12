@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:21:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/02 14:45:09 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:25:42 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "argument.h"
 #include "libft.h"
 #include <math.h>
+#include <stdio.h>
 
 static t_vector	get_3d_vector(int x, int y, t_info info);
 static void		law_rodrigues(t_vector *res, t_vector cw, \
@@ -51,8 +52,8 @@ void	make_img(t_mlx *data, t_info info)
 			if (distance != 0)
 			{
 				apply_ambient(&rgb, info.amb);
-				my_mlx_pixel_put(data, x, y, \
-					((int)rgb.red << 16) | ((int)rgb.green << 8) | (int)rgb.blue);
+				my_mlx_pixel_put(data, x, y, ((int)rgb.red << 16) \
+								| ((int)rgb.green << 8) | (int)rgb.blue);
 			}
 		}
 	}
@@ -70,6 +71,7 @@ static t_vector	get_3d_vector(int x, int y, t_info info)
 	normal = v_outer_product(ndc_t, info.camera->way);
 	v_normalize(&normal);
 	law_rodrigues(&res, info.camera->way, normal, ndc_t);
+	v_normalize(&res);
 	return (res);
 }
 
