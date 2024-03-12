@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:21:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/12 10:32:33 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:25:42 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "argument.h"
 #include "libft.h"
 #include <math.h>
+#include <stdio.h>
 
 static t_vector	get_3d_vector(int x, int y, t_info info);
 static void		law_rodrigues(t_vector *res, t_vector cw, \
