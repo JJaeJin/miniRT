@@ -6,12 +6,13 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:28:29 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/12 15:06:46 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/13 09:46:58 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "argument.h"
 #include <math.h>
+#include <stdio.h>
 
 static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, \
 									t_point *p, t_vector cam);
