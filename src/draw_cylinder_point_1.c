@@ -6,18 +6,14 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:28:29 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/13 09:46:58 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:04:33 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "argument.h"
 #include <math.h>
-#include <stdio.h>
 
-static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, \
-									t_point *p, t_vector cam);
-static void	get_p_side_vertical(t_vector v, t_obj_cylinder *cy, \
-									t_point *p, t_vector cam);
+static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, t_point *p);
 
 void	get_p_bottom(t_vector v, t_point *p, t_obj_cylinder *cy)
 {
@@ -44,12 +40,10 @@ void	get_p_bottom(t_vector v, t_point *p, t_obj_cylinder *cy)
 	p[1].z = t * v.z;
 }
 
-void	get_p_side(t_vector v, t_point *p, t_obj_cylinder *cy, t_info info)
+void	get_p_side(t_vector v, t_point *p, t_obj_cylinder *cy)
 {
-	if (get_d_between_lines(v, cy) == 0)
-		return (get_p_side_vertical(v, cy, p, info.camera->way));
-	else if (v_inner_product(v, cy->normal) == 0)
-		return (get_p_side_parallel(v, cy, p, info.camera->way));
+	if (v_inner_product(v, cy->normal) == 0)
+		return (get_p_side_parallel(v, cy, p));
 	else
 		return (get_p_side_others(v, p, cy));
 }
@@ -70,47 +64,32 @@ t_point	get_p_center(t_obj_cylinder *cy, t_vector v)
 	return (center);
 }
 
-static void	get_p_side_vertical(t_vector v, t_obj_cylinder *cy, \
-								t_point *p, t_vector cam)
+double	get_height_diff(t_vector v_ray, t_obj_cylinder *cy)
 {
-	t_point	center;
-	double	cos_th1;
-	double	sin_th2;
-	double	diff;
-	double	t;
+	double		dis_between_lines;
+	double		theta;
+	double		res;
 
-	cos_th1 = v_inner_product(v, cam) / (v_size(v) * v_size(cam));
-	t = get_d_between_lines(v_outer_product(cam, cy->normal), cy) \
-		/ cos_th1;
-	center.x = v.x * t;
-	center.y = v.y * t;
-	center.z = v.z * t;
-	sin_th2 = sqrt(1 - pow(v_inner_product(v, cy->normal) \
-					/ (v_size(v) * v_size(cy->normal)), 2));
-	diff = (cy->diameter / 2) / sin_th2;
-	v_normalize(&v);
-	p[0].x = center.x - v.x * diff;
-	p[0].y = center.y - v.y * diff;
-	p[0].z = center.z - v.z * diff;
-	p[1].x = center.x + v.x * diff;
-	p[1].y = center.y + v.y * diff;
-	p[1].z = center.z + v.z * diff;
+	dis_between_lines = get_d_between_lines(v_ray, cy);
+	theta = acos(sqrt(1 - pow((v_inner_product(v_ray, cy->normal) / \
+			(v_size(v_ray) * v_size(cy->normal))), 2)));
+	res = sqrt(pow(cy->diameter / 2, 2) - pow(dis_between_lines, 2)) * \
+			tan(theta);
+	return (res);
 }
 
-static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, \
-									t_point *p, t_vector cam)
+static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, t_point *p)
 {
 	double	def;
 	double	diff;
 	double	cos_th;
 	double	v_to_cy;
 
-	(void)cam;
 	v_to_cy = get_d_between_lines(v, cy);
 	cos_th = fabs(v_inner_product(cy->loc, cy->normal)) \
 				/ (v_size(cy->loc) * v_size(cy->normal));
-	def = sqrt(fabs(pow(v_size(cy->loc) * sqrt(1 - pow(cos_th, 2)), 2) \
-				- pow(v_to_cy, 2)));
+	def = sqrt(pow(v_size(cy->loc), 2) - \
+				pow(v_inner_product(cy->loc, cy->normal), 2) - pow(v_to_cy, 2));
 	diff = sqrt(fabs(pow(cy->diameter / 2, 2) - pow(v_to_cy, 2)));
 	p[0].x = v.x * (def + diff);
 	p[0].y = v.y * (def + diff);
