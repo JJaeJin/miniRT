@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:27 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/12 20:45:36 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:53:12 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 #include "draw.h"
 #include <math.h>
 
-static void	check_p_bottom(t_point p, t_obj_cylinder *cy, \
+static void		check_p_bottom(t_point p, t_obj_cylinder *cy, \
 							double *distance, t_color *rgb);
-static void	check_p_side(t_point p, t_obj_cylinder *cy, \
+static void		check_p_side(t_point p, t_obj_cylinder *cy, \
 							double *distance, t_color *rgb);
+static double	get_d_between_lines_parallel(t_vector v_ray, \
+											t_obj_cylinder *cy);
 
 void	check_cylinder(t_color *rgb, double *distance, t_vector v, t_info info)
 {
@@ -32,7 +34,7 @@ void	check_cylinder(t_color *rgb, double *distance, t_vector v, t_info info)
 		dis_between_lines = get_d_between_lines(v, cy);
 		if (dis_between_lines <= (cy->diameter / 2))
 		{
-			get_p_side(v, p_side, cy, info);
+			get_p_side(v, p_side, cy);
 			get_p_bottom(v, p_bottom, cy);
 			if (v_inner_product(p_bottom[0], info.camera->way) > 0)
 				check_p_bottom(p_bottom[0], cy, distance, rgb);
@@ -47,20 +49,6 @@ void	check_cylinder(t_color *rgb, double *distance, t_vector v, t_info info)
 	}
 }
 
-double	get_height_diff(t_vector v_ray, t_obj_cylinder *cy)
-{
-	double		dis_between_lines;
-	double		theta;
-	double		res;
-
-	dis_between_lines = get_d_between_lines(v_ray, cy);
-	theta = acos(sqrt(1 - pow((v_inner_product(v_ray, cy->normal) / \
-			(v_size(v_ray) * v_size(cy->normal))), 2)));
-	res = sqrt(pow(cy->diameter / 2, 2) - pow(dis_between_lines, 2)) * \
-			tan(theta);
-	return (res);
-}
-
 double	get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy)
 {
 	t_vector	temp;
@@ -73,8 +61,7 @@ double	get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy)
 		return (0);
 	temp = v_outer_product(temp, v_ray);
 	if (v_inner_product(v_ray, cy->normal) == 0)
-		return (v_size(cy->loc) * sqrt(1 - pow(v_inner_product(cy->loc, v_ray) \
-				/ (v_size(cy->loc) * v_size(v_ray)), 2)));
+		return (get_d_between_lines_parallel(v_ray, cy));
 	t = (-temp.x * cy->loc.x - temp.y * cy->loc.y - temp.z * cy->loc.z) / \
 		(cy->normal.x * temp.x + cy->normal.y * temp.y + cy->normal.z * temp.z);
 	p_on_cy.x = cy->loc.x + t * cy->normal.x;
@@ -87,6 +74,20 @@ double	get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy)
 	p_on_cam.y = t * v_ray.y;
 	p_on_cam.z = t * v_ray.z;
 	return (p_get_distance(p_on_cy, p_on_cam));
+}
+
+static double	get_d_between_lines_parallel(t_vector v_ray, t_obj_cylinder *cy)
+{
+	double	cos_th_1;
+	double	sin_th_2;
+	double	res;
+
+	cos_th_1 = v_inner_product(cy->normal, cy->loc) \
+				/ (v_size(cy->normal) * v_size(cy->loc));
+	sin_th_2 = sqrt(1 - pow(v_inner_product(v_ray, cy->loc) \
+				/ (v_size(v_ray) * v_size(cy->loc)), 2));
+	res = v_size(cy->loc) * sqrt(fabs(pow(sin_th_2, 2) - pow(cos_th_1, 2)));
+	return (res);
 }
 
 static void	check_p_bottom(t_point p, t_obj_cylinder *cy, \

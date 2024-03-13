@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/12 10:26:24 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:52:37 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	apply_ambient(t_color *c, t_ambient_lightning *amb);
 
 /* funcs for cylinder */
 void	get_p_bottom(t_vector v, t_point *p, t_obj_cylinder *cy);
-void	get_p_side(t_vector v, t_point *p, t_obj_cylinder *cy, t_info info);
+void	get_p_side(t_vector v, t_point *p, t_obj_cylinder *cy);
 void	get_p_side_others(t_vector v, t_point *p, t_obj_cylinder *cy);
 double	get_height_diff(t_vector v_ray, t_obj_cylinder *cy);
 double	get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy);
