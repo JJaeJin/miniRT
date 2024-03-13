@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:54:45 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/12 18:59:55 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/13 10:44:20 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@
 double	*solve_quadratic(double a, double b, double c)
 {
 	double	*res;
+	double	d;
 
-	if (pow(b, 2) - 4 * a * c == 0)
+	d = pow(b, 2) - 4 * a * c;
+	if (d < 0)
+		return (NULL);
+	else if (d == 0)
 	{
 		res = (double *)ft_calloc(1, sizeof(double));
 		res[0] = (-1 * b) / (2 * a);

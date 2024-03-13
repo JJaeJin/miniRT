@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:27 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/12 10:53:24 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:45:36 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,14 @@ void	check_cylinder(t_color *rgb, double *distance, t_vector v, t_info info)
 		{
 			get_p_side(v, p_side, cy, info);
 			get_p_bottom(v, p_bottom, cy);
-			check_p_bottom(p_bottom[0], cy, distance, rgb);
-			check_p_bottom(p_bottom[1], cy, distance, rgb);
-			check_p_side(p_side[0], cy, distance, rgb);
-			check_p_side(p_side[1], cy, distance, rgb);
+			if (v_inner_product(p_bottom[0], info.camera->way) > 0)
+				check_p_bottom(p_bottom[0], cy, distance, rgb);
+			if (v_inner_product(p_bottom[1], info.camera->way) > 0)
+				check_p_bottom(p_bottom[1], cy, distance, rgb);
+			if (v_inner_product(p_side[0], info.camera->way) > 0)
+				check_p_side(p_side[0], cy, distance, rgb);
+			if (v_inner_product(p_side[1], info.camera->way) > 0)
+				check_p_side(p_side[1], cy, distance, rgb);
 		}
 		cy = cy->next;
 	}

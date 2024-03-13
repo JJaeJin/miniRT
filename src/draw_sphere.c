@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:31:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/12 20:12:57 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/13 10:58:36 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	check_sphere(t_color *rgb, double *distance, t_vector v, t_info info)
 		if (d * sqrt(1 - pow(cos_th, 2)) <= sp->diameter / 2)
 		{
 			d_res = get_res_distance(v, sp, info.camera->way);
-			if (*distance == 0 || d_res < *distance)
+			if (d_res != -1 && (*distance == 0 || d_res < *distance))
 			{
 				*distance = d_res;
 				*rgb = sp->color;
@@ -57,10 +57,12 @@ static double	get_res_distance(t_vector v, t_obj_sphere *sp, t_vector cam)
 				sp->center.y -2 * v.z * sp->center.z, pow(sp->center.x, 2) \
 				+ pow(sp->center.y, 2) + pow(sp->center.z, 2) - \
 				pow(sp->diameter / 2, 2));
+	if (diff == NULL)
+		return (-1);
 	get_res_p(res, v, diff);
 	if (v_inner_product(res[0], cam) > 0)
 		res_d = v_size(res[0]);
-	if (v_inner_product(res[1], cam) > 0)
+	if (sizeof(diff) != sizeof(double) && v_inner_product(res[1], cam) > 0)
 	{
 		temp = v_size(res[1]);
 		if (res_d == 0 || res_d > temp)
