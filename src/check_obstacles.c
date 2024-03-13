@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   check_obstacles.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/17 17:35:45 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/13 21:35:20 by dongyeuk         ###   ########.fr       */
+/*   Created: 2024/03/13 21:37:36 by dongyeuk          #+#    #+#             */
+/*   Updated: 2024/03/13 21:40:57 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include "argument.h"
+#include "vector.h"
+#include <math.h>
 
-typedef struct s_color
+int	check_obstacles()
 {
-	double	red;
-	double	green;
-	double	blue;
-	double	brightness;
-}	t_color;
 
-#endif
+}
+
+int	check_sphere()
+{
+
+}
+
+int	check_plane()
+{
+
+}
+
+int	check_cylinder()
+{
+	
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/13 16:52:37 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/13 21:40:23 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,33 +82,45 @@ typedef struct s_info
 	t_obj				*objs;
 }	t_info;
 
-void	init_obj(t_info *info);
-int		parse_all(t_info *info, char *file);
-int		is_vector(char *s, t_vector *v);
-int		is_unsigned_double(char *s, double *f);
-int		is_rgb(char *s, t_color *clr);
-int		fail_free(void *p);
+void		init_obj(t_info *info);
+int			parse_all(t_info *info, char *file);
+int			is_vector(char *s, t_vector *v);
+int			is_unsigned_double(char *s, double *f);
+int			is_rgb(char *s, t_color *clr);
+int			fail_free(void *p);
 
-int		read_sp(t_obj *obj, char **all_info);
-int		read_pl(t_obj *obj, char **all_info);
-int		read_cy(t_obj *obj, char **all_info);
-int		read_cam(t_info *info, char **all_info);
-int		read_light(t_info *info, char **all_info);
-int		read_amb(t_info *info, char **all_info);
+int			read_sp(t_obj *obj, char **all_info);
+int			read_pl(t_obj *obj, char **all_info);
+int			read_cy(t_obj *obj, char **all_info);
+int			read_cam(t_info *info, char **all_info);
+int			read_light(t_info *info, char **all_info);
+int			read_amb(t_info *info, char **all_info);
 
-void	convert_system(t_info *info);
+void		convert_system(t_info *info);
 
-void	check_sphere(t_color *rgb, double *distance, t_vector v, t_info info);
-void	check_plane(t_color *rgb, double *distance, t_vector v, t_info info);
-void	check_cylinder(t_color *rgb, double *distance, t_vector v, t_info info);
-void	apply_ambient(t_color *c, t_ambient_lightning *amb);
+void		check_sphere(t_color *rgb, double *distance, t_vector v, t_info info);
+void		check_plane(t_color *rgb, double *distance, t_vector v, t_info info);
+void		check_cylinder(t_color *rgb, double *distance, t_vector v, t_info info);
+void		apply_ambient(t_color *c, t_ambient_lightning *amb);
+void		apply_diffuse(t_color *c, t_light *diff, double cos_th);
 
 /* funcs for cylinder */
-void	get_p_bottom(t_vector v, t_point *p, t_obj_cylinder *cy);
-void	get_p_side(t_vector v, t_point *p, t_obj_cylinder *cy);
-void	get_p_side_others(t_vector v, t_point *p, t_obj_cylinder *cy);
-double	get_height_diff(t_vector v_ray, t_obj_cylinder *cy);
-double	get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy);
-t_point	get_p_center(t_obj_cylinder *cy, t_vector v);
+void		get_p_bottom(t_vector v, t_point *p, t_obj_cylinder *cy);
+void		get_p_side(t_vector v, t_point *p, t_obj_cylinder *cy);
+void		get_p_side_others(t_vector v, t_point *p, t_obj_cylinder *cy);
+double		get_height_diff(t_vector v_ray, t_obj_cylinder *cy);
+double		get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy);
+t_point		get_p_center(t_obj_cylinder *cy, t_vector v);
+
+/* get_obj_normal */
+t_vector	get_sphere_normal(t_obj_sphere *sp, t_point p);
+t_vector	get_plane_normal(t_obj_plane *sp, t_point p);
+t_vector	get_cylinder_normal(t_obj_cylinder *sp, t_point p);
+
+/* check_obstacles */
+int			check_obstacles();
+int			check_sphere();
+int			check_plane();
+int			check_cylinder();
 
 #endif

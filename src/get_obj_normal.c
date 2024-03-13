@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   get_obj_normal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/17 17:35:45 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/13 21:35:20 by dongyeuk         ###   ########.fr       */
+/*   Created: 2024/03/13 21:23:34 by dongyeuk          #+#    #+#             */
+/*   Updated: 2024/03/13 21:27:03 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include "argument.h"
+#include "vector.h"
 
-typedef struct s_color
+t_vector	get_sphere_normal(t_obj_sphere *sp, t_point p)
 {
-	double	red;
-	double	green;
-	double	blue;
-	double	brightness;
-}	t_color;
 
-#endif
+}
+
+t_vector	get_plane_normal(t_obj_plane *sp, t_point p)
+{
+	
+}
+
+t_vector	get_cylinder_normal(t_obj_cylinder *sp, t_point p)
+{
+	
+}
