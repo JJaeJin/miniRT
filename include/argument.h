@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 12:04:09 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:26:23 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@ double		get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy);
 t_point		get_p_center(t_obj_cylinder *cy, t_vector v);
 
 /* get_obj_normal */
+t_vector	get_plane_normal(t_camera *cam, t_obj_plane *pl, t_point p);
 t_vector	get_sphere_normal(t_obj_sphere *sp, t_point p);
-t_vector	get_plane_normal(t_obj_plane *pl, t_point p);
 t_vector	get_cylinder_normal(t_obj_cylinder *cy, t_point p);
 
 /* check_obstacles */
