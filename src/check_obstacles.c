@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:37:36 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/14 20:19:25 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:41:05 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,18 @@ int	check_obs_cylinder(t_point l, t_point p, t_obj_cylinder *cy, void *obj)
 	v_normalize(&p_to_l);
 	while (temp_cy != NULL)
 	{
-		l_to_cy = p_get_vector(l, temp_cy->loc);
-		d_between_lines = get_d_between_lines(p_to_l, temp_cy);
-		temp = pow(v_inner_product(p_to_l, l_to_cy), 2) + \
-				pow(d_between_lines, 2);
-		temp = sqrt(fabs(pow(v_size(l_to_cy), 2) - temp));
-		if (d_between_lines < temp_cy->diameter / 2 && \
-			temp < temp_cy->height / 2)
-			return (OBS_EXIST);
+		if ((void *)temp_cy != obj)
+		{
+			l_to_cy = p_get_vector(l, temp_cy->loc);
+			d_between_lines = get_d_between_lines(p_to_l, temp_cy);
+			temp = pow(v_inner_product(p_to_l, l_to_cy), 2) + \
+					pow(d_between_lines, 2);
+			temp = sqrt(fabs(pow(v_size(l_to_cy), 2) - temp));
+			if (d_between_lines < temp_cy->diameter / 2 && \
+				temp < temp_cy->height / 2)
+				return (OBS_EXIST);
+		}
+		temp_cy = temp_cy->next;
 	}
 	return (OBS_NOT_EXIST);
 }

@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:54:45 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 13:15:10 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:42:27 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ double	p_get_distance(t_point p1, t_point p2)
 	return (res);
 }
 
-double	v_get_cos(t_vector l_to_p, t_vector n)
+double	v_get_cos(t_vector p_to_l, t_vector n)
 {
-	return (v_inner_product(l_to_p, n) / (v_size(l_to_p) * v_size(n)));
+	return (v_inner_product(p_to_l, n) / (v_size(p_to_l) * v_size(n)));
 }
 
 t_vector	p_get_vector(t_point start, t_point end)

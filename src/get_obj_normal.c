@@ -6,23 +6,23 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:23:34 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/15 14:25:49 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:49:18 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "argument.h"
 #include "vector.h"
 
-t_vector	get_plane_normal(t_camera *cam, t_obj_plane *pl, t_point p)
+t_vector	get_plane_normal(t_camera *cam, t_obj_plane *pl)
 {
 	t_vector	res;
-	double		inner_cam_point;
+	double		inner_cam_n;
 
-	inner_cam_point = v_inner_product(cam->way, p);
-	res.x = cam->way.x;
-	res.y = cam->way.y;
-	res.z = cam->way.z;
-	if (inner_cam_point > 0)
+	inner_cam_n = v_inner_product(cam->way, pl->normal);
+	res.x = pl->normal.x;
+	res.y = pl->normal.y;
+	res.z = pl->normal.z;
+	if (inner_cam_n > 0)
 	{
 		res.x *= (-1);
 		res.y *= (-1);
@@ -46,7 +46,6 @@ t_vector	get_cylinder_normal(t_obj_cylinder *cy, t_point p)
 	t_vector	p_center_of_point_pl;
 	t_vector	res_normal;
 	double		size_of_normal;
-	double		distance;
 
 	v_center_to_point = p_get_vector(cy->normal, p);
 	size_of_normal = v_inner_product(v_center_to_point, cy->normal);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 10:57:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/11 16:23:21 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:44:35 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ void	clear_img(t_mlx *data);
 void	apply_kb_plus_minus(int keycode, t_mlx *data);
 void	apply_kb_w_s_q_e(int keycode, t_mlx *data);
 void	apply_kb_a_d(int keycode, t_mlx *data);
+
+void	apply_draw(t_final_c rgb, t_mlx *data, int x, int y);
 
 #endif
