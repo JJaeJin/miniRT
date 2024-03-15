@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:29 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 19:53:56 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 20:57:22 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,16 @@ static void	add_lights_pl(t_final_c *rgb, t_point p, \
 {
 	t_light		*l;
 	t_vector	n;
-	double	cos_th;
+	double		cos_th;
 
 	l = info.lights;
 	n = get_plane_normal(info.camera, pl);
 	while (l != NULL)
 	{
-		if (check_obstacles(l->loc, p, info, (void *)pl) == OBS_NOT_EXIST)
+		cos_th = v_get_cos(p_get_vector(p, l->loc), n);
+		if (cos_th > 0 && \
+				check_obstacles(l->loc, p, info, (void *)pl) == OBS_NOT_EXIST)
 		{
-			cos_th = v_get_cos(p_get_vector(p, l->loc), n);
 			rgb->ratio.red += \
 				l->color.red * l->ratio * cos_th / 255;
 			rgb->ratio.green += \
@@ -77,4 +78,3 @@ static void	add_lights_pl(t_final_c *rgb, t_point p, \
 		l = l->next;
 	}
 }
-

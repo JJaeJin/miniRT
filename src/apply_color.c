@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:35:19 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 19:54:07 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 20:33:21 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "color.h"
 #include "vector.h"
 #include "draw.h"
-#include <stdio.h>
 
 void	apply_ambient(t_final_c *rgb, t_ambient_lightning *amb)
 {
@@ -35,29 +34,6 @@ void	apply_diffuse(t_color *c, t_light *diff, double cos_th)
 	if (c->blue > 255)
 		c->blue = 255;
 }
-
-// void	add_lights(t_final_c *rgb, t_point p, t_vector n, t_info info)
-// {
-// 	t_light		*l;
-// 	t_vector	n;
-// 	double	cos_th;
-
-// 	l = info.lights;
-// 	while (l != NULL)
-// 	{
-// 		if (check_obstacles(l->loc, p, info, info.objs) == OBS_NOT_EXIST)
-// 		{
-// 			cos_th = v_get_cos(p_get_vector(p, l->loc), n);
-// 			rgb->ratio.red += \
-// 				l->color.red * l->ratio * cos_th / 255;
-// 			rgb->ratio.green += \
-// 				l->color.green * l->ratio * cos_th / 255;
-// 			rgb->ratio.blue += \
-// 				l->color.blue * l->ratio * cos_th / 255;
-// 		}
-// 		l = l->next;
-// 	}
-// }
 
 void	apply_draw(t_final_c rgb, t_mlx *data, int x, int y)
 {
