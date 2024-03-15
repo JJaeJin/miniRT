@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:18:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/14 16:40:46 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:42:49 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vector	v_sub(t_vector v1, t_vector v2);
 double		*solve_quadratic(double a, double b, double c);
 void		v_normalize(t_vector *v);
 double		p_get_distance(t_point p1, t_point p2);
-double		v_get_cos(t_vector l_to_p, t_vector n);
+double		v_get_cos(t_vector p_to_l, t_vector n);
 t_vector	p_get_vector(t_point start, t_point end);
 
 #endif

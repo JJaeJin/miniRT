@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:35:19 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 12:37:52 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:59:50 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void	add_lights(t_final_c *rgb, t_point p, t_vector n, t_info info)
 	{
 		if (check_obstacles(l->loc, p, info, info.objs) == OBS_NOT_EXIST)
 		{
-			cos_th = v_get_cos();
+			cos_th = v_get_cos(p_get_vector(p, l->loc), n);
 			rgb->ratio.red += \
-				rgb->color.red + l->color.red * l->ratio * cos_th / 255;
+				l->color.red * l->ratio * cos_th / 255;
 			rgb->ratio.green += \
-				rgb->color.green + l->color.green * l->ratio * cos_th / 255;
+				l->color.green * l->ratio * cos_th / 255;
 			rgb->ratio.blue += \
-				rgb->color.blue + l->color.blue * l->ratio * cos_th / 255;
+				l->color.blue * l->ratio * cos_th / 255;
 		}
 		l = l->next;
 	}

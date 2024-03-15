@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:45:37 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/02 14:52:54 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:08:40 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,7 @@ static int	read_info(t_info *info, char *buffer)
 static int	parse_finished(t_info *info)
 {
 	if (info->amb == 0
-		|| info->camera == 0
-		|| info->lights == 0)
+		|| info->camera == 0)
 		return (FAILURE);
 	return (SUCCESS);
 }
