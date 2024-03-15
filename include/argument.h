@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/14 14:19:27 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:04:09 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,13 @@ int			read_amb(t_info *info, char **all_info);
 void		convert_system(t_info *info);
 
 /* draw objects */
-void		check_sphere(t_color *rgb, double *distance, t_vector v, t_info info);
-void		check_plane(t_color *rgb, double *distance, t_vector v, t_info info);
-void		check_cylinder(t_color *rgb, double *distance, t_vector v, t_info info);
-void		apply_ambient(t_color *c, t_ambient_lightning *amb);
+void		check_sphere(t_final_c *rgb, double *distance, \
+							t_vector v, t_info info);
+void		check_plane(t_final_c *rgb, double *distance, \
+							t_vector v, t_info info);
+void		check_cylinder(t_final_c *rgb, double *distance, \
+							t_vector v, t_info info);
+void		apply_ambient(t_final_c *rgb, t_ambient_lightning *amb);
 void		apply_diffuse(t_color *c, t_light *diff, double cos_th);
 
 /* funcs for cylinder */
@@ -118,13 +121,14 @@ t_point		get_p_center(t_obj_cylinder *cy, t_vector v);
 
 /* get_obj_normal */
 t_vector	get_sphere_normal(t_obj_sphere *sp, t_point p);
-t_vector	get_plane_normal(t_obj_plane *sp, t_point p);
-t_vector	get_cylinder_normal(t_obj_cylinder *sp, t_point p);
+t_vector	get_plane_normal(t_obj_plane *pl, t_point p);
+t_vector	get_cylinder_normal(t_obj_cylinder *cy, t_point p);
 
 /* check_obstacles */
 int			check_obstacles(t_point l, t_point p, t_info info, void *obj);
 int			check_obs_sphere(t_point l, t_point p, t_obj_sphere *sp, void *obj);
 int			check_obs_plane(t_point l, t_point p, t_obj_plane *pl, void *obj);
-int			check_obs_cylinder(t_point l, t_point p, t_obj_cylinder *cy, void *obj);
+int			check_obs_cylinder(t_point l, t_point p, \
+								t_obj_cylinder *cy, void *obj);
 
 #endif

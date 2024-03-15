@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:37:36 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/14 16:48:16 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/14 20:19:25 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_obs_plane(t_point l, t_point p, t_obj_plane *pl, void *obj)
 {
 	t_obj_plane	*temp_pl;
 	t_vector	p_to_l;
-	
+
 	temp_pl = pl;
 	p_to_l = p_get_vector(p, l);
 	v_normalize(&p_to_l);
@@ -79,7 +79,7 @@ static double	get_pl_res(t_obj_plane *pl, t_point p)
 	double	res;
 
 	res = pl->normal.x * (p.x - pl->loc.x) + \
-			pl->normal.y * (p.y - pl->loc.y) +\
+			pl->normal.y * (p.y - pl->loc.y) + \
 			pl->normal.z * (p.x - pl->loc.z);
 	return (res);
 }

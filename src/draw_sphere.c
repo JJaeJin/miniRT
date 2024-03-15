@@ -6,38 +6,42 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:31:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/13 10:58:36 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:49:13 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "argument.h"
 #include "draw.h"
 #include "vector.h"
+#include "libft.h"
 #include <math.h>
 
 static double	get_res_distance(t_vector v, t_obj_sphere *sp, t_vector cam);
 static void		get_res_p(t_point *res, t_vector v, double *diff);
+static t_point	sp_get_p(t_point p, double d_res);
 
-void	check_sphere(t_color *rgb, double *distance, t_vector v, t_info info)
+void	check_sphere(t_final_c *rgb, double *distance, \
+						t_vector v, t_info info)
 {
-	double			d;
-	double			cos_th;
 	t_obj_sphere	*sp;
 	double			d_res;
+	t_point			p_res;
 
 	sp = info.objs->sp;
 	while (sp != NULL)
 	{
-		d = v_size((t_vector)sp->center);
-		cos_th = v_inner_product((t_vector)sp->center, v) \
-				/ (v_size((t_vector)sp->center) * v_size(v));
-		if (d * sqrt(1 - pow(cos_th, 2)) <= sp->diameter / 2)
+		if (v_size((t_vector)sp->center) * sqrt(1 - \
+			pow(v_inner_product((t_vector)sp->center, v) / \
+			(v_size((t_vector)sp->center) * v_size(v)), 2)) <= sp->diameter / 2)
 		{
 			d_res = get_res_distance(v, sp, info.camera->way);
 			if (d_res != -1 && (*distance == 0 || d_res < *distance))
 			{
+				p_res = sp_get_p(v, d_res);
 				*distance = d_res;
-				*rgb = sp->color;
+				rgb->color = sp->color;
+				apply_ambient(rgb, info.amb);
+				add_lights(rgb, p_res, get_sphere_normal(sp, p_res), info);
 			}
 		}
 		sp = sp->next;
@@ -82,4 +86,14 @@ static void	get_res_p(t_point *res, t_vector v, double *diff)
 	res[1].x = v.x * diff[1];
 	res[1].y = v.y * diff[1];
 	res[1].z = v.z * diff[1];
+}
+
+static t_point	sp_get_p(t_point p, double d_res)
+{
+	t_point	res;
+
+	res.x = p.x * d_res;
+	res.y = p.y * d_res;
+	res.z = p.z * d_res;
+	return (res);
 }

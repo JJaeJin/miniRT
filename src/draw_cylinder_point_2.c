@@ -6,16 +6,18 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:43:15 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/12 10:37:23 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:38:53 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "argument.h"
 #include <math.h>
 
-static void	set_temp(t_point *temp, t_point center, \
+static void		set_temp(t_point *temp, t_point center, \
 					t_vector v_cy_to_center, double height_diff);
-static void	set_p(t_point *p, double t, t_vector v);
+static void		set_p(t_point *p, double t, t_vector v);
+static double	get_d_between_lines_parallel(t_vector v_ray, \
+					t_obj_cylinder *cy);
 
 void	get_p_side_others(t_vector v, t_point *p, t_obj_cylinder *cy)
 {
@@ -56,4 +58,45 @@ static void	set_p(t_point *p, double t, t_vector v)
 	p->x = t * v.x;
 	p->y = t * v.y;
 	p->z = t * v.z;
+}
+
+double	get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy)
+{
+	t_vector	temp;
+	double		t;
+	t_point		p_on_cy;
+	t_point		p_on_cam;
+
+	temp = v_outer_product(v_ray, cy->normal);
+	if (temp.x == 0 && temp.y == 0 && temp.z == 0)
+		return (0);
+	temp = v_outer_product(temp, v_ray);
+	if (v_inner_product(v_ray, cy->normal) == 0)
+		return (get_d_between_lines_parallel(v_ray, cy));
+	t = (-temp.x * cy->loc.x - temp.y * cy->loc.y - temp.z * cy->loc.z) / \
+		(cy->normal.x * temp.x + cy->normal.y * temp.y + cy->normal.z * temp.z);
+	p_on_cy.x = cy->loc.x + t * cy->normal.x;
+	p_on_cy.y = cy->loc.y + t * cy->normal.y;
+	p_on_cy.z = cy->loc.z + t * cy->normal.z;
+	temp = v_outer_product(v_ray, cy->normal);
+	t = (temp.y * p_on_cy.x - temp.x * p_on_cy.y) / \
+		(v_ray.x * temp.y - v_ray.y * temp.x);
+	p_on_cam.x = t * v_ray.x;
+	p_on_cam.y = t * v_ray.y;
+	p_on_cam.z = t * v_ray.z;
+	return (p_get_distance(p_on_cy, p_on_cam));
+}
+
+static double	get_d_between_lines_parallel(t_vector v_ray, t_obj_cylinder *cy)
+{
+	double	cos_th_1;
+	double	sin_th_2;
+	double	res;
+
+	cos_th_1 = v_inner_product(cy->normal, cy->loc) \
+				/ (v_size(cy->normal) * v_size(cy->loc));
+	sin_th_2 = sqrt(1 - pow(v_inner_product(v_ray, cy->loc) \
+				/ (v_size(v_ray) * v_size(cy->loc)), 2));
+	res = v_size(cy->loc) * sqrt(fabs(pow(sin_th_2, 2) - pow(cos_th_1, 2)));
+	return (res);
 }
