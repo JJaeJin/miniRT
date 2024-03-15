@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:18:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/13 21:35:21 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:40:46 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ double		*solve_quadratic(double a, double b, double c);
 void		v_normalize(t_vector *v);
 double		p_get_distance(t_point p1, t_point p2);
 double		v_get_cos(t_vector l_to_p, t_vector n);
+t_vector	p_get_vector(t_point start, t_point end);
 
 #endif

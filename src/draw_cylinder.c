@@ -6,22 +6,24 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:27 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/13 16:53:12 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:38:39 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "argument.h"
 #include "draw.h"
+#include "libft.h"
 #include <math.h>
 
-static void		check_p_bottom(t_point p, t_obj_cylinder *cy, \
-							double *distance, t_color *rgb);
-static void		check_p_side(t_point p, t_obj_cylinder *cy, \
-							double *distance, t_color *rgb);
-static double	get_d_between_lines_parallel(t_vector v_ray, \
-											t_obj_cylinder *cy);
+static int		check_p_bottom(t_point p, t_obj_cylinder *cy, \
+									double *distance, t_info info);
+static int		check_p_side(t_point p, t_obj_cylinder *cy, \
+									double *distance, t_info info);
+static void		cy_apply_rgb(t_final_c *rgb, t_point p, \
+									t_info info, t_obj_cylinder *cy);
 
-void	check_cylinder(t_color *rgb, double *distance, t_vector v, t_info info)
+void	check_cylinder(t_final_c *rgb, double *distance, \
+								t_vector v, t_info info)
 {
 	t_point			p_bottom[2];
 	t_point			p_side[2];
@@ -36,86 +38,58 @@ void	check_cylinder(t_color *rgb, double *distance, t_vector v, t_info info)
 		{
 			get_p_side(v, p_side, cy);
 			get_p_bottom(v, p_bottom, cy);
-			if (v_inner_product(p_bottom[0], info.camera->way) > 0)
-				check_p_bottom(p_bottom[0], cy, distance, rgb);
-			if (v_inner_product(p_bottom[1], info.camera->way) > 0)
-				check_p_bottom(p_bottom[1], cy, distance, rgb);
-			if (v_inner_product(p_side[0], info.camera->way) > 0)
-				check_p_side(p_side[0], cy, distance, rgb);
-			if (v_inner_product(p_side[1], info.camera->way) > 0)
-				check_p_side(p_side[1], cy, distance, rgb);
+			if (check_p_bottom(p_bottom[0], cy, distance, info))
+				cy_apply_rgb(rgb, p_bottom[0], info, cy);
+			if (check_p_bottom(p_bottom[1], cy, distance, info))
+				cy_apply_rgb(rgb, p_bottom[1], info, cy);
+			if (check_p_side(p_side[0], cy, distance, info))
+				cy_apply_rgb(rgb, p_side[0], info, cy);
+			if (check_p_side(p_side[1], cy, distance, info))
+				cy_apply_rgb(rgb, p_side[1], info, cy);
 		}
 		cy = cy->next;
 	}
 }
 
-double	get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy)
-{
-	t_vector	temp;
-	double		t;
-	t_point		p_on_cy;
-	t_point		p_on_cam;
-
-	temp = v_outer_product(v_ray, cy->normal);
-	if (temp.x == 0 && temp.y == 0 && temp.z == 0)
-		return (0);
-	temp = v_outer_product(temp, v_ray);
-	if (v_inner_product(v_ray, cy->normal) == 0)
-		return (get_d_between_lines_parallel(v_ray, cy));
-	t = (-temp.x * cy->loc.x - temp.y * cy->loc.y - temp.z * cy->loc.z) / \
-		(cy->normal.x * temp.x + cy->normal.y * temp.y + cy->normal.z * temp.z);
-	p_on_cy.x = cy->loc.x + t * cy->normal.x;
-	p_on_cy.y = cy->loc.y + t * cy->normal.y;
-	p_on_cy.z = cy->loc.z + t * cy->normal.z;
-	temp = v_outer_product(v_ray, cy->normal);
-	t = (temp.y * p_on_cy.x - temp.x * p_on_cy.y) / \
-		(v_ray.x * temp.y - v_ray.y * temp.x);
-	p_on_cam.x = t * v_ray.x;
-	p_on_cam.y = t * v_ray.y;
-	p_on_cam.z = t * v_ray.z;
-	return (p_get_distance(p_on_cy, p_on_cam));
-}
-
-static double	get_d_between_lines_parallel(t_vector v_ray, t_obj_cylinder *cy)
-{
-	double	cos_th_1;
-	double	sin_th_2;
-	double	res;
-
-	cos_th_1 = v_inner_product(cy->normal, cy->loc) \
-				/ (v_size(cy->normal) * v_size(cy->loc));
-	sin_th_2 = sqrt(1 - pow(v_inner_product(v_ray, cy->loc) \
-				/ (v_size(v_ray) * v_size(cy->loc)), 2));
-	res = v_size(cy->loc) * sqrt(fabs(pow(sin_th_2, 2) - pow(cos_th_1, 2)));
-	return (res);
-}
-
-static void	check_p_bottom(t_point p, t_obj_cylinder *cy, \
-							double *distance, t_color *rgb)
+static int	check_p_bottom(t_point p, t_obj_cylinder *cy, \
+							double *distance, t_info info)
 {
 	double	d_res;
 
+	if (v_inner_product(p, info.camera->way) <= 0)
+		return (FALSE);
 	d_res = v_size(p);
 	if (p_get_distance(cy->loc, p) <= \
 		sqrt(pow(cy->diameter / 2, 2) + pow(cy->height / 2, 2)) \
 		&& (*distance == 0 || d_res < *distance))
 	{
 		*distance = d_res;
-		*rgb = cy->color;
+		return (TRUE);
 	}
+	return (FALSE);
 }
 
-static void	check_p_side(t_point p, t_obj_cylinder *cy, \
-							double *distance, t_color *rgb)
+static int	check_p_side(t_point p, t_obj_cylinder *cy, \
+						double *distance, t_info info)
 {
 	double	d_res;
 
+	if (v_inner_product(p, info.camera->way) <= 0)
+		return (FALSE);
 	d_res = v_size(p);
 	if (sqrt(fabs(pow(p_get_distance(p, cy->loc), 2) - \
 		pow(cy->diameter / 2, 2))) <= cy->height / 2 \
 		&& (*distance == 0 || d_res < *distance))
 	{
 		*distance = d_res;
-		*rgb = cy->color;
-	}	
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+static void	cy_apply_rgb(t_final_c *rgb, t_point p, \
+								t_info info, t_obj_cylinder *cy)
+{
+	apply_ambient(rgb, info.amb);
+	add_lights(rgb, p, get_cylinder_normal(cy, p), info);
 }

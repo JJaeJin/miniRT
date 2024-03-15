@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   vector_cal2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:54:45 by jaejilee          #+#    #+#             */
 /*   Updated: 2024/03/15 13:15:10 by dongyeuk         ###   ########.fr       */
