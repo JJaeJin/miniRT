@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_obj_normal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:23:34 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/13 21:27:03 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:52:17 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,12 @@
 
 t_vector	get_sphere_normal(t_obj_sphere *sp, t_point p)
 {
-
 }
 
-t_vector	get_plane_normal(t_obj_plane *sp, t_point p)
+t_vector	get_plane_normal(t_obj_plane *pl, t_point p)
 {
-	
 }
 
-t_vector	get_cylinder_normal(t_obj_cylinder *sp, t_point p)
+t_vector	get_cylinder_normal(t_obj_cylinder *cy, t_point p)
 {
-	
 }
