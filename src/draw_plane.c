@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:29 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 14:48:46 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:53:56 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <math.h>
 
 static void	get_p_res(double t, t_point *p_res, t_vector v);
+static void	add_lights_pl(t_final_c *rgb, t_point p, \
+							t_obj_plane *pl, t_info info);
 
 void	check_plane(t_final_c *rgb, double *distance, t_vector v, t_info info)
 {
@@ -37,8 +39,7 @@ void	check_plane(t_final_c *rgb, double *distance, t_vector v, t_info info)
 				*distance = d_res;
 				rgb->color = pl-> color;
 				apply_ambient(rgb, info.amb);
-				add_lights(rgb, p_res, \
-						get_plane_normal(info.camera, pl), info);
+				add_lights_pl(rgb, p_res, pl, info);
 			}
 		}
 		pl = pl->next;
@@ -51,3 +52,29 @@ static void	get_p_res(double t, t_point *p_res, t_vector v)
 	p_res->y = v.y * t;
 	p_res->z = v.z * t;
 }
+
+static void	add_lights_pl(t_final_c *rgb, t_point p, \
+							t_obj_plane *pl, t_info info)
+{
+	t_light		*l;
+	t_vector	n;
+	double	cos_th;
+
+	l = info.lights;
+	n = get_plane_normal(info.camera, pl);
+	while (l != NULL)
+	{
+		if (check_obstacles(l->loc, p, info, (void *)pl) == OBS_NOT_EXIST)
+		{
+			cos_th = v_get_cos(p_get_vector(p, l->loc), n);
+			rgb->ratio.red += \
+				l->color.red * l->ratio * cos_th / 255;
+			rgb->ratio.green += \
+				l->color.green * l->ratio * cos_th / 255;
+			rgb->ratio.blue += \
+				l->color.blue * l->ratio * cos_th / 255;
+		}
+		l = l->next;
+	}
+}
+

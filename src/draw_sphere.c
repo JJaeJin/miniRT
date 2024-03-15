@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:31:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 12:49:13 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:51:58 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 static double	get_res_distance(t_vector v, t_obj_sphere *sp, t_vector cam);
 static void		get_res_p(t_point *res, t_vector v, double *diff);
 static t_point	sp_get_p(t_point p, double d_res);
+static void		add_lights_sp(t_final_c *rgb, t_point p, \
+							t_obj_sphere *sp, t_info info);
 
 void	check_sphere(t_final_c *rgb, double *distance, \
 						t_vector v, t_info info)
@@ -41,7 +43,7 @@ void	check_sphere(t_final_c *rgb, double *distance, \
 				*distance = d_res;
 				rgb->color = sp->color;
 				apply_ambient(rgb, info.amb);
-				add_lights(rgb, p_res, get_sphere_normal(sp, p_res), info);
+				add_lights_sp(rgb, p_res, sp, info);
 			}
 		}
 		sp = sp->next;
@@ -96,4 +98,29 @@ static t_point	sp_get_p(t_point p, double d_res)
 	res.y = p.y * d_res;
 	res.z = p.z * d_res;
 	return (res);
+}
+
+static void	add_lights_sp(t_final_c *rgb, t_point p, \
+							t_obj_sphere *sp, t_info info)
+{
+	t_light		*l;
+	t_vector	n;
+	double	cos_th;
+
+	l = info.lights;
+	n = get_sphere_normal(sp, p);
+	while (l != NULL)
+	{
+		if (check_obstacles(l->loc, p, info, (void *)sp) == OBS_NOT_EXIST)
+		{
+			cos_th = v_get_cos(p_get_vector(p, l->loc), n);
+			rgb->ratio.red += \
+				l->color.red * l->ratio * cos_th / 255;
+			rgb->ratio.green += \
+				l->color.green * l->ratio * cos_th / 255;
+			rgb->ratio.blue += \
+				l->color.blue * l->ratio * cos_th / 255;
+		}
+		l = l->next;
+	}
 }
