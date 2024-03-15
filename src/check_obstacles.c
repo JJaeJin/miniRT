@@ -6,14 +6,13 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:37:36 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/15 19:13:40 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 20:31:47 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "argument.h"
 #include "vector.h"
 #include <math.h>
-#include <stdio.h>
 
 static double	get_pl_res(t_obj_plane *pl, t_point p);
 

@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:27 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 20:06:03 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 20:57:05 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "draw.h"
 #include "libft.h"
 #include <math.h>
-#include <stdio.h>
 
 static int		check_p_bottom(t_point p, t_obj_cylinder *cy, \
 									double *distance, t_info info);
@@ -95,7 +94,7 @@ static void	cy_apply_rgb_side(t_final_c *rgb, t_point p, \
 {
 	t_light		*l;
 	t_vector	n;
-	double	cos_th;
+	double		cos_th;
 
 	rgb->color = cy->color;
 	apply_ambient(rgb, info.amb);
@@ -122,7 +121,7 @@ static void	cy_apply_rgb_bottom(t_final_c *rgb, t_point p, \
 {
 	t_light		*l;
 	t_vector	n;
-	double	cos_th;
+	double		cos_th;
 
 	rgb->color = cy->color;
 	apply_ambient(rgb, info.amb);
@@ -130,10 +129,10 @@ static void	cy_apply_rgb_bottom(t_final_c *rgb, t_point p, \
 	n = get_cylinder_normal_bottom(info.camera, cy);
 	while (l != NULL)
 	{
-		if (check_obstacles(l->loc, p, info, (void *)cy) == OBS_NOT_EXIST)
+		cos_th = v_get_cos(p_get_vector(p, l->loc), n);
+		if (cos_th > 0 && \
+				check_obstacles(l->loc, p, info, (void *)cy) == OBS_NOT_EXIST)
 		{
-			cos_th = v_get_cos(p_get_vector(p, l->loc), n);
-			printf("cos_th = %f\n", cos_th);
 			rgb->ratio.red += \
 				l->color.red * l->ratio * cos_th / 255;
 			rgb->ratio.green += \

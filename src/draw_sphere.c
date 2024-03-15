@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:31:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 19:51:58 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/15 20:57:51 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,16 @@ static void	add_lights_sp(t_final_c *rgb, t_point p, \
 {
 	t_light		*l;
 	t_vector	n;
-	double	cos_th;
+	double		cos_th;
 
 	l = info.lights;
 	n = get_sphere_normal(sp, p);
 	while (l != NULL)
 	{
-		if (check_obstacles(l->loc, p, info, (void *)sp) == OBS_NOT_EXIST)
+		cos_th = v_get_cos(p_get_vector(p, l->loc), n);
+		if (cos_th > 0 && \
+				check_obstacles(l->loc, p, info, (void *)sp) == OBS_NOT_EXIST)
 		{
-			cos_th = v_get_cos(p_get_vector(p, l->loc), n);
 			rgb->ratio.red += \
 				l->color.red * l->ratio * cos_th / 255;
 			rgb->ratio.green += \
