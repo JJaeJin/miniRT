@@ -40,9 +40,11 @@ To execute miniRT, you need formatted file with `.rt` expansion.
 **2024.02.20** parsing 구현 완료, 이론 공부 시작  
 **2024.02.25** mlx 기본 세팅 완료  
 **2024.02.26** 각 픽셀에 대한 벡터 구하기 완료, 구 & 평면 투영 구현 완료  
-**2024.03.04 ~ 2024.03.09** 일본 오사카 여행 `with jjhang`  
+**2024.03.04 ~ 2024.03.09** 일본 오사카 여행 (with @jjhang)  
 **2024.03.12** ray casting 전반적인 수식 확인 및 이슈 해결  
 **2024.03.13** 원기둥 투영 구현 완료  
+**2024.03.15** Light 여러개 및 object 하나일 때 구현 완료  
+**2024.03.17** object 여러개일 때 구현 완료 `mandatory part 완료` + `bonus part 1번 완료`  
 
 # [Rules]
 ## commit message

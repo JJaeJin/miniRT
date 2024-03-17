@@ -6,30 +6,12 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:23:34 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/15 20:31:50 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:10:36 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "argument.h"
 #include "vector.h"
-
-t_vector	get_plane_normal(t_camera *cam, t_obj_plane *pl)
-{
-	t_vector	res;
-	double		inner_cam_n;
-
-	inner_cam_n = v_inner_product(cam->way, pl->normal);
-	res.x = pl->normal.x;
-	res.y = pl->normal.y;
-	res.z = pl->normal.z;
-	if (inner_cam_n > 0)
-	{
-		res.x *= (-1);
-		res.y *= (-1);
-		res.z *= (-1);
-	}
-	return (res);
-}
 
 t_vector	get_sphere_normal(t_obj_sphere *sp, t_point p)
 {
@@ -55,22 +37,4 @@ t_vector	get_cylinder_normal(t_obj_cylinder *cy, t_point p)
 	res_normal = p_get_vector(p_center_of_point_pl, p);
 	v_normalize(&res_normal);
 	return (res_normal);
-}
-
-t_vector	get_cylinder_normal_bottom(t_camera *cam, t_obj_cylinder *cy)
-{
-	t_vector	res;
-	double		inner_cam_n;
-
-	inner_cam_n = v_inner_product(cam->way, cy->normal);
-	res.x = cy->normal.x;
-	res.y = cy->normal.y;
-	res.z = cy->normal.z;
-	if (inner_cam_n > 0)
-	{
-		res.x *= (-1);
-		res.y *= (-1);
-		res.z *= (-1);
-	}
-	return (res);
 }
