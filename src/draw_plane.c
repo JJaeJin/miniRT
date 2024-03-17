@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:29 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 20:57:22 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/17 13:47:43 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,17 @@ void	check_plane(t_final_c *rgb, double *distance, t_vector v, t_info info)
 	pl = info.objs->pl;
 	while (pl != NULL)
 	{
-		if (v_inner_product(info.camera->way, pl->normal) != 0)
+		get_p_res((pl->normal.x * pl->loc.x + pl->normal.y * pl->loc.y + \
+			pl->normal.z * pl->loc.z) / (pl->normal.x * v.x + pl->normal.y \
+			* v.y + pl->normal.z * v.z), &p_res, v);
+		d_res = v_size((t_vector)p_res);
+		if (v_inner_product(p_res, info.camera->way) > 0 \
+			&& (*distance == 0 || d_res < *distance))
 		{
-			get_p_res((pl->normal.x * pl->loc.x + pl->normal.y * pl->loc.y + \
-				pl->normal.z * pl->loc.z) / (pl->normal.x * v.x + pl->normal.y \
-				* v.y + pl->normal.z * v.z), &p_res, v);
-			d_res = v_size((t_vector)p_res);
-			if (v_inner_product(p_res, info.camera->way) > 0 \
-				&& (*distance == 0 || d_res < *distance))
-			{
-				*distance = d_res;
-				rgb->color = pl-> color;
-				apply_ambient(rgb, info.amb);
-				add_lights_pl(rgb, p_res, pl, info);
-			}
+			*distance = d_res;
+			rgb->color = pl-> color;
+			apply_ambient(rgb, info.amb);
+			add_lights_pl(rgb, p_res, pl, info);
 		}
 		pl = pl->next;
 	}
@@ -57,14 +54,12 @@ static void	add_lights_pl(t_final_c *rgb, t_point p, \
 							t_obj_plane *pl, t_info info)
 {
 	t_light		*l;
-	t_vector	n;
 	double		cos_th;
 
 	l = info.lights;
-	n = get_plane_normal(info.camera, pl);
 	while (l != NULL)
 	{
-		cos_th = v_get_cos(p_get_vector(p, l->loc), n);
+		cos_th = v_get_cos(p_get_vector(p, l->loc), pl->normal);
 		if (cos_th > 0 && \
 				check_obstacles(l->loc, p, info, (void *)pl) == OBS_NOT_EXIST)
 		{

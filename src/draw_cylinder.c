@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:27 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 20:57:05 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:10:55 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,16 +120,14 @@ static void	cy_apply_rgb_bottom(t_final_c *rgb, t_point p, \
 								t_info info, t_obj_cylinder *cy)
 {
 	t_light		*l;
-	t_vector	n;
 	double		cos_th;
 
 	rgb->color = cy->color;
 	apply_ambient(rgb, info.amb);
 	l = info.lights;
-	n = get_cylinder_normal_bottom(info.camera, cy);
 	while (l != NULL)
 	{
-		cos_th = v_get_cos(p_get_vector(p, l->loc), n);
+		cos_th = v_get_cos(p_get_vector(p, l->loc), cy->normal);
 		if (cos_th > 0 && \
 				check_obstacles(l->loc, p, info, (void *)cy) == OBS_NOT_EXIST)
 		{
