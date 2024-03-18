@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:45:37 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 15:08:40 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:09:09 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static int	read_info(t_info *info, char *buffer)
 		return (read_pl(info->objs, all_info));
 	else if (ft_strncmp(all_info[0], "cy", 3) == 0)
 		return (read_cy(info->objs, all_info));
+	else if (ft_strncmp(all_info[0], "co", 3) == 0)
+		return (read_co(info->objs, all_info));
 	else if (ft_strncmp(all_info[0], "A", 2) == 0)
 		return (read_amb(info, all_info));
 	else if (ft_strncmp(all_info[0], "C", 2) == 0)
