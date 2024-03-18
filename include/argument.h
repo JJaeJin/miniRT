@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/17 14:10:27 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:08:54 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,22 @@ typedef struct s_obj_cylinder
 	struct s_obj_cylinder	*next;
 }	t_obj_cylinder;
 
+typedef struct s_obj_cone
+{
+	t_point				loc;
+	t_vector			normal;
+	double				height;
+	double				diameter;
+	t_color				color;
+	struct s_obj_cone	*next;
+}	t_obj_cone;
+
 typedef struct s_obj
 {
 	t_obj_cylinder	*cy;
 	t_obj_plane		*pl;
 	t_obj_sphere	*sp;
+	t_obj_cone		*co;
 }	t_obj;
 
 typedef struct s_info
@@ -95,6 +106,7 @@ int			fail_free(void *p);
 int			read_sp(t_obj *obj, char **all_info);
 int			read_pl(t_obj *obj, char **all_info);
 int			read_cy(t_obj *obj, char **all_info);
+int			read_co(t_obj *obj, char **all_info);
 int			read_cam(t_info *info, char **all_info);
 int			read_light(t_info *info, char **all_info);
 int			read_amb(t_info *info, char **all_info);
