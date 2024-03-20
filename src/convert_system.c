@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:07:38 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/17 14:11:20 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:42:22 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,7 @@ static void	convert_sp_pl(t_obj *obj, t_point mod)
 		temp_pl->loc.y -= mod.y;
 		temp_pl->loc.z -= mod.z;
 		if (v_inner_product(temp_pl->loc, temp_pl->normal) > 0)
-		{
-			temp_pl->normal.x *= -1;
-			temp_pl->normal.y *= -1;
-			temp_pl->normal.z *= -1;
-		}
+			temp_pl->normal = v_multiply(temp_pl->normal, -1);
 		temp_pl = temp_pl->next;
 	}
 }

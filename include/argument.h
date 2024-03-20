@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/18 10:08:54 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:59:26 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,8 @@ void		check_plane(t_final_c *rgb, double *distance, \
 void		check_cylinder(t_final_c *rgb, double *distance, \
 							t_vector v, t_info info);
 void		apply_ambient(t_final_c *rgb, t_ambient_lightning *amb);
-void		apply_diffuse(t_color *c, t_light *diff, double cos_th);
+void		apply_diffuse(t_color *ratio, t_light *l, double cos_th);
+void		apply_specular(t_final_c *rgb, t_light *l, t_point p, t_vector n);
 
 /* funcs for cylinder */
 void		get_p_bottom(t_vector v, t_point *p, t_obj_cylinder *cy);
