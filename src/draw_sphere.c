@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:31:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 20:57:51 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:55:13 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,8 @@ static void	add_lights_sp(t_final_c *rgb, t_point p, \
 		if (cos_th > 0 && \
 				check_obstacles(l->loc, p, info, (void *)sp) == OBS_NOT_EXIST)
 		{
-			rgb->ratio.red += \
-				l->color.red * l->ratio * cos_th / 255;
-			rgb->ratio.green += \
-				l->color.green * l->ratio * cos_th / 255;
-			rgb->ratio.blue += \
-				l->color.blue * l->ratio * cos_th / 255;
+			apply_diffuse(&rgb->ratio, l, cos_th);
+			apply_specular(rgb, l, p, n);
 		}
 		l = l->next;
 	}

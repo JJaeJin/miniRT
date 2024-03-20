@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:33:58 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/17 16:35:14 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:09:45 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "vector.h"
 #include <math.h>
 
-static int		is_obstacle_cy(t_point *p, t_obj_cylinder *m_cy, t_point m_l);
+static int	is_obstacle_cy(t_point *p, t_obj_cylinder *m_cy, t_point m_l);
 
 int	check_obs_cylinder(t_point l, t_point p, t_obj_cylinder *cy, void *obj)
 {

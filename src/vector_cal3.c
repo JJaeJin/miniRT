@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   vector_cal3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/17 17:35:45 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/19 16:48:20 by jaejilee         ###   ########.fr       */
+/*   Created: 2024/02/25 13:54:45 by jaejilee          #+#    #+#             */
+/*   Updated: 2024/03/19 13:33:51 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include "vector.h"
+#include "libft.h"
+#include <math.h>
 
-typedef struct s_color
+t_vector	v_multiply(t_vector v, double num)
 {
-	double	red;
-	double	green;
-	double	blue;
-	double	brightness;
-}	t_color;
-
-typedef struct s_final_c
-{
-	t_color	ratio;
-	t_color	color;
-	t_color	specular;
-}	t_final_c;
-
-#endif
+	v.x *= num;
+	v.y *= num;
+	v.z *= num;
+	return (v);
+}

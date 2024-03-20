@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:21:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 16:01:38 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:52:37 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,7 @@ static void	init_img_data(t_final_c *rgb, double *distance)
 	rgb->ratio.red = 0;
 	rgb->ratio.green = 0;
 	rgb->ratio.blue = 0;
+	rgb->specular.red = 0;
+	rgb->specular.green = 0;
+	rgb->specular.blue = 0;
 }

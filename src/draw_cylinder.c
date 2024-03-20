@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:27 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/17 14:10:55 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:44:43 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static int	check_p_bottom(t_point p, t_obj_cylinder *cy, \
 	if (v_inner_product(p, info.camera->way) <= 0)
 		return (FALSE);
 	d_res = v_size(p);
+	if (v_inner_product(p, cy->normal) > 0)
+		cy->normal = v_multiply(cy->normal, -1);
 	if (p_get_distance(cy->loc, p) <= \
 		sqrt(pow(cy->diameter / 2, 2) + pow(cy->height / 2, 2)) \
 		&& (*distance == 0 || d_res < *distance))
@@ -102,15 +104,12 @@ static void	cy_apply_rgb_side(t_final_c *rgb, t_point p, \
 	n = get_cylinder_normal(cy, p);
 	while (l != NULL)
 	{
-		if (check_obstacles(l->loc, p, info, (void *)cy) == OBS_NOT_EXIST)
+		cos_th = v_get_cos(p_get_vector(p, l->loc), n);
+		if (cos_th > 0 && \
+			check_obstacles(l->loc, p, info, (void *)cy) == OBS_NOT_EXIST)
 		{
-			cos_th = v_get_cos(p_get_vector(p, l->loc), n);
-			rgb->ratio.red += \
-				l->color.red * l->ratio * cos_th / 255;
-			rgb->ratio.green += \
-				l->color.green * l->ratio * cos_th / 255;
-			rgb->ratio.blue += \
-				l->color.blue * l->ratio * cos_th / 255;
+			apply_diffuse(&rgb->ratio, l, cos_th);
+			apply_specular(rgb, l, p, n);
 		}
 		l = l->next;
 	}
@@ -131,12 +130,8 @@ static void	cy_apply_rgb_bottom(t_final_c *rgb, t_point p, \
 		if (cos_th > 0 && \
 				check_obstacles(l->loc, p, info, (void *)cy) == OBS_NOT_EXIST)
 		{
-			rgb->ratio.red += \
-				l->color.red * l->ratio * cos_th / 255;
-			rgb->ratio.green += \
-				l->color.green * l->ratio * cos_th / 255;
-			rgb->ratio.blue += \
-				l->color.blue * l->ratio * cos_th / 255;
+			apply_diffuse(&rgb->ratio, l, cos_th);
+			apply_specular(rgb, l, p, cy->normal);
 		}
 		l = l->next;
 	}
