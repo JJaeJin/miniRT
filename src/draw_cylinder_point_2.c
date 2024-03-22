@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:43:15 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 16:45:12 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:58:51 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,22 @@ double	get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy)
 	t_point		p_on_cam;
 
 	temp = v_outer_product(v_ray, cy->normal);
-	if (temp.x == 0 && temp.y == 0 && temp.z == 0)
+	if (v_size(temp) == 0)
 		return (0);
+	if (v_size(v_outer_product(cy->cam, cy->normal)) == 0)
+		return (fabs(temp.x * cy->loc.x + temp.y * cy->loc.y + \
+		temp.z * cy->loc.z) / sqrt(pow(temp.x, 2) + \
+		pow(temp.y, 2) + pow(temp.z, 2)));
 	temp = v_outer_product(temp, v_ray);
 	if (v_inner_product(v_ray, cy->normal) == 0)
 		return (get_d_between_lines_parallel(v_ray, cy));
 	t = (-temp.x * cy->loc.x - temp.y * cy->loc.y - temp.z * cy->loc.z) / \
 		(cy->normal.x * temp.x + cy->normal.y * temp.y + cy->normal.z * temp.z);
-	p_on_cy.x = cy->loc.x + t * cy->normal.x;
-	p_on_cy.y = cy->loc.y + t * cy->normal.y;
-	p_on_cy.z = cy->loc.z + t * cy->normal.z;
+	p_on_cy = v_add(cy->loc, v_multiply(cy->normal, t));
 	temp = v_outer_product(v_ray, cy->normal);
 	t = (temp.y * p_on_cy.x - temp.x * p_on_cy.y) / \
 		(v_ray.x * temp.y - v_ray.y * temp.x);
-	p_on_cam.x = t * v_ray.x;
-	p_on_cam.y = t * v_ray.y;
-	p_on_cam.z = t * v_ray.z;
+	p_on_cam = v_multiply(v_ray, t);
 	return (p_get_distance(p_on_cy, p_on_cam));
 }
 

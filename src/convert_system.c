@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:07:38 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/19 18:42:22 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/22 11:04:56 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ static void	convert_cy(t_obj *obj, t_point mod, t_camera *cam)
 		temp_cy->loc.x -= mod.x;
 		temp_cy->loc.y -= mod.y;
 		temp_cy->loc.z -= mod.z;
+		temp_cy->cam = cam->way;
 		inner_cam_n = v_inner_product(cam->way, temp_cy->normal);
 		if (inner_cam_n > 0)
 		{

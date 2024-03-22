@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/19 18:59:26 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/22 11:03:51 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_obj_cylinder
 	double					height;
 	double					diameter;
 	t_color					color;
+	t_vector				cam;
 	struct s_obj_cylinder	*next;
 }	t_obj_cylinder;
 
