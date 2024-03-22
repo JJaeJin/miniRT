@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:33:58 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/20 14:09:45 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:19:12 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,19 @@ int	check_obs_cylinder(t_point l, t_point p, t_obj_cylinder *cy, void *obj)
 
 static int	is_obstacle_cy(t_point *p, t_obj_cylinder *m_cy, t_point m_l)
 {
-	double	d_res;
-
-	d_res = v_size(p[0]);
 	if (v_inner_product(p[0], m_l) > 0 && p_get_distance(m_cy->loc, m_l) <= \
 		sqrt(pow(m_cy->diameter / 2, 2) + pow(m_cy->height / 2, 2)) && \
 		v_size(m_l) > v_size(p[0]))
 		return (OBS_EXIST);
-	d_res = v_size(p[1]);
 	if (v_inner_product(p[1], m_l) > 0 && p_get_distance(m_cy->loc, m_l) <= \
 		sqrt(pow(m_cy->diameter / 2, 2) + pow(m_cy->height / 2, 2)) && \
 		v_size(m_l) > v_size(p[1]))
 		return (OBS_EXIST);
-	d_res = v_size(p[2]);
 	if (v_inner_product(p[2], m_l) > 0 && \
 		sqrt(fabs(pow(p_get_distance(p[2], m_cy->loc), 2) - \
 		pow(m_cy->diameter / 2, 2))) <= m_cy->height / 2 && \
 		v_size(m_l) > v_size(p[2]))
 		return (OBS_EXIST);
-	d_res = v_size(p[3]);
 	if (v_inner_product(p[3], m_l) > 0 && \
 		sqrt(fabs(pow(p_get_distance(p[3], m_cy->loc), 2) - \
 		pow(m_cy->diameter / 2, 2))) <= m_cy->height / 2 && \
