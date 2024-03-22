@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:28:29 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/13 17:04:33 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:18:46 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, t_point *p)
 	double	cos_th;
 	double	v_to_cy;
 
+	v_normalize(&v);
 	v_to_cy = get_d_between_lines(v, cy);
 	cos_th = fabs(v_inner_product(cy->loc, cy->normal)) \
 				/ (v_size(cy->loc) * v_size(cy->normal));
