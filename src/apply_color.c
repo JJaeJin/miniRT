@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:35:19 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/20 11:35:39 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/24 13:02:48 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,14 @@ void	apply_draw(t_final_c rgb, t_mlx *data, int x, int y)
 		res.blue = 255;
 	my_mlx_pixel_put(data, x, y, \
 					(int)res.red << 16 | (int)res.green << 8 | (int)res.blue);
+}
+
+t_color	get_complementary_color(t_color c)
+{
+	t_color	res;
+
+	res.red = fabs(255 - c.red);
+	res.green = fabs(255 - c.green);
+	res.blue = fabs(255 - c.blue);
+	return (res);
 }

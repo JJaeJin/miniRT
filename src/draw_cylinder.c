@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:27 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/19 19:44:43 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/24 15:42:29 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static void	cy_apply_rgb_side(t_final_c *rgb, t_point p, \
 	t_vector	n;
 	double		cos_th;
 
-	rgb->color = cy->color;
+	get_cb_color_cy_side(cy, info, p, &rgb->color);
 	apply_ambient(rgb, info.amb);
 	l = info.lights;
 	n = get_cylinder_normal(cy, p);
@@ -120,8 +120,15 @@ static void	cy_apply_rgb_bottom(t_final_c *rgb, t_point p, \
 {
 	t_light		*l;
 	double		cos_th;
+	t_obj_plane	pl_bottom;
 
-	rgb->color = cy->color;
+	pl_bottom.color = cy->color;
+	if (v_inner_product(p_get_vector(cy->loc, p), cy->normal) > 0)
+		pl_bottom.loc = v_add(cy->loc, v_multiply(cy->normal, cy->height / 2));
+	else
+		pl_bottom.loc = v_sub(cy->loc, v_multiply(cy->normal, cy->height / 2));
+	pl_bottom.normal = cy->normal;
+	get_cb_color_pl(&pl_bottom, info, p, &rgb->color);
 	apply_ambient(rgb, info.amb);
 	l = info.lights;
 	while (l != NULL)

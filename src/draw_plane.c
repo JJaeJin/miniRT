@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:29 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/19 16:54:34 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/24 09:37:23 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	check_plane(t_final_c *rgb, double *distance, t_vector v, t_info info)
 			&& (*distance == 0 || d_res < *distance))
 		{
 			*distance = d_res;
-			rgb->color = pl-> color;
+			get_cb_color_pl(pl, info, p_res, &rgb->color);
 			apply_ambient(rgb, info.amb);
 			add_lights_pl(rgb, p_res, pl, info);
 		}

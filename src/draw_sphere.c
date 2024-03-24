@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:31:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/19 16:55:13 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/24 14:07:34 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	check_sphere(t_final_c *rgb, double *distance, \
 			{
 				p_res = sp_get_p(v, d_res);
 				*distance = d_res;
-				rgb->color = sp->color;
+				get_cb_color_sp(sp, info, p_res, &rgb->color);
 				apply_ambient(rgb, info.amb);
 				add_lights_sp(rgb, p_res, sp, info);
 			}

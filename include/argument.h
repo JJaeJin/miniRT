@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/22 11:03:51 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/24 14:46:27 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_info
 	t_ambient_lightning	*amb;
 	t_light				*lights;
 	t_obj				*objs;
+	int					checkerboard;
 }	t_info;
 
 void		init_obj(t_info *info);
@@ -113,6 +114,8 @@ int			read_light(t_info *info, char **all_info);
 int			read_amb(t_info *info, char **all_info);
 
 void		convert_system(t_info *info);
+
+int			get_sign(double n);
 
 /* draw objects */
 void		check_sphere(t_final_c *rgb, double *distance, \
@@ -143,5 +146,13 @@ int			check_obs_sphere(t_point l, t_point p, t_obj_sphere *sp, void *obj);
 int			check_obs_plane(t_point l, t_point p, t_obj_plane *pl, void *obj);
 int			check_obs_cylinder(t_point l, t_point p, \
 								t_obj_cylinder *cy, void *obj);
+
+/* get_checkerboard_color */
+void		get_cb_color_sp(t_obj_sphere *sp, t_info info, \
+								t_point p, t_color *c);
+void		get_cb_color_pl(t_obj_plane *pl, t_info info, \
+								t_point p, t_color *c);
+void		get_cb_color_cy_side(t_obj_cylinder *cy, t_info info, \
+								t_point p, t_color *c);
 
 #endif

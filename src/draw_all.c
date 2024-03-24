@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 10:31:44 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/12 15:40:48 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/24 09:49:08 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	key_hook(int keycode, t_mlx *data)
 	else if (keycode == KB_W || keycode == KB_S || keycode == KB_Q
 		|| keycode == KB_E)
 		apply_kb_w_s_q_e(keycode, data);
-	else if (keycode == KB_A || keycode == KB_D)
+	else if (keycode == KB_A || keycode == KB_D || keycode == KB_C)
 		apply_kb_a_d(keycode, data);
 	else
 		return (1);
