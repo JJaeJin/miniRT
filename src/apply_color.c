@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:35:19 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/24 13:02:48 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/24 20:27:40 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 void	apply_ambient(t_final_c *rgb, t_ambient_lightning *amb)
 {
+	rgb->specular.red = 0;
+	rgb->specular.green = 0;
+	rgb->specular.blue = 0;
 	rgb->ratio.red = rgb->color.red * amb->color.red * amb->ratio / 255;
 	rgb->ratio.green = rgb->color.green * amb->color.green * amb->ratio / 255;
 	rgb->ratio.blue = rgb->color.blue * amb->color.blue * amb->ratio / 255;

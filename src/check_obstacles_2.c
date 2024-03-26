@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:33:58 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/22 15:19:12 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:03:08 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	is_obstacle_cy(t_point *p, t_obj_cylinder *m_cy, t_point m_l);
 int	check_obs_cylinder(t_point l, t_point p, t_obj_cylinder *cy, void *obj)
 {
 	t_obj_cylinder	*temp_cy;
-	t_obj_cylinder	modified_cy;
-	t_point			modified_l;
+	t_obj_cylinder	m_cy;
+	t_point			m_l;
 	t_point			p_bottom_side[4];
 
 	temp_cy = cy;
@@ -28,14 +28,17 @@ int	check_obs_cylinder(t_point l, t_point p, t_obj_cylinder *cy, void *obj)
 	{
 		if ((void *)temp_cy != obj)
 		{
-			modified_l = p_get_vector(p, l);
-			modified_cy = *temp_cy;
-			modified_cy.loc = p_get_vector(p, modified_cy.loc);
-			get_p_bottom(modified_l, p_bottom_side, &modified_cy);
-			get_p_side(modified_l, p_bottom_side + 2, &modified_cy);
-			if (is_obstacle_cy(p_bottom_side, &modified_cy, modified_l) \
-				== OBS_EXIST)
-				return (OBS_EXIST);
+			m_l = p_get_vector(p, l);
+			m_cy = *temp_cy;
+			m_cy.loc = p_get_vector(p, m_cy.loc);
+			if (get_d_between_lines(p, temp_cy) <= (temp_cy->diameter / 2))
+			{
+				get_p_bottom(v_multiply(m_l, -1), p_bottom_side, &m_cy);
+				get_p_side(v_multiply(m_l, -1), p_bottom_side + 2, &m_cy);
+				if (is_obstacle_cy(p_bottom_side, &m_cy, m_l) \
+					== OBS_EXIST)
+					return (OBS_EXIST);
+			}
 		}
 		temp_cy = temp_cy->next;
 	}

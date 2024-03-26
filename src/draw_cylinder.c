@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:27 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/24 15:42:29 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/24 19:38:36 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,9 @@ static void	cy_apply_rgb_side(t_final_c *rgb, t_point p, \
 	apply_ambient(rgb, info.amb);
 	l = info.lights;
 	n = get_cylinder_normal(cy, p);
+	rgb->specular.red = 0;
+	rgb->specular.green = 0;
+	rgb->specular.blue = 0;
 	while (l != NULL)
 	{
 		cos_th = v_get_cos(p_get_vector(p, l->loc), n);

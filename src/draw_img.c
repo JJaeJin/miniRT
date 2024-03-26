@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:21:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/24 15:48:04 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/26 09:48:50 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "argument.h"
 #include "libft.h"
 #include <math.h>
+// #include <stdio.h>
 
 static t_vector	get_3d_vector(int x, int y, t_info info);
 static void		law_rodrigues(t_vector *res, t_vector cw, \
@@ -43,6 +44,7 @@ void	make_img(t_mlx *data, t_info info)
 		y = -1;
 		while (++y < SCREEN_H)
 		{
+			// printf("\nx = %d, y = %d\n", x, y);
 			init_img_data(&rgb, &distance);
 			distance = 0;
 			v = get_3d_vector(x, y, info);
