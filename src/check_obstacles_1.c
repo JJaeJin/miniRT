@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_obstacles_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:37:36 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/24 20:21:27 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:47:05 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	check_obstacles(t_point l, t_point p, t_info info, void *obj)
 	else if (check_obs_plane(l, p, info.objs->pl, obj) == OBS_EXIST)
 		return (OBS_EXIST);
 	else if (check_obs_cylinder(l, p, info.objs->cy, obj) == OBS_EXIST)
+		return (OBS_EXIST);
+	else if (check_obs_cone(l, p, info.objs->co, obj) == OBS_EXIST)
 		return (OBS_EXIST);
 	return (OBS_NOT_EXIST);
 }
