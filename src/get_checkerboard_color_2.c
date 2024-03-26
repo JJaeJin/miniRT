@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 10:02:34 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/24 15:48:19 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:14:38 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	get_cb_color_cy_side(t_obj_cylinder *cy, t_info info, \
 	v_z.z = 1;
 	p = v_sub(p, cy->loc);
 	p_converted = get_cs_cy_side(p, cy->normal, v_z);
-	d = (abs((int)(p_converted.x / (M_PI / 30))) + \
-		abs((int)(p_converted.y / 10))) % 2;
+	d = (abs((int)(p_converted.x / (M_PI / 10))) + \
+		abs((int)(p_converted.y / 30))) % 2;
 	sign = get_sign(p_converted.x) * get_sign(p_converted.y);
 	if ((sign < 0 && d == 1) || (sign >= 0 && d == 0))
 		*c = cy->color;

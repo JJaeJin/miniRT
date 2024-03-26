@@ -6,14 +6,13 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 10:10:49 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/24 15:02:34 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/26 09:48:54 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "argument.h"
 #include "vector.h"
 #include <math.h>
-#include <stdio.h>
 
 static t_point	get_cs_pl(t_vector pl, t_point p, t_vector v_z);
 static t_point	get_cs_sp(t_point p);
@@ -81,7 +80,7 @@ void	get_cb_color_pl(t_obj_plane *pl, t_info info, t_point p, t_color *c)
 	v_z.z = 1;
 	p = v_sub(p, pl->loc);
 	p_converted = get_cs_pl(pl->normal, p, v_z);
-	d = (abs((int)p_converted.x / 10) + abs((int)p_converted.y / 10)) % 2;
+	d = (abs((int)p_converted.x / 30) + abs((int)p_converted.y / 30)) % 2;
 	sign = get_sign(p_converted.x) * get_sign(p_converted.y);
 	if ((sign > 0 && d == 0) || (sign <= 0 && d == 1))
 		*c = pl->color;
