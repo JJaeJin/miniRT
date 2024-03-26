@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:21:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/26 09:48:50 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:50:49 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	make_img(t_mlx *data, t_info info)
 			check_sphere(&rgb, &distance, v, info);
 			check_plane(&rgb, &distance, v, info);
 			check_cylinder(&rgb, &distance, v, info);
+			check_cone(&rgb, &distance, v, info);
 			if (distance != 0)
 				apply_draw(rgb, data, x, y);
 		}

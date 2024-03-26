@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/24 14:46:27 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:46:30 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,18 @@ double		get_height_diff(t_vector v_ray, t_obj_cylinder *cy);
 double		get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy);
 t_point		get_p_center(t_obj_cylinder *cy, t_vector v);
 
+/* funcs for cone */
+void		check_cone(t_final_c *rgb, double *distance, \
+								t_vector v, t_info info);
+int			co_check_p_side(t_point *p, t_vector v, \
+								double *distance, t_info info);
+void		co_get_p_bottom(t_vector v, t_point *p, t_obj_cone *co);
+int			check_obs_cone(t_point l, t_point p, t_obj_cone *co, void *obj);
+
 /* get_obj_normal */
 t_vector	get_sphere_normal(t_obj_sphere *sp, t_point p);
 t_vector	get_cylinder_normal(t_obj_cylinder *cy, t_point p);
+t_vector	get_cone_normal(t_obj_cone *co, t_point p);
 
 /* check_obstacles */
 int			check_obstacles(t_point l, t_point p, t_info info, void *obj);
