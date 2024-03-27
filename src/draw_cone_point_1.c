@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:20:41 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/26 16:49:03 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/27 19:34:02 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ double	co_get_distance(t_point *p, t_obj_cone *co, t_vector cam, t_vector v)
 		res_d = v_size(p[0]);
 	temp = v_inner_product(v_add(v_multiply(v, res_d), \
 			v_multiply(co->loc, (-1))), co->normal);
+	if (v_inner_product(cam, co->normal) == (-1) && fabs(temp - co->height) < 0.00000001)
+		return (res_d);
 	if (temp < 0 || co->height < temp)
 		return (-1);
 	return (res_d);

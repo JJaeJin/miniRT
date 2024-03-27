@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_cal2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:54:45 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/15 14:42:27 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/27 19:28:32 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,18 @@
 double	*solve_quadratic(double a, double b, double c)
 {
 	double	*res;
+	double	abs_d;
 	double	d;
 
 	d = pow(b, 2) - 4 * a * c;
-	if (d < 0)
-		return (NULL);
-	else if (d == 0)
+	abs_d = fabs(d);
+	if (abs_d < 0.00000001)
 	{
 		res = (double *)ft_calloc(1, sizeof(double));
 		res[0] = (-1 * b) / (2 * a);
 	}
+	else if (d < 0)
+		return (NULL);
 	else
 	{
 		res = (double *)ft_calloc(2, sizeof(double));
