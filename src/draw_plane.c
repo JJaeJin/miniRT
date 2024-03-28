@@ -6,11 +6,12 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:29 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/24 19:38:32 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:02:19 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "argument.h"
+#include "libft.h"
 #include "draw.h"
 #include <math.h>
 
@@ -35,7 +36,8 @@ void	check_plane(t_final_c *rgb, double *distance, t_vector v, t_info info)
 			&& (*distance == 0 || d_res < *distance))
 		{
 			*distance = d_res;
-			get_cb_color_pl(pl, info, p_res, &rgb->color);
+			pl->temp_normal = pl->normal;
+			rgb->color = pl->color;
 			apply_ambient(rgb, info.amb);
 			add_lights_pl(rgb, p_res, pl, info);
 		}
@@ -59,12 +61,12 @@ static void	add_lights_pl(t_final_c *rgb, t_point p, \
 	l = info.lights;
 	while (l != NULL)
 	{
-		cos_th = v_get_cos(p_get_vector(p, l->loc), pl->normal);
-		if (cos_th > 0 && \
-				check_obstacles(l->loc, p, info, (void *)pl) == OBS_NOT_EXIST)
+		cos_th = v_get_cos(p_get_vector(p, l->loc), pl->temp_normal);
+		if (v_get_cos(p_get_vector(p, l->loc), pl->normal) > 0 && cos_th > 0 && \
+			check_obstacles(l->loc, p, info, (void *)pl) == OBS_NOT_EXIST)
 		{
 			apply_diffuse(&rgb->ratio, l, cos_th);
-			apply_specular(rgb, l, p, pl->normal);
+			apply_specular(rgb, l, p, pl->temp_normal);
 		}
 		l = l->next;
 	}

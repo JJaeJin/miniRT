@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:05:28 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/24 09:51:51 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:56:31 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	apply_kb_a_d(int keycode, t_mlx *data)
 	}
 	else if (keycode == KB_C)
 		data->info->checkerboard = (data->info->checkerboard + 1) % 2;
+	else if (keycode == KB_B)
+		data->info->bumpmap = (data->info->bumpmap + 1) % 2;
 	convert_system(data->info);
 }
 

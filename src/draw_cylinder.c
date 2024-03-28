@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:27 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/24 19:38:36 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:02:16 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,24 +95,26 @@ static void	cy_apply_rgb_side(t_final_c *rgb, t_point p, \
 								t_info info, t_obj_cylinder *cy)
 {
 	t_light		*l;
-	t_vector	n;
 	double		cos_th;
+	t_vector	n;
 
-	get_cb_color_cy_side(cy, info, p, &rgb->color);
+	n = get_cylinder_normal(cy, p);
+	cy->temp_normal = n;
+	rgb->color = cy->color;
 	apply_ambient(rgb, info.amb);
 	l = info.lights;
-	n = get_cylinder_normal(cy, p);
 	rgb->specular.red = 0;
 	rgb->specular.green = 0;
 	rgb->specular.blue = 0;
 	while (l != NULL)
 	{
-		cos_th = v_get_cos(p_get_vector(p, l->loc), n);
+		cos_th = v_get_cos(p_get_vector(p, l->loc), cy->temp_normal);
 		if (cos_th > 0 && \
 			check_obstacles(l->loc, p, info, (void *)cy) == OBS_NOT_EXIST)
 		{
 			apply_diffuse(&rgb->ratio, l, cos_th);
-			apply_specular(rgb, l, p, n);
+			if (check_specular(l, p, n) == TRUE)
+				apply_specular(rgb, l, p, cy->temp_normal);
 		}
 		l = l->next;
 	}
@@ -122,8 +124,8 @@ static void	cy_apply_rgb_bottom(t_final_c *rgb, t_point p, \
 								t_info info, t_obj_cylinder *cy)
 {
 	t_light		*l;
-	double		cos_th;
 	t_obj_plane	pl_bottom;
+	double		cos_th;
 
 	pl_bottom.color = cy->color;
 	if (v_inner_product(p_get_vector(cy->loc, p), cy->normal) > 0)
@@ -131,17 +133,18 @@ static void	cy_apply_rgb_bottom(t_final_c *rgb, t_point p, \
 	else
 		pl_bottom.loc = v_sub(cy->loc, v_multiply(cy->normal, cy->height / 2));
 	pl_bottom.normal = cy->normal;
-	get_cb_color_pl(&pl_bottom, info, p, &rgb->color);
+	pl_bottom.temp_normal = cy->normal;
+	rgb->color = cy->color;
 	apply_ambient(rgb, info.amb);
 	l = info.lights;
 	while (l != NULL)
 	{
-		cos_th = v_get_cos(p_get_vector(p, l->loc), cy->normal);
+		cos_th = v_get_cos(p_get_vector(p, l->loc), pl_bottom.temp_normal);
 		if (cos_th > 0 && \
-				check_obstacles(l->loc, p, info, (void *)cy) == OBS_NOT_EXIST)
+		check_obstacles(l->loc, p, info, (void *)cy) == OBS_NOT_EXIST)
 		{
 			apply_diffuse(&rgb->ratio, l, cos_th);
-			apply_specular(rgb, l, p, cy->normal);
+			apply_specular(rgb, l, p, pl_bottom.temp_normal);
 		}
 		l = l->next;
 	}

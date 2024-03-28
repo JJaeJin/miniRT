@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_obj_normal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:23:34 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/26 13:51:21 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:55:19 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

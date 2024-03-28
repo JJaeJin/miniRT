@@ -1,10 +1,10 @@
 CC=				cc
-CFLAGS=			-Wall -Wextra -Werror -g
+CFLAGS=			-Wall -Wextra -Werror# -g -fsanitize=address
 NAME=			miniRT
 
 FILES=			parse_color parse_double error init_data main parse_capital parse_small parse parse_vector draw_all draw_img vector_cal1 vector_cal2 vector_cal3 draw_sphere draw_plane draw_cylinder \
 				convert_system apply_color hook_kb draw_cylinder_point_1 draw_cylinder_point_2 check_obstacles_1 check_obstacles_2 get_obj_normal draw_cone draw_cone_point_1 check_obstacles_3\
-				get_checkerboard_color_1 get_checkerboard_color_2
+				get_checkerboard_color get_img_color
 SRCS=			$(addsuffix .c, $(addprefix ./src/, $(FILES)))
 OBJS=			$(SRCS:.c=.o)
 SRCS_BONUS=		$(EMPTY)
