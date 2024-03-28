@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:35:19 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/24 20:27:40 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/28 11:41:22 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@ void	apply_draw(t_final_c rgb, t_mlx *data, int x, int y)
 {
 	t_color	res;
 
-	res.red = 0;
-	res.green = 0;
-	res.blue = 0;
 	res.red = rgb.color.red * rgb.ratio.red;
 	res.red += rgb.specular.red;
 	if (res.red > 255)

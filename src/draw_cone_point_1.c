@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_cone_point_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:20:41 by dongyeuk          #+#    #+#             */
 /*   Updated: 2024/03/28 17:05:31 by dongyeuk         ###   ########.fr       */

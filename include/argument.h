@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   argument.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
 /*   Updated: 2024/03/26 16:24:26 by dongyeuk         ###   ########.fr       */
@@ -49,6 +49,7 @@ typedef struct s_obj_sphere
 	t_point				center;
 	double				diameter;
 	t_color				color;
+	t_vector			temp_normal;
 	struct s_obj_sphere	*next;
 }	t_obj_sphere;
 
@@ -57,6 +58,7 @@ typedef struct s_obj_plane
 	t_point				loc;
 	t_vector			normal;
 	t_color				color;
+	t_vector			temp_normal;
 	struct s_obj_plane	*next;
 }	t_obj_plane;
 
@@ -68,6 +70,7 @@ typedef struct s_obj_cylinder
 	double					diameter;
 	t_color					color;
 	t_vector				cam;
+	t_vector				temp_normal;
 	struct s_obj_cylinder	*next;
 }	t_obj_cylinder;
 
@@ -89,6 +92,16 @@ typedef struct s_obj
 	t_obj_cone		*co;
 }	t_obj;
 
+typedef struct s_img
+{
+	void	*img;
+	void	*img_addr;
+	int		img_size[2];
+	int		img_bpp;
+	int		img_line_length;
+	int		img_endian;
+}	t_img;
+
 typedef struct s_info
 {
 	t_camera			*camera;
@@ -96,6 +109,13 @@ typedef struct s_info
 	t_light				*lights;
 	t_obj				*objs;
 	int					checkerboard;
+	int					bumpmap;
+
+	t_img				pl_img;
+	t_img				pl_normalmap;
+
+	void				*sp_img;
+	void				*sp_normal_map;
 }	t_info;
 
 void		init_obj(t_info *info);
@@ -157,13 +177,14 @@ int			check_obs_sphere(t_point l, t_point p, t_obj_sphere *sp, void *obj);
 int			check_obs_plane(t_point l, t_point p, t_obj_plane *pl, void *obj);
 int			check_obs_cylinder(t_point l, t_point p, \
 								t_obj_cylinder *cy, void *obj);
+int			check_specular(t_light *l, t_point p, t_vector n);
 
 /* get_checkerboard_color */
 void		get_cb_color_sp(t_obj_sphere *sp, t_info info, \
 								t_point p, t_color *c);
-void		get_cb_color_pl(t_obj_plane *pl, t_info info, \
-								t_point p, t_color *c);
-void		get_cb_color_cy_side(t_obj_cylinder *cy, t_info info, \
-								t_point p, t_color *c);
+
+/* get_img_color */
+t_color		get_img_color(t_img img, t_point p);
+t_vector	get_img_vector(t_img img, t_point p, t_vector n);
 
 #endif
