@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/28 17:00:35 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:24:26 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,10 +159,12 @@ t_point		get_p_center(t_obj_cylinder *cy, t_vector v);
 /* funcs for cone */
 void		check_cone(t_final_c *rgb, double *distance, \
 								t_vector v, t_info info);
-int			co_check_p_side(t_point *p, t_vector v, \
-								double *distance, t_info info);
+int			co_check_p_side(double d_res, double *distance);
 void		co_get_p_bottom(t_vector v, t_point *p, t_obj_cone *co);
 int			check_obs_cone(t_point l, t_point p, t_obj_cone *co, void *obj);
+double		*co_get_diff_set_p_side(t_point *p, t_vector v, t_obj_cone *co);
+double		co_get_distance(t_point *p, t_obj_cone *co, \
+								t_vector cam, t_vector v);
 
 /* get_obj_normal */
 t_vector	get_sphere_normal(t_obj_sphere *sp, t_point p);

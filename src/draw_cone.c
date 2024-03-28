@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:10:36 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/26 13:42:57 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:05:05 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include "libft.h"
 #include <math.h>
 
-static int		co_check_p_bottom(t_point *p, t_vector v, \
-								double *distance, t_info info);
+static int		co_check_p_bottom(double d_res, t_obj_cone *co, \
+									double *distance, t_point p_bottom);
 static void		co_apply_rgb_bottom(t_final_c *rgb, t_point p, \
 									t_info info, t_obj_cone *co);
 static void		co_apply_rgb_side(t_final_c *rgb, t_point p, \
@@ -25,16 +25,29 @@ static void		co_apply_rgb_side(t_final_c *rgb, t_point p, \
 void	check_cone(t_final_c *rgb, double *distance, \
 								t_vector v, t_info info)
 {
-	t_point		p_side_bottom;
+	t_point		p_bottom;
+	t_point		p_side[2];
 	t_obj_cone	*co;
+	double		*diff;
+	double		d_res;
 
 	co = info.objs->co;
 	while (co != NULL)
 	{
-		if (co_check_p_side(&p_side_bottom, v, distance, info))
-			co_apply_rgb_side(rgb, p_side_bottom, info, co);
-		if (co_check_p_bottom(&p_side_bottom, v, distance, info))
-			co_apply_rgb_bottom(rgb, p_side_bottom, info, co);
+		diff = co_get_diff_set_p_side(p_side, v, co);
+		if (diff != NULL)
+		{
+			d_res = co_get_distance(p_side, co, info.camera->way, v);
+			if (co_check_p_side(d_res, distance))
+				co_apply_rgb_side(rgb, p_side[0], info, co);
+		}
+		co_get_p_bottom(v, &p_bottom, co);
+		if (v_inner_product(p_bottom, info.camera->way) > 0)
+		{
+			d_res = v_size(p_bottom);
+			if (co_check_p_bottom(d_res, co, distance, p_bottom))
+				co_apply_rgb_bottom(rgb, p_bottom, info, co);
+		}
 		co = co->next;
 	}
 }
@@ -51,18 +64,10 @@ void	co_get_p_bottom(t_vector v, t_point *p, t_obj_cone *co)
 	p->z = t * v.z;
 }
 
-static int	co_check_p_bottom(t_point *p, t_vector v, \
-							double *distance, t_info info)
+static int	co_check_p_bottom(double d_res, t_obj_cone *co, \
+							double *distance, t_point p_bottom)
 {
-	double		d_res;
-	t_obj_cone	*co;
-
-	co = info.objs->co;
-	co_get_p_bottom(v, p, co);
-	if (v_inner_product(*p, info.camera->way) <= 0)
-		return (FALSE);
-	d_res = v_size(*p);
-	if (p_get_distance(co->loc, *p) <= co->diameter / 2 \
+	if (p_get_distance(co->loc, p_bottom) <= co->diameter / 2 \
 		&& (*distance == 0 || d_res < *distance))
 	{
 		*distance = d_res;
@@ -87,12 +92,8 @@ static void	co_apply_rgb_bottom(t_final_c *rgb, t_point p, \
 		if (cos_th > 0 && \
 				check_obstacles(l->loc, p, info, (void *)co) == OBS_NOT_EXIST)
 		{
-			rgb->ratio.red += \
-				l->color.red * l->ratio * cos_th / 255;
-			rgb->ratio.green += \
-				l->color.green * l->ratio * cos_th / 255;
-			rgb->ratio.blue += \
-				l->color.blue * l->ratio * cos_th / 255;
+			apply_diffuse(&rgb->ratio, l, cos_th);
+			apply_specular(rgb, l, p, co->normal);
 		}
 		l = l->next;
 	}
@@ -115,12 +116,8 @@ static void	co_apply_rgb_side(t_final_c *rgb, t_point p, \
 		if (cos_th > 0 \
 			&& check_obstacles(l->loc, p, info, (void *)co) == OBS_NOT_EXIST)
 		{
-			rgb->ratio.red += \
-				l->color.red * l->ratio * cos_th / 255;
-			rgb->ratio.green += \
-				l->color.green * l->ratio * cos_th / 255;
-			rgb->ratio.blue += \
-				l->color.blue * l->ratio * cos_th / 255;
+			apply_diffuse(&rgb->ratio, l, cos_th);
+			apply_specular(rgb, l, p, n);
 		}
 		l = l->next;
 	}

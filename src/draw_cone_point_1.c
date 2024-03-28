@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:20:41 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/26 19:57:25 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:05:31 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,67 +16,32 @@
 #include <math.h>
 
 static void		co_get_res_p(t_point *res, t_vector v, double *diff);
-static double	*co_get_diff_set_p_side(t_point *p, t_vector v, \
-										t_obj_cone *co);
-static double	co_get_res_distance(t_point *p, t_vector cam, double *diff);
-static double	co_get_distance(t_point *p, double *diff, \
-								t_info info, t_vector v);
 
-int	co_check_p_side(t_point *p, t_vector v, double *distance, t_info info)
+int	co_check_p_side(double d_res, double *distance)
 {
-	t_obj_cone	*co;
-	t_point		p_side[2];
-	double		d_res;
-	double		*diff;
-
-	co = info.objs->co;
-	diff = co_get_diff_set_p_side(p_side, v, co);
-	d_res = co_get_distance(p_side, diff, info, v);
 	if (d_res != -1 && (*distance == 0 || d_res < *distance))
 	{
-		*p = p_side[0];
 		*distance = d_res;
 		return (TRUE);
 	}
 	return (FALSE);
 }
 
-static double	co_get_distance(t_point *p, double *diff, \
-											t_info info, t_vector v)
+double	co_get_distance(t_point *p, t_obj_cone *co, t_vector cam, t_vector v)
 {
 	double		res_d;
 	double		temp;
-	t_obj_cone	*co;
 
-	if (diff == NULL)
-		return (-1);
-	co = info.objs->co;
-	res_d = co_get_res_distance(p, info.camera->way, diff);
-	temp = v_inner_product(v_add(v_multiply(v, res_d), \
-			v_multiply(co->loc, (-1))), co->normal);
-	if (temp < 0 || co->height < temp)
-		return (-1);
-	return (res_d);
-}
-
-static double	co_get_res_distance(t_point *p, t_vector cam, double *diff)
-{
-	double	temp;
-	double	res_d;
-
-	res_d = 0;
+	res_d = (-1);
 	if (v_inner_product(p[0], cam) > 0)
 		res_d = v_size(p[0]);
-	if (sizeof(diff) != sizeof(double) && v_inner_product(p[1], cam) > 0)
-	{
-		temp = v_size(p[1]);
-		if (res_d == 0 || res_d > temp)
-		{
-			res_d = temp;
-			p[0] = p[1];
-		}
-	}
-	free(diff);
+	temp = v_inner_product(v_add(v_multiply(v, res_d), \
+			v_multiply(co->loc, (-1))), co->normal);
+	if (v_inner_product(cam, co->normal) == (-1) && \
+		fabs(temp - co->height) < 0.00000001)
+		return (res_d);
+	if (temp < 0 || co->height < temp)
+		return (-1);
 	return (res_d);
 }
 
@@ -92,7 +57,7 @@ static void	co_get_res_p(t_point *res, t_vector v, double *diff)
 	res[1].z = v.z * diff[1];
 }
 
-static double	*co_get_diff_set_p_side(t_point *p, t_vector v, \
+double	*co_get_diff_set_p_side(t_point *p, t_vector v, \
 										t_obj_cone *co)
 {
 	t_vector	w;

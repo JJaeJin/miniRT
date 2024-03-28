@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:39:15 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/26 13:39:49 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:22:59 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	is_obstacle_co(t_point *p, t_obj_cone *m_co, t_point m_l)
 		return (OBS_EXIST);
 	unit_m_l = m_l;
 	v_normalize(&unit_m_l);
-	if (1 && v_inner_product(p[0], m_l) > 0 && v_size(m_l) > v_size(p[0]))
+	if (v_inner_product(p[0], m_l) > 0 && v_size(m_l) > v_size(p[0]))
 	{
 		temp = v_inner_product(v_add(v_multiply(unit_m_l, v_size(p[0])), \
 			v_multiply(m_co->loc, (-1))), m_co->normal);
