@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:10:36 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/26 16:51:22 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:05:05 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,8 @@ static void	co_apply_rgb_bottom(t_final_c *rgb, t_point p, \
 		if (cos_th > 0 && \
 				check_obstacles(l->loc, p, info, (void *)co) == OBS_NOT_EXIST)
 		{
-			rgb->ratio.red += \
-				l->color.red * l->ratio * cos_th / 255;
-			rgb->ratio.green += \
-				l->color.green * l->ratio * cos_th / 255;
-			rgb->ratio.blue += \
-				l->color.blue * l->ratio * cos_th / 255;
+			apply_diffuse(&rgb->ratio, l, cos_th);
+			apply_specular(rgb, l, p, co->normal);
 		}
 		l = l->next;
 	}
@@ -120,12 +116,8 @@ static void	co_apply_rgb_side(t_final_c *rgb, t_point p, \
 		if (cos_th > 0 \
 			&& check_obstacles(l->loc, p, info, (void *)co) == OBS_NOT_EXIST)
 		{
-			rgb->ratio.red += \
-				l->color.red * l->ratio * cos_th / 255;
-			rgb->ratio.green += \
-				l->color.green * l->ratio * cos_th / 255;
-			rgb->ratio.blue += \
-				l->color.blue * l->ratio * cos_th / 255;
+			apply_diffuse(&rgb->ratio, l, cos_th);
+			apply_specular(rgb, l, p, n);
 		}
 		l = l->next;
 	}
