@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:45:37 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/26 15:30:57 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:48:12 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	read_info(t_info *info, char *buffer)
 	if (all_info == 0)
 		return (FAILURE);
 	if (all_info[0] == NULL || all_info[0][0] == '#')
-		return (SUCCESS);
+		return (free_double_char_pointer_rt_int(all_info, SUCCESS));
 	else if (ft_strncmp(all_info[0], "sp", 3) == 0)
 		return (read_sp(info->objs, all_info));
 	else if (ft_strncmp(all_info[0], "pl", 3) == 0)
@@ -92,8 +92,17 @@ static int	parse_finished(t_info *info)
 	return (SUCCESS);
 }
 
-int	fail_free(void *p)
+int	fail_free(void *p, char **ptr)
 {
+	int	idx;
+
+	idx = 0;
+	while (ptr[idx] != NULL)
+	{
+		free(ptr[idx]);
+		idx++;
+	}
+	free(ptr);
 	free(p);
 	return (FAILURE);
 }

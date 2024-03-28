@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:10:36 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/28 17:05:05 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:25:37 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	check_cone(t_final_c *rgb, double *distance, \
 		if (diff != NULL)
 		{
 			d_res = co_get_distance(p_side, co, info.camera->way, v);
-			if (co_check_p_side(d_res, distance))
+			if (co_check_p_side(d_res, distance, diff))
 				co_apply_rgb_side(rgb, p_side[0], info, co);
 		}
 		co_get_p_bottom(v, &p_bottom, co);

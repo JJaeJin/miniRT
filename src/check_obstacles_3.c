@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:39:15 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/26 15:22:59 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:15:20 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static void	co_get_p_side(t_point *p, t_vector v, t_obj_cone *co)
 							v_inner_product(w, w) - (temp + 1) * \
 							pow(v_inner_product(w, co->normal), 2));
 	co_get_res_p(p, v, diff);
+	free(diff);
 }
 
 static void	co_get_res_p(t_point *res, t_vector v, double *diff)
