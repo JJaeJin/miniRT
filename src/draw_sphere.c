@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:31:28 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/24 19:38:28 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/28 11:36:03 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	check_sphere(t_final_c *rgb, double *distance, \
 			{
 				p_res = sp_get_p(v, d_res);
 				*distance = d_res;
+				sp->temp_normal = get_sphere_normal(sp, p_res);
 				get_cb_color_sp(sp, info, p_res, &rgb->color);
 				apply_ambient(rgb, info.amb);
 				add_lights_sp(rgb, p_res, sp, info);
@@ -111,12 +112,12 @@ static void	add_lights_sp(t_final_c *rgb, t_point p, \
 	n = get_sphere_normal(sp, p);
 	while (l != NULL)
 	{
-		cos_th = v_get_cos(p_get_vector(p, l->loc), n);
+		cos_th = v_get_cos(p_get_vector(p, l->loc), sp->temp_normal);
 		if (cos_th > 0 && \
-				check_obstacles(l->loc, p, info, (void *)sp) == OBS_NOT_EXIST)
+		check_obstacles(l->loc, p, info, (void *)sp) == OBS_NOT_EXIST)
 		{
 			apply_diffuse(&rgb->ratio, l, cos_th);
-			apply_specular(rgb, l, p, n);
+			apply_specular(rgb, l, p, sp->temp_normal);
 		}
 		l = l->next;
 	}

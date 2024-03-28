@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 10:57:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/24 09:48:58 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:55:53 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define KB_Q			12
 # define KB_E			14
 # define KB_C			8
+# define KB_B			11
 
 # define SCREEN_W		800
 # define SCREEN_H		800

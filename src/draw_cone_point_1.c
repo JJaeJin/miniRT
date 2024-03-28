@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_cone_point_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:20:41 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/26 13:43:41 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/26 19:57:25 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "vector.h"
 #include "libft.h"
 #include <math.h>
-#include <stdio.h>
 
 static void		co_get_res_p(t_point *res, t_vector v, double *diff);
 static double	*co_get_diff_set_p_side(t_point *p, t_vector v, \
