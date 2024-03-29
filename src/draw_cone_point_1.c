@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:20:41 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/28 19:26:22 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/29 19:55:13 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,21 @@ double	co_get_distance(t_point *p, t_obj_cone *co, t_vector cam, t_vector v)
 	double		res_d;
 	double		temp;
 
-	res_d = (-1);
+	res_d = 0;
 	if (v_inner_product(p[0], cam) > 0)
 		res_d = v_size(p[0]);
+	if (v_inner_product(p[1], cam) > 0)
+	{
+		temp = v_size(p[1]);
+		if (res_d == 0 || res_d > temp)
+			res_d = temp;
+	}
 	temp = v_inner_product(v_add(v_multiply(v, res_d), \
 			v_multiply(co->loc, (-1))), co->normal);
 	if (v_inner_product(cam, co->normal) == (-1) && \
 		fabs(temp - co->height) < 0.00000001)
 		return (res_d);
-	if (temp < 0 || co->height < temp)
+	if (temp < 0 || co->height + 0.00000001 < temp)
 		return (-1);
 	return (res_d);
 }
@@ -52,8 +58,6 @@ static void	co_get_res_p(t_point *res, t_vector v, double *diff)
 	res[0].x = v.x * diff[0];
 	res[0].y = v.y * diff[0];
 	res[0].z = v.z * diff[0];
-	if (sizeof(diff) == sizeof(double))
-		return ;
 	res[1].x = v.x * diff[1];
 	res[1].y = v.y * diff[1];
 	res[1].z = v.z * diff[1];

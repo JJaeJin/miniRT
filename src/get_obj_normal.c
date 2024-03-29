@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_obj_normal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:23:34 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/26 20:55:19 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/29 20:37:59 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,26 @@ t_vector	get_cylinder_normal(t_obj_cylinder *cy, t_point p)
 t_vector	get_cone_normal(t_obj_cone *co, t_point p)
 {
 	t_vector	reverse_normal;
-	t_vector	top_of_cone;
-	t_vector	v_top_to_p;
+	t_vector	temp_vector;
 	t_vector	res_normal;
+	double		temp;
 
 	reverse_normal = v_multiply(co->normal, (-1));
-	top_of_cone = v_add(co->loc, v_multiply(co->normal, co->height));
-	v_top_to_p = p_get_vector(top_of_cone, p);
+	temp_vector = v_add(co->loc, v_multiply(co->normal, co->height));
+	temp_vector = p_get_vector(temp_vector, p);
 	res_normal = p_get_vector(v_multiply(reverse_normal, \
-					pow(v_size(v_top_to_p), 2) / v_inner_product(v_top_to_p, \
-					reverse_normal)), v_top_to_p);
+					pow(v_size(temp_vector), 2) / v_inner_product(temp_vector, \
+					reverse_normal)), temp_vector);
 	v_normalize(&res_normal);
+	if (v_size(co->loc) != 0)
+	{
+		temp = 1 - pow(v_inner_product(co->loc, co->normal) / \
+				v_size(co->loc), 2);
+		temp = pow(temp * v_size(co->loc), 2) - \
+				pow((1 + v_inner_product(co->loc, co->normal) / \
+				co->height) * co->diameter / 2, 2);
+		if (get_sign(temp) == -1)
+			res_normal = v_multiply(res_normal, (-1));
+	}
 	return (res_normal);
 }

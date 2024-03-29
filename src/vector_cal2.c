@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:54:45 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/27 19:28:32 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/29 20:38:13 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ double	*solve_quadratic(double a, double b, double c)
 	abs_d = fabs(d);
 	if (abs_d < 0.00000001)
 	{
-		res = (double *)ft_calloc(1, sizeof(double));
+		res = (double *)ft_calloc(2, sizeof(double));
 		res[0] = (-1 * b) / (2 * a);
+		res[1] = res[0];
 	}
 	else if (d < 0)
 		return (NULL);
