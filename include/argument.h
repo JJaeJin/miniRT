@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/28 19:26:09 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/29 20:38:00 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,10 +151,12 @@ void		apply_specular(t_final_c *rgb, t_light *l, t_point p, t_vector n);
 /* funcs for cylinder */
 void		get_p_bottom(t_vector v, t_point *p, t_obj_cylinder *cy);
 void		get_p_side(t_vector v, t_point *p, t_obj_cylinder *cy);
-void		get_p_side_others(t_vector v, t_point *p, t_obj_cylinder *cy);
+void		get_p_side_others(t_vector v, t_point *p, \
+							t_obj_cylinder *cy, t_vector *move);
 double		get_height_diff(t_vector v_ray, t_obj_cylinder *cy);
 double		get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy);
 t_point		get_p_center(t_obj_cylinder *cy, t_vector v);
+int			p_is_in_cy(t_point p, t_obj_cylinder *cy);
 
 /* funcs for cone */
 void		check_cone(t_final_c *rgb, double *distance, \
@@ -178,6 +180,7 @@ int			check_obs_plane(t_point l, t_point p, t_obj_plane *pl, void *obj);
 int			check_obs_cylinder(t_point l, t_point p, \
 								t_obj_cylinder *cy, void *obj);
 int			check_specular(t_light *l, t_point p, t_vector n);
+int			is_in_cy(t_obj_cylinder *cy);
 
 /* get_checkerboard_color */
 void		get_cb_color_sp(t_obj_sphere *sp, t_info info, \

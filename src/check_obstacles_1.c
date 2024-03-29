@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_obstacles_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:37:36 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/26 13:47:05 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:37:08 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ static double	get_pl_res(t_obj_plane *pl, t_point p)
 
 	res = pl->normal.x * (p.x - pl->loc.x) + \
 			pl->normal.y * (p.y - pl->loc.y) + \
-			pl->normal.z * (p.x - pl->loc.z);
+			pl->normal.z * (p.z - pl->loc.z);
 	return (res);
 }
