@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   check_obstacles_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:37:36 by dongyeuk          #+#    #+#             */
 /*   Updated: 2024/03/29 15:41:50 by dongyeuk         ###   ########.fr       */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_system.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:07:38 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/26 14:44:54 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/29 20:03:15 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	convert_cy(t_obj *obj, t_point mod, t_camera *cam)
 	{
 		temp_cy->loc.x -= mod.x;
 		temp_cy->loc.y -= mod.y;
-		temp_cy->loc.z -= mod.z;
+		temp_cy->loc.z -= (mod.z + 1);
 		temp_cy->cam = cam->way;
 		inner_cam_n = v_inner_product(cam->way, temp_cy->normal);
 		if (inner_cam_n > 0)

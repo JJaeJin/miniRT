@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_obstacles_3.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:39:15 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/28 19:15:20 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/29 19:06:05 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,17 @@ static void	co_get_res_p(t_point *res, t_vector v, double *diff)
 	res[0].x = v.x * diff[0];
 	res[0].y = v.y * diff[0];
 	res[0].z = v.z * diff[0];
+}
+
+int	is_in_cy(t_obj_cylinder *cy)
+{
+	double	h;
+	double	d;
+
+	h = fabs(v_inner_product(cy->normal, cy->loc));
+	d = sqrt(pow(v_size(cy->loc), 2) - pow(h, 2));
+	if (d < cy->diameter / 2 && h < cy->height / 2)
+		return (1);
+	else
+		return (-1);
 }

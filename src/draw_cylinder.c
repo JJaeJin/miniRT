@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:27 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/28 17:02:16 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/29 19:15:53 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ static int	check_p_side(t_point p, t_obj_cylinder *cy, \
 	if (v_inner_product(p, info.camera->way) <= 0)
 		return (FALSE);
 	d_res = v_size(p);
-	if (sqrt(fabs(pow(p_get_distance(p, cy->loc), 2) - \
+	if ((sqrt(fabs(pow(p_get_distance(p, cy->loc), 2) - \
 		pow(cy->diameter / 2, 2))) <= cy->height / 2 \
-		&& (*distance == 0 || d_res < *distance))
+		&& (*distance == 0 || d_res < *distance)))
 	{
 		*distance = d_res;
 		return (TRUE);
@@ -109,7 +109,8 @@ static void	cy_apply_rgb_side(t_final_c *rgb, t_point p, \
 	while (l != NULL)
 	{
 		cos_th = v_get_cos(p_get_vector(p, l->loc), cy->temp_normal);
-		if (cos_th > 0 && \
+		if (p_is_in_cy(l->loc, cy) * is_in_cy(cy) == 1 && \
+			cos_th >= 0 && \
 			check_obstacles(l->loc, p, info, (void *)cy) == OBS_NOT_EXIST)
 		{
 			apply_diffuse(&rgb->ratio, l, cos_th);

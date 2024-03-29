@@ -6,14 +6,15 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:28:29 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/22 15:18:46 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/29 20:39:11 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "argument.h"
 #include <math.h>
 
-static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, t_point *p);
+static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, \
+									t_point *p, t_vector *move);
 
 void	get_p_bottom(t_vector v, t_point *p, t_obj_cylinder *cy)
 {
@@ -42,10 +43,24 @@ void	get_p_bottom(t_vector v, t_point *p, t_obj_cylinder *cy)
 
 void	get_p_side(t_vector v, t_point *p, t_obj_cylinder *cy)
 {
+	t_obj_cylinder	temp_cy;
+	double			diff;
+	t_vector		move;
+
+	temp_cy = *cy;
+	move.x = 0;
+	move.y = 0;
+	move.z = 0;
+	if (is_in_cy(cy) == 1)
+	{
+		diff = sqrt(pow(cy->height, 2) + pow(cy->diameter, 2));
+		move = v_multiply(v, diff / v_size(v));
+		temp_cy.loc = v_add(cy->loc, move);
+	}
 	if (v_inner_product(v, cy->normal) == 0)
-		return (get_p_side_parallel(v, cy, p));
+		return (get_p_side_parallel(v, &temp_cy, p, &move));
 	else
-		return (get_p_side_others(v, p, cy));
+		return (get_p_side_others(v, p, &temp_cy, &move));
 }
 
 t_point	get_p_center(t_obj_cylinder *cy, t_vector v)
@@ -58,9 +73,7 @@ t_point	get_p_center(t_obj_cylinder *cy, t_vector v)
 	temp = v_outer_product(temp, v);
 	t = (-temp.x * cy->loc.x - temp.y * cy->loc.y - temp.z * cy->loc.z) / \
 		(cy->normal.x * temp.x + cy->normal.y * temp.y + cy->normal.z * temp.z);
-	center.x = cy->loc.x + t * cy->normal.x;
-	center.y = cy->loc.y + t * cy->normal.y;
-	center.z = cy->loc.z + t * cy->normal.z;
+	center = v_add(cy->loc, v_multiply(cy->normal, t));
 	return (center);
 }
 
@@ -78,7 +91,8 @@ double	get_height_diff(t_vector v_ray, t_obj_cylinder *cy)
 	return (res);
 }
 
-static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, t_point *p)
+static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, \
+								t_point *p, t_vector *move)
 {
 	double	def;
 	double	diff;
@@ -92,10 +106,6 @@ static void	get_p_side_parallel(t_vector v, t_obj_cylinder *cy, t_point *p)
 	def = sqrt(pow(v_size(cy->loc), 2) - \
 				pow(v_inner_product(cy->loc, cy->normal), 2) - pow(v_to_cy, 2));
 	diff = sqrt(fabs(pow(cy->diameter / 2, 2) - pow(v_to_cy, 2)));
-	p[0].x = v.x * (def + diff);
-	p[0].y = v.y * (def + diff);
-	p[0].z = v.z * (def + diff);
-	p[1].x = v.x * (def - diff);
-	p[1].y = v.y * (def - diff);
-	p[1].z = v.z * (def - diff);
+	p[0] = v_sub(v_multiply(v, def + diff), *move);
+	p[1] = v_sub(v_multiply(v, def - diff), *move);
 }
