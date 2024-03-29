@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:23:34 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/26 20:55:19 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:22:02 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_vector	get_sphere_normal(t_obj_sphere *sp, t_point p)
 
 	normal = p_get_vector(sp->center, p);
 	v_normalize(&normal);
+	if (v_size(sp->center) <= sp->diameter / 2)
+		return (v_multiply(normal, -1));
 	return (normal);
 }
 
@@ -37,6 +39,8 @@ t_vector	get_cylinder_normal(t_obj_cylinder *cy, t_point p)
 	p_center_of_point_pl.z = cy->loc.z + cy->normal.z * size_of_normal;
 	res_normal = p_get_vector(p_center_of_point_pl, p);
 	v_normalize(&res_normal);
+	if (is_in_cy(cy) == 1)
+		return (v_multiply(res_normal, -1));
 	return (res_normal);
 }
 
