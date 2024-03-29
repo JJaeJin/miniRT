@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:56:52 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/02/20 14:29:07 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:50:05 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ void	free_all_info(t_info *info)
 
 	free(info->camera);
 	free(info->amb);
-	while (info->lights != NULL)
-	{
-		temp_light = info->lights->next;
-		free(info->lights);
-		info->lights = temp_light;
-	}
 	while (info->lights != NULL)
 	{
 		temp_light = info->lights->next;
@@ -69,4 +63,18 @@ static void	free_obj(t_obj *objs)
 		free(objs->sp);
 		objs->sp = temp_sp;
 	}
+}
+
+int	free_double_char_pointer_rt_int(char **ptr, int rt_value)
+{
+	int	idx;
+
+	idx = 0;
+	while (ptr[idx] != NULL)
+	{
+		free(ptr[idx]);
+		idx++;
+	}
+	free(ptr);
+	return (rt_value);
 }

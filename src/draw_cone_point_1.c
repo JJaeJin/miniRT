@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_cone_point_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:20:41 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/28 17:05:31 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:26:22 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@
 
 static void		co_get_res_p(t_point *res, t_vector v, double *diff);
 
-int	co_check_p_side(double d_res, double *distance)
+int	co_check_p_side(double d_res, double *distance, double *diff)
 {
 	if (d_res != -1 && (*distance == 0 || d_res < *distance))
 	{
 		*distance = d_res;
+		free(diff);
 		return (TRUE);
 	}
+	free(diff);
 	return (FALSE);
 }
 

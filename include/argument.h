@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/26 16:24:26 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:26:09 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int			parse_all(t_info *info, char *file);
 int			is_vector(char *s, t_vector *v);
 int			is_unsigned_double(char *s, double *f);
 int			is_rgb(char *s, t_color *clr);
-int			fail_free(void *p);
+int			fail_free(void *p, char **ptr);
 
 int			read_sp(t_obj *obj, char **all_info);
 int			read_pl(t_obj *obj, char **all_info);
@@ -159,7 +159,7 @@ t_point		get_p_center(t_obj_cylinder *cy, t_vector v);
 /* funcs for cone */
 void		check_cone(t_final_c *rgb, double *distance, \
 								t_vector v, t_info info);
-int			co_check_p_side(double d_res, double *distance);
+int			co_check_p_side(double d_res, double *distance, double *diff);
 void		co_get_p_bottom(t_vector v, t_point *p, t_obj_cone *co);
 int			check_obs_cone(t_point l, t_point p, t_obj_cone *co, void *obj);
 double		*co_get_diff_set_p_side(t_point *p, t_vector v, t_obj_cone *co);
@@ -186,5 +186,8 @@ void		get_cb_color_sp(t_obj_sphere *sp, t_info info, \
 /* get_img_color */
 t_color		get_img_color(t_img img, t_point p);
 t_vector	get_img_vector(t_img img, t_point p, t_vector n);
+
+/* leak_funcs */
+int			free_double_char_pointer_rt_int(char **ptr, int rt_value);
 
 #endif
