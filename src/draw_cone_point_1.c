@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:20:41 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/29 19:55:13 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/31 12:09:50 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <math.h>
 
 static void		co_get_res_p(t_point *res, t_vector v, double *diff);
+static int		is_cam_in_co(t_vector cam, t_obj_cone *co);
 
 int	co_check_p_side(double d_res, double *distance, double *diff)
 {
@@ -37,7 +38,7 @@ double	co_get_distance(t_point *p, t_obj_cone *co, t_vector cam, t_vector v)
 	res_d = 0;
 	if (v_inner_product(p[0], cam) > 0)
 		res_d = v_size(p[0]);
-	if (v_inner_product(p[1], cam) > 0)
+	if (is_cam_in_co(cam, co) && v_inner_product(p[1], cam) > 0)
 	{
 		temp = v_size(p[1]);
 		if (res_d == 0 || res_d > temp)
@@ -83,4 +84,24 @@ double	*co_get_diff_set_p_side(t_point *p, t_vector v, \
 		return (NULL);
 	co_get_res_p(p, v, diff);
 	return (diff);
+}
+
+static int	is_cam_in_co(t_vector cam, t_obj_cone *co)
+{
+	t_vector	co_to_cam;
+	double		inner_result;
+	double		size;
+	double		cam_diameter;
+
+	co_to_cam = p_get_vector(co->loc, cam);
+	inner_result = v_inner_product(co_to_cam, co->normal);
+	if (inner_result > 0)
+	{
+		size = v_size(co_to_cam);
+		cam_diameter = (1 - size / co->height) * co->diameter / 2;
+		if (cam_diameter >= 0 && cam_diameter <= co->diameter && \
+			sqrt(1 - pow(inner_result / size, 2)) * size <= cam_diameter)
+			return (TRUE);
+	}
+	return (FALSE);
 }
