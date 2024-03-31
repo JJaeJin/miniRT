@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:27 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/29 19:15:53 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/31 13:59:52 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,7 @@ static void	cy_apply_rgb_side(t_final_c *rgb, t_point p, \
 	while (l != NULL)
 	{
 		cos_th = v_get_cos(p_get_vector(p, l->loc), cy->temp_normal);
-		if (p_is_in_cy(l->loc, cy) * is_in_cy(cy) == 1 && \
-			cos_th >= 0 && \
+		if (p_is_in_cy(l->loc, cy) * is_in_cy(cy) == 1 && cos_th >= 0 && \
 			check_obstacles(l->loc, p, info, (void *)cy) == OBS_NOT_EXIST)
 		{
 			apply_diffuse(&rgb->ratio, l, cos_th);
@@ -141,7 +140,7 @@ static void	cy_apply_rgb_bottom(t_final_c *rgb, t_point p, \
 	while (l != NULL)
 	{
 		cos_th = v_get_cos(p_get_vector(p, l->loc), pl_bottom.temp_normal);
-		if (cos_th > 0 && \
+		if (p_is_in_cy(l->loc, cy) * is_in_cy(cy) == 1 && cos_th > 0 && \
 		check_obstacles(l->loc, p, info, (void *)cy) == OBS_NOT_EXIST)
 		{
 			apply_diffuse(&rgb->ratio, l, cos_th);
