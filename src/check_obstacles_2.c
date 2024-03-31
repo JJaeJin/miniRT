@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:33:58 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/25 14:03:08 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/31 11:41:22 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <math.h>
 
 static int	is_obstacle_cy(t_point *p, t_obj_cylinder *m_cy, t_point m_l);
+static void	get_p_res(t_point *p_bottom_side, t_point m_l, t_obj_cylinder m_cy);
 
 int	check_obs_cylinder(t_point l, t_point p, t_obj_cylinder *cy, void *obj)
 {
@@ -28,21 +29,27 @@ int	check_obs_cylinder(t_point l, t_point p, t_obj_cylinder *cy, void *obj)
 	{
 		if ((void *)temp_cy != obj)
 		{
+			if (p_is_in_cy(p, temp_cy) * p_is_in_cy(l, temp_cy) == -1)
+				return (OBS_EXIST);
 			m_l = p_get_vector(p, l);
 			m_cy = *temp_cy;
 			m_cy.loc = p_get_vector(p, m_cy.loc);
 			if (get_d_between_lines(p, temp_cy) <= (temp_cy->diameter / 2))
 			{
-				get_p_bottom(v_multiply(m_l, -1), p_bottom_side, &m_cy);
-				get_p_side(v_multiply(m_l, -1), p_bottom_side + 2, &m_cy);
-				if (is_obstacle_cy(p_bottom_side, &m_cy, m_l) \
-					== OBS_EXIST)
+				get_p_res(p_bottom_side, m_l, m_cy);
+				if (is_obstacle_cy(p_bottom_side, &m_cy, m_l) == OBS_EXIST)
 					return (OBS_EXIST);
 			}
 		}
 		temp_cy = temp_cy->next;
 	}
 	return (OBS_NOT_EXIST);
+}
+
+static void	get_p_res(t_point *p_bottom_side, t_point m_l, t_obj_cylinder m_cy)
+{
+	get_p_bottom(v_multiply(m_l, -1), p_bottom_side, &m_cy);
+	get_p_side(v_multiply(m_l, -1), p_bottom_side + 2, &m_cy);
 }
 
 static int	is_obstacle_cy(t_point *p, t_obj_cylinder *m_cy, t_point m_l)

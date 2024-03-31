@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:37:36 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/29 15:41:50 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/31 11:27:52 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ int	check_obs_sphere(t_point l, t_point p, t_obj_sphere *sp, void *obj)
 			temp = v_inner_product(p_to_l, p_to_sp);
 			sp_to_ray = sqrt(fabs(pow(v_size(p_to_sp), 2) - \
 						pow(temp, 2)));
-			if (temp > 0 && temp < v_size(p_to_l) && \
-				sp_to_ray <= temp_sp->diameter / 2)
+			if (is_in_sp(p, temp_sp) * is_in_sp(l, temp_sp) == -1 || \
+				(temp > 0 && temp < v_size(p_to_l) && \
+				sp_to_ray <= temp_sp->diameter / 2))
 				return (OBS_EXIST);
 		}
 		temp_sp = temp_sp->next;

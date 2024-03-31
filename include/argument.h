@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/29 20:38:00 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/31 10:49:45 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ int			check_obs_cylinder(t_point l, t_point p, \
 								t_obj_cylinder *cy, void *obj);
 int			check_specular(t_light *l, t_point p, t_vector n);
 int			is_in_cy(t_obj_cylinder *cy);
+int			is_in_sp(t_point p, t_obj_sphere *sp);
 
 /* get_checkerboard_color */
 void		get_cb_color_sp(t_obj_sphere *sp, t_info info, \
