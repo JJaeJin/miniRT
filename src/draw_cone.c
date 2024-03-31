@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:10:36 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/28 19:25:37 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/31 15:42:45 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,23 @@ static void	co_apply_rgb_bottom(t_final_c *rgb, t_point p, \
 								t_info info, t_obj_cone *co)
 {
 	t_light		*l;
+	t_obj_plane	pl_bottom;
 	double		cos_th;
 
+	pl_bottom.color = co->color;
+	if (v_inner_product(p_get_vector(co->loc, p), co->normal) > 0)
+		pl_bottom.loc = v_add(co->loc, v_multiply(co->normal, co->height / 2));
+	else
+		pl_bottom.loc = v_sub(co->loc, v_multiply(co->normal, co->height / 2));
+	pl_bottom.normal = co->normal;
+	pl_bottom.temp_normal = co->normal;
 	rgb->color = co->color;
 	apply_ambient(rgb, info.amb);
 	l = info.lights;
 	while (l != NULL)
 	{
-		cos_th = v_get_cos(p_get_vector(p, l->loc), \
-					v_multiply(co->normal, (-1)));
-		if (cos_th > 0 && \
+		cos_th = v_get_cos(p_get_vector(p, l->loc), pl_bottom.temp_normal);
+		if (p_is_in_co(l->loc, co) * is_in_co(co) == 1 && cos_th > 0 && \
 				check_obstacles(l->loc, p, info, (void *)co) == OBS_NOT_EXIST)
 		{
 			apply_diffuse(&rgb->ratio, l, cos_th);
@@ -106,18 +113,22 @@ static void	co_apply_rgb_side(t_final_c *rgb, t_point p, \
 	t_vector	n;
 	double		cos_th;
 
+	n = get_cone_normal(co, p);
 	rgb->color = co->color;
 	apply_ambient(rgb, info.amb);
 	l = info.lights;
-	n = get_cone_normal(co, p);
+	rgb->specular.red = 0;
+	rgb->specular.green = 0;
+	rgb->specular.blue = 0;
 	while (l != NULL)
 	{
 		cos_th = v_get_cos(p_get_vector(p, l->loc), n);
-		if (cos_th > 0 \
+		if (p_is_in_co(l->loc, co) * is_in_co(co) == 1 && cos_th > 0 \
 			&& check_obstacles(l->loc, p, info, (void *)co) == OBS_NOT_EXIST)
 		{
 			apply_diffuse(&rgb->ratio, l, cos_th);
-			apply_specular(rgb, l, p, n);
+			if (check_specular(l, p, n) == TRUE)
+				apply_specular(rgb, l, p, n);
 		}
 		l = l->next;
 	}

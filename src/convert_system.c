@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_system.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:07:38 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/29 20:03:15 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/31 16:41:08 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,20 @@ static void	convert_co(t_obj *obj, t_point mod);
 
 void	convert_system(t_info *info)
 {
-	t_point	mod;
+	t_point			mod;
+	t_obj_cylinder	*temp_cy;
 
+	temp_cy = info->objs->cy;
 	mod.x = info->camera->loc.x;
 	mod.y = info->camera->loc.y;
 	mod.z = info->camera->loc.z;
+	while (temp_cy != NULL)
+	{
+		mod.x += temp_cy->normal.x;
+		mod.y += temp_cy->normal.y;
+		mod.z += temp_cy->normal.z;
+		temp_cy = temp_cy->next;
+	}
 	convert_camera_lights(info->camera, info->lights, mod);
 	convert_sp_pl(info->objs, mod);
 	convert_cy(info->objs, mod, info->camera);
@@ -96,7 +105,7 @@ static void	convert_cy(t_obj *obj, t_point mod, t_camera *cam)
 	{
 		temp_cy->loc.x -= mod.x;
 		temp_cy->loc.y -= mod.y;
-		temp_cy->loc.z -= (mod.z + 1);
+		temp_cy->loc.z -= mod.z;
 		temp_cy->cam = cam->way;
 		inner_cam_n = v_inner_product(cam->way, temp_cy->normal);
 		if (inner_cam_n > 0)

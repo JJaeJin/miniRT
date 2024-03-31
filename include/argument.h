@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/31 10:49:45 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/31 15:39:32 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,8 @@ int			check_obs_cone(t_point l, t_point p, t_obj_cone *co, void *obj);
 double		*co_get_diff_set_p_side(t_point *p, t_vector v, t_obj_cone *co);
 double		co_get_distance(t_point *p, t_obj_cone *co, \
 								t_vector cam, t_vector v);
+int			p_is_in_co(t_point p, t_obj_cone *co);
+int			is_in_co(t_obj_cone *co);
 
 /* get_obj_normal */
 t_vector	get_sphere_normal(t_obj_sphere *sp, t_point p);
