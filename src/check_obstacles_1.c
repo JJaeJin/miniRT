@@ -6,13 +6,14 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:37:36 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/31 11:27:52 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/03/31 15:20:48 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "argument.h"
 #include "vector.h"
 #include <math.h>
+#include <stdio.h>
 
 static double	get_pl_res(t_obj_plane *pl, t_point p);
 
@@ -20,11 +21,11 @@ int	check_obstacles(t_point l, t_point p, t_info info, void *obj)
 {
 	if (check_obs_sphere(l, p, info.objs->sp, obj) == OBS_EXIST)
 		return (OBS_EXIST);
-	else if (check_obs_plane(l, p, info.objs->pl, obj) == OBS_EXIST)
+	if (check_obs_plane(l, p, info.objs->pl, obj) == OBS_EXIST)
 		return (OBS_EXIST);
-	else if (check_obs_cylinder(l, p, info.objs->cy, obj) == OBS_EXIST)
+	if (check_obs_cylinder(l, p, info.objs->cy, obj) == OBS_EXIST)
 		return (OBS_EXIST);
-	else if (check_obs_cone(l, p, info.objs->co, obj) == OBS_EXIST)
+	if (check_obs_cone(l, p, info.objs->co, obj) == OBS_EXIST)
 		return (OBS_EXIST);
 	return (OBS_NOT_EXIST);
 }
@@ -49,7 +50,7 @@ int	check_obs_sphere(t_point l, t_point p, t_obj_sphere *sp, void *obj)
 			sp_to_ray = sqrt(fabs(pow(v_size(p_to_sp), 2) - \
 						pow(temp, 2)));
 			if (is_in_sp(p, temp_sp) * is_in_sp(l, temp_sp) == -1 || \
-				(temp > 0 && temp < v_size(p_to_l) && \
+				(temp > 0 && temp < v_size(p_get_vector(p, l)) && \
 				sp_to_ray <= temp_sp->diameter / 2))
 				return (OBS_EXIST);
 		}
