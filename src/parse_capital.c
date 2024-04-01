@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_capital.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:32:02 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/28 19:09:15 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/04/01 13:52:27 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	read_light(t_info *info, char **all_info)
 {
 	t_light	*res;
 
+	if (info->lights != NULL)
+		return (FAILURE);
 	res = (t_light *)ft_calloc(1, sizeof(t_light));
 	if (all_info[1] == NULL \
 		|| is_vector(all_info[1], &(res->loc)) == FALSE)
