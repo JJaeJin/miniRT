@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:43:15 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/29 20:38:41 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/04/01 11:34:59 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ double	get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy)
 		(cy->normal.x * temp.x + cy->normal.y * temp.y + cy->normal.z * temp.z);
 	p_on_cy = v_add(cy->loc, v_multiply(cy->normal, t));
 	temp = v_outer_product(v_ray, cy->normal);
-	t = (temp.y * p_on_cy.x - temp.x * p_on_cy.y) / \
-		(v_ray.x * temp.y - v_ray.y * temp.x);
+	t = get_contact_t(temp, v_ray, p_on_cy);
 	p_on_cam = v_multiply(v_ray, t);
 	return (p_get_distance(p_on_cy, p_on_cam));
 }

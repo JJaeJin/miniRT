@@ -6,14 +6,13 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:33:58 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/31 16:14:42 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/04/01 11:35:17 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "argument.h"
 #include "vector.h"
 #include <math.h>
-#include <stdio.h>
 
 static int	is_obstacle_cy(t_point *p, t_obj_cylinder *m_cy, t_point m_l);
 static void	get_p_res(t_point *p_bottom_side, t_point m_l, t_obj_cylinder m_cy);
