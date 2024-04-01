@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 11:26:04 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/04/01 11:34:19 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/04/01 13:50:53 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 double	get_contact_t(t_vector temp, t_vector v_ray, t_point p_on_cy)
 {
-	int	t;
+	double	t;
 
 	if (v_ray.x == 0)
 		t = (temp.y * p_on_cy.z - temp.z * p_on_cy.y) / \

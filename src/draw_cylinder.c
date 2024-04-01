@@ -6,7 +6,7 @@
 /*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:45:27 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/04/01 11:35:22 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/04/01 13:32:33 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	check_p_side(t_point p, t_obj_cylinder *cy, \
 {
 	double	d_res;
 
-	if (v_inner_product(p, info.camera->way) < 0)
+	if (v_inner_product(p, info.camera->way) <= 0)
 		return (FALSE);
 	d_res = v_size(p);
 	if ((sqrt(fabs(pow(p_get_distance(p, cy->loc), 2) - \
