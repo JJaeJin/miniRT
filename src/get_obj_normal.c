@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:23:34 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/31 20:26:50 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/04/01 12:06:03 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_vector	get_cone_normal(t_obj_cone *co, t_point p)
 	t_vector	reverse_normal;
 	t_vector	temp_vector;
 	t_vector	res_normal;
-	double		temp;
 
 	reverse_normal = v_multiply(co->normal, (-1));
 	temp_vector = v_add(co->loc, v_multiply(co->normal, co->height));
@@ -58,15 +57,7 @@ t_vector	get_cone_normal(t_obj_cone *co, t_point p)
 					pow(v_size(temp_vector), 2) / v_inner_product(temp_vector, \
 					reverse_normal)), temp_vector);
 	v_normalize(&res_normal);
-	if (v_size(co->loc) != 0)
-	{
-		temp = 1 - pow(v_inner_product(co->loc, co->normal) / \
-				v_size(co->loc), 2);
-		temp = pow(temp * v_size(co->loc), 2) - \
-				pow((1 - v_inner_product(co->loc, co->normal) / \
-				co->height) * co->diameter / 2, 2);
-		if (get_sign(temp) == -1)
-			res_normal = v_multiply(res_normal, (-1));
-	}
+	if (is_in_co(co) == 1)
+		res_normal = v_multiply(res_normal, (-1));
 	return (res_normal);
 }
