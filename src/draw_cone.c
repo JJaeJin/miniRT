@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:10:36 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/31 15:42:45 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/31 20:49:29 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,21 +81,21 @@ static void	co_apply_rgb_bottom(t_final_c *rgb, t_point p, \
 {
 	t_light		*l;
 	t_obj_plane	pl_bottom;
+	t_vector	vec_light;
 	double		cos_th;
 
 	pl_bottom.color = co->color;
-	if (v_inner_product(p_get_vector(co->loc, p), co->normal) > 0)
-		pl_bottom.loc = v_add(co->loc, v_multiply(co->normal, co->height / 2));
-	else
-		pl_bottom.loc = v_sub(co->loc, v_multiply(co->normal, co->height / 2));
 	pl_bottom.normal = co->normal;
 	pl_bottom.temp_normal = co->normal;
 	rgb->color = co->color;
 	apply_ambient(rgb, info.amb);
 	l = info.lights;
+	vec_light = p_get_vector(l->loc, p);
+	if (p_is_in_co(l->loc, co) == 1)
+		vec_light = p_get_vector(p, l->loc);
 	while (l != NULL)
 	{
-		cos_th = v_get_cos(p_get_vector(p, l->loc), pl_bottom.temp_normal);
+		cos_th = v_get_cos(vec_light, pl_bottom.temp_normal);
 		if (p_is_in_co(l->loc, co) * is_in_co(co) == 1 && cos_th > 0 && \
 				check_obstacles(l->loc, p, info, (void *)co) == OBS_NOT_EXIST)
 		{

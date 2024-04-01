@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:23:34 by dongyeuk          #+#    #+#             */
-/*   Updated: 2024/03/29 20:37:59 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/03/31 20:26:50 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_vector	get_cone_normal(t_obj_cone *co, t_point p)
 		temp = 1 - pow(v_inner_product(co->loc, co->normal) / \
 				v_size(co->loc), 2);
 		temp = pow(temp * v_size(co->loc), 2) - \
-				pow((1 + v_inner_product(co->loc, co->normal) / \
+				pow((1 - v_inner_product(co->loc, co->normal) / \
 				co->height) * co->diameter / 2, 2);
 		if (get_sign(temp) == -1)
 			res_normal = v_multiply(res_normal, (-1));
