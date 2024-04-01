@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_cal3.c                                      :+:      :+:    :+:   */
+/*   vector_cal3_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:54:45 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/04/01 13:59:09 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/04/01 13:58:39 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "argument.h"
-#include "vector.h"
+#include "argument_bonus.h"
+#include "vector_bonus.h"
 #include "libft.h"
 #include <math.h>
-#include "color.h"
+#include "color_bonus.h"
 
 t_vector	v_multiply(t_vector v, double num)
 {

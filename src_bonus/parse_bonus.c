@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:45:37 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/04/01 13:59:36 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/04/01 13:58:10 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "argument.h"
+#include "argument_bonus.h"
 #include <fcntl.h>
 
 static int	is_rt_file(char *file);
