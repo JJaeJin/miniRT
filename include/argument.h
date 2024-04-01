@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:17:36 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/31 15:39:32 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/04/01 11:33:20 by jaejilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ double		get_height_diff(t_vector v_ray, t_obj_cylinder *cy);
 double		get_d_between_lines(t_vector v_ray, t_obj_cylinder *cy);
 t_point		get_p_center(t_obj_cylinder *cy, t_vector v);
 int			p_is_in_cy(t_point p, t_obj_cylinder *cy);
+double		get_contact_t(t_vector temp, t_vector v_ray, t_point p_on_cy);
 
 /* funcs for cone */
 void		check_cone(t_final_c *rgb, double *distance, \
