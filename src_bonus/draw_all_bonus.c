@@ -6,7 +6,7 @@
 /*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 10:31:44 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/04/01 13:58:20 by dongyeuk         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:14:32 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,8 @@ static int	key_hook(int keycode, t_mlx *data)
 	else if ((keycode == KB_PLUS && data->info->amb->ratio != 1)
 		|| (keycode == KB_MINUS && data->info->amb->ratio != 0))
 		apply_kb_plus_minus(keycode, data);
-	else if (keycode == KB_W || keycode == KB_S || keycode == KB_Q
-		|| keycode == KB_E)
-		apply_kb_w_s_q_e(keycode, data);
-	else if (keycode == KB_A || keycode == KB_D || keycode == KB_C \
-			|| keycode == KB_B)
-		apply_kb_a_d(keycode, data);
+	else if (keycode == KB_C || keycode == KB_B)
+		apply_kb_c_b(keycode, data);
 	else
 		return (1);
 	make_img(data, *data->info);

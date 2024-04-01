@@ -1,5 +1,5 @@
 CC=					cc
-CFLAGS=				-Wall -Wextra -Werror# -g -fsanitize=address
+CFLAGS=				-Wall -Wextra -Werror
 NAME=				miniRT
 
 FILES=				parse_color parse_double error init_data main parse_capital parse_small parse parse_vector draw_all draw_img vector_cal1 vector_cal2 vector_cal3 draw_sphere draw_plane draw_cylinder \

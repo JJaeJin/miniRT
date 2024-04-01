@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejilee <jaejilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongyeuk <dongyeuk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 10:57:20 by jaejilee          #+#    #+#             */
-/*   Updated: 2024/03/26 16:55:53 by jaejilee         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:14:15 by dongyeuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@
 # define KB_MINUS		27
 # define KB_PLUS		24
 # define KB_ESC			53
-# define KB_W			13
-# define KB_A			0
-# define KB_S			1
-# define KB_D			2
-# define KB_Q			12
-# define KB_E			14
 # define KB_C			8
 # define KB_B			11
 
@@ -50,8 +44,7 @@ void	make_img(t_mlx *data, t_info info);
 
 void	clear_img(t_mlx *data);
 void	apply_kb_plus_minus(int keycode, t_mlx *data);
-void	apply_kb_w_s_q_e(int keycode, t_mlx *data);
-void	apply_kb_a_d(int keycode, t_mlx *data);
+void	apply_kb_c_b(int keycode, t_mlx *data);
 
 void	apply_draw(t_final_c rgb, t_mlx *data, int x, int y);
 
